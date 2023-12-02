@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const corsOptions = require('./BackEnd/config/corsOptions')
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const DBConnection = require('./BackEnd/config/database');
@@ -15,7 +14,7 @@ dotenv.config()
 
 // Middlewares
 app.use(bodyParser.json());
-//app.use(cors(corsOptions));
+app.use(cors());
 app.use(cookieParser()); // Use cookie-parser
 
 // Import route files
