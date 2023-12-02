@@ -1,0 +1,8 @@
+MONGODB_URL =
+SECRET_JWT_KEY=""
+CLIENT_ID_Discord=""
+CLIENT_SECRET_Discord=""
+REDIRECT_URI_Discord=""
+SECRET_KEY_Discord=""
+PORT=""
+MODE=""

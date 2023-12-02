@@ -1,0 +1,32 @@
+.three-dimensions-menu {
+    position: relative;
+    width: 25%;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex {
+    flex: 1 1 0;
+}
+
+.buttonStyle {
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    width: 230px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    background-color: #5165f6;
+    transition: background-color 0.5s ease;
+    border: none;
+}
+
+.buttonStyle:hover{
+    background-color: #3b4d9e;
+}

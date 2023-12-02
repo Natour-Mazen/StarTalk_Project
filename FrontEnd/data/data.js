@@ -1,0 +1,1 @@
+export const userState = "ADMIN"; // UNKNOWN, USER, ADMIN

@@ -1,0 +1,4 @@
+.Main{
+    flex: 1; /* La div flexible occupe tout l'espace restant à droite */
+    padding: 20px;
+}

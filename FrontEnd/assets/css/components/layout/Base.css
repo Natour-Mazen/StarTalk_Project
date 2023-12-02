@@ -1,0 +1,9 @@
+.Base{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.separator {
+    border: 2px solid rgba(45, 194, 225, 0.5);
+}

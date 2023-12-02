@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:700|Poppins:400');
+
+/*
+https://www.realtimecolors.com/?colors=0b1319-f5f9fa-5863b6-e0d8ee-724cae&fonts=Poppins-Poppins
+le lien pour le style
+*/
+
+:root {
+  --three-dimensions-menu-left-side-width: 1rem;
+
+  --text: #0b1319;
+  --background-light: #f4f8fa;
+  --primary: #5863b6;
+  --secondary: #e0d8ee;
+  --accent: #724cae;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e6eef4;
+    --background: #05090a;
+    --primary: #4954a7;
+    --secondary: #191127;
+    --accent: #7751b3;
+  }
+}
+
+body {
+  font-family: 'Poppins', serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background-color: var(--background-light);
+}
+
+#root{
+  height: 100vh;
+}
+
+p,  ul {
+    font-family: 'Poppins', serif;
+
+    & h1, & h2 {
+      font-weight: 700;
+    }
+
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+
+h1{
+  font-size: 2.210rem;
+  padding-block-start: 0.67em;
+  padding-block-end: 0.67em;
+}
+h2{
+  font-size: 3.158rem; /* 50.56px */
+  padding-block-start: 0.83em;
+  padding-block-end: 0.83em;
+}
+
+h3 {
+  font-size: 2.369rem; /* 37.92px */
+}
+
+h4 {
+  font-size: 1.777rem; /* 28.48px */
+}
+
+h5 {
+  font-size: 1.333rem; /* 21.28px */
+}
+
+p, ul{
+  padding-block-start: 1em;
+  padding-block-end: 1em;
+}
+
+small {
+  font-size: 0.750rem; /* 12px */
+}
