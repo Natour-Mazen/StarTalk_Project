@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 // Load environment variables from .env file
 dotenv.config();
 
-const allowedRolesForRouteUser = 'ROLE_USER'
+const allowedRolesForRouteUser = ['ROLE_USER','ROLE_ADMIN']
 
 
 // Get the profile of the connected user

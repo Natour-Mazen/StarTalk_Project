@@ -30,14 +30,7 @@ app.use('/startalk-api/users', routerUsers);
 app.use('/startalk-api/auth', routerAuth);
 
 
-app.get('startalk/api/docs',(req,res) =>{
-    res.sendFile(path.resolve("public/index.html"))
-})
-
 app.get('/*', (req, res) => {
-    //res.send('Welcome to the main page!');
-    //res.redirect('https://startalk-project.vercel.app');
-    console.log("serveur")
     fs.readFile(
       "./public/index.html",
         'utf-8',

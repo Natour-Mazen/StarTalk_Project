@@ -3,7 +3,7 @@ const routerCitations = express.Router();
 const CitationController = require('../controllers/CitationController');
 const authenticateToken = require('../middlewares/authTokenjwt');
 
-const allowedRolesForRouteCitation = 'ROLE_USER';
+const allowedRolesForRouteCitation = ['ROLE_USER','ROLE_ADMIN'];
 
 routerCitations.get('/', CitationController.getAllCitations);
 
