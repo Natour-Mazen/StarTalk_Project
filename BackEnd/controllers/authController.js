@@ -6,27 +6,26 @@ const UserTokenModel = require('../models/UserToken');
 
 dotenv.config();
 
+// Retrieve environment variables
+const clientId = process.env.CLIENT_ID_Discord;
+const clientSecret = process.env.CLIENT_SECRET_Discord;
+const redirectUri = process.env.REDIRECT_URI_Discord;
+const secretKey = process.env.SECRET_JWT_KEY;
+
 class AuthController {
-    constructor() {
-        this.clientId = process.env.CLIENT_ID_Discord;
-        this.clientSecret = process.env.CLIENT_SECRET_Discord;
-        this.redirectUri = process.env.REDIRECT_URI_Discord;
-        this.secretKey = process.env.SECRET_JWT_KEY;
+    // Get Discord authorization URL
+    static getDiscordAuthUrl() {
+        return `https://discord.com/api/oauth2/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=identify`;
     }
 
-    // Function to generate Discord authorization URL
-    getDiscordAuthUrl() {
-        return `https://discord.com/api/oauth2/authorize?client_id=${this.clientId}&redirect_uri=${encodeURIComponent(this.redirectUri)}&response_type=code&scope=identify`;
-    }
-
-    // Function to exchange authorization code for access token
-    async exchangeCodeForResponseData(code) {
+    // Exchange authorization code for access token
+    static async exchangeCodeForResponseData(code) {
         const data = {
-            client_id: this.clientId,
-            client_secret: this.clientSecret,
+            client_id: clientId,
+            client_secret: clientSecret,
             grant_type: 'authorization_code',
             code: code,
-            redirect_uri: this.redirectUri,
+            redirect_uri: redirectUri,
             scope: 'identify'
         };
 
@@ -39,8 +38,8 @@ class AuthController {
         return response.data;
     }
 
-    // Function to get user's Discord profile using access token
-    async getDiscordUserProfile(accessToken) {
+    // Get user's Discord profile using access token
+    static async getDiscordUserProfile(accessToken) {
         const headers = {
             'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
@@ -50,8 +49,8 @@ class AuthController {
         return userResponse.data;
     }
 
-    // Function to create a new user object in the database
-    createNewUser(discordUser) {
+    // Create a new user object in the database
+    static createNewUser(discordUser) {
         return new User({
             discordId: discordUser.id,
             pseudo: discordUser.username,
@@ -61,16 +60,16 @@ class AuthController {
         });
     }
 
-    // Function to create a new userToken object in the database
-    createNewUserToken(UserID, Token) {
+    // Create a new userToken object in the database
+    static createNewUserToken(UserID, Token) {
         return new UserTokenModel({
             discordUserId: UserID,
             jwtToken: Token
         });
     }
 
-    // Function to generate JWT for the user
-    generateJwtToken(user, tokenExp) {
+    // Generate JWT for the user
+    static generateJwtToken(user, tokenExp) {
         const expirationDate = new Date(Date.now() + (tokenExp * 1000));
         const tokenPayload = {
             id: user.discordId,
@@ -78,7 +77,60 @@ class AuthController {
             roles: user.Role,
             exp: expirationDate.getTime() / 1000
         };
-        return jwt.sign(tokenPayload, this.secretKey);
+        return jwt.sign(tokenPayload, secretKey);
+    }
+
+    // Handle OAuth2 callback from Discord
+    static async handleOAuthCallback(code) {
+        try {
+            // Exchange the authorization code for response data from Discord
+            const myResponseData = await AuthController.exchangeCodeForResponseData(code);
+            const accessToken = myResponseData.access_token;
+
+            // Get the Discord user profile using the access token
+            const discordUser = await AuthController.getDiscordUserProfile(accessToken);
+
+            // Create a new user in the local database based on the Discord user profile
+            const newUserDB = AuthController.createNewUser(discordUser);
+
+            // Check if the user already exists in the database
+            const existingUser = await User.findOne({ discordId: newUserDB.discordId });
+
+            // If the user doesn't exist, save the new user to the database
+            if (!existingUser) {
+                await newUserDB.save();
+            }
+
+            // Generate a JWT token for the user and set its expiration time
+            const token = AuthController.generateJwtToken(newUserDB, myResponseData.expires_in);
+
+            // Create a new user token and save it to the database
+            const newUserToken = AuthController.createNewUserToken(newUserDB.discordId, token);
+            await newUserToken.save();
+
+            // Return the token and its expiration time
+            return {
+                token,
+                expires_in: myResponseData.expires_in,
+            };
+        } catch (err) {
+            // Handle errors by throwing the exception
+            throw err;
+        }
+    }
+
+    // Handle user logout
+    static async handleLogout(discordUserId) {
+        // Find user token in the database based on discordUserId
+        const existingUser = await UserTokenModel.findOne({ discordUserId });
+
+        // If the user token exists, delete it from the database
+        if (existingUser) {
+            await UserTokenModel.deleteOne({ _id: existingUser._id });
+        }
+
+        // Return a message indicating successful logout
+        return { message: "logout is okay" };
     }
 }
 
