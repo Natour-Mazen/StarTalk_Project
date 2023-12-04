@@ -5,7 +5,6 @@ import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import axios from "axios";
 import { UserContext } from '../../utils/UserAuthContext';
-import { redirect } from "react-router-dom";
 
 export default function AddCitation()
 {
@@ -27,7 +26,8 @@ export default function AddCitation()
                 });
 
                 if (response.status === 200) {
-                    redirect("/");
+                    inputTitre.current.value = "";
+                    inputDescription.current.value = "";
                 }
             } catch (error) {
                 // Handle error

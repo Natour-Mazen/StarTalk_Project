@@ -19,7 +19,7 @@ export default function Citations()
                 if (response.status === 200) {
                     //console.log(response.data.citations);
                     const data = response.data.citations;
-                    setAllCitations(old => [...old, ...data]);
+                    setAllCitations(data);
                 }
             } catch (error) {
                 // Handle error
