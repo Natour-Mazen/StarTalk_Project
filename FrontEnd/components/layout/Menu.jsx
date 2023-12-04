@@ -13,7 +13,7 @@ import logo from '../../assets/images/logoUpScale.png'
 
 export default function Menu() {
     const navigate = useNavigate();
-    const { isAuthenticated, role,login , logout } = useContext(UserContext);
+    const { isAuthenticated, role, login, logout } = useContext(UserContext);
     const [isDiscordButtonClicked, setDiscordButtonClicked] = useState(false);
 
     function changePage(to) {
