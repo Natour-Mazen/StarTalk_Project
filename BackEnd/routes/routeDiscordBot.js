@@ -15,6 +15,5 @@ routerDiscordBot.get('citations/fav',botMiddleWare(allowedRolesForRouteDiscord),
 routerDiscordBot.post('citations/', botMiddleWare(allowedRolesForRouteDiscord), CitationController.createCitation);
 
 
-
 module.exports = routerDiscordBot;
 
