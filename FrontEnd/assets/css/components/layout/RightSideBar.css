@@ -1,5 +1,21 @@
 .three-dimensions-rightside {
     position: relative;
     width : 25%;
-    padding: 50px;
+    height: 100%;
+    padding: 2%;
+    overflow: auto;
+}
+
+@media (max-width: 500px) {
+    .three-dimensions-rightside{
+        width : 100%;
+    }
+}
+
+p{
+    overflow: auto;
+}
+
+p::-webkit-scrollbar {
+    display: none;
 }

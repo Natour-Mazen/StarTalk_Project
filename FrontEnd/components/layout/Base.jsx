@@ -42,11 +42,11 @@ export default function Base({ children })
     return (
         <div className="Base">
             <Menu/>
-            <Divider layout="vertical" />
+            <Divider layout="vertical" className="separator"/>
             <Main>
                 {children}
             </Main>
-            <Divider layout="vertical" />
+            <Divider layout="vertical" className="separator"/>
             <RightSideBar/>
         </div>
     );

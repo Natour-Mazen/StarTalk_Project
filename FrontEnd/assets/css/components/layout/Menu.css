@@ -6,6 +6,12 @@
     flex-direction: column;
 }
 
+@media (max-width: 500px) {
+    .three-dimensions-menu{
+        width : 100%;
+    }
+}
+
 .flex {
     flex: 1 1 0;
 }
@@ -29,4 +35,29 @@
 
 .buttonStyle:hover{
     background-color: #3b4d9e;
+}
+
+.logo{
+    width: 6vw;
+    object-fit: contain;
+}
+
+.titre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & h1{
+        font-size: 4vw;
+    }
+}
+
+@media (min-width: 1000px) {
+    .titre h1 {
+        font-size: 40px;
+    }
+
+    .logo{
+        width: 60px;
+    }
 }

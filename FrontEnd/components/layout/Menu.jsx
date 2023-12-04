@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { UserContext } from '../../utils/UserAuthContext';
+import logo from '../../assets/images/logoUpScale.png'
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -87,8 +88,15 @@ export default function Menu() {
 
     return (
         <div className="three-dimensions-menu">
-            <h1 className="pl-8">StarTalk</h1>
-            <nav className="">
+            <div className="titre">
+                <img
+                    className="logo"
+                    src={logo}
+                    alt="StarTalk logo" />
+                <h1>StarTalk</h1>
+            </div>
+
+            <nav>
                 <MenuP model={items} className="w-full pl-5 pr-5" />
             </nav>
             <div className="flex flex-grow"></div>
