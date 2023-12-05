@@ -36,7 +36,7 @@ export default function App()
                 <>
                     <Route path="/profile" element={<Profile/>} />
                     <Route path="/bookmark" element={<Bookmark />} />
-                    <Route path="/add" element={<AddCitation />} />
+                    <Route path="/addCitation" element={<AddCitation />} />
                 </>
             )
         }

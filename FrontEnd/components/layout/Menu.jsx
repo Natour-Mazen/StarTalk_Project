@@ -125,6 +125,10 @@ export default function Menu() {
         </React.Fragment>
     );
 
+    const handleaddCitaion = async () => {
+        changePage('/addCitation')
+    };
+
     return (
         <div className="dimensions-menu">
             <div className="titre">
@@ -140,6 +144,22 @@ export default function Menu() {
             <nav>
                 <MenuP model={items} className="w-full pl-5 pr-5" />
             </nav>
+
+
+
+            {isAuthenticated ? (
+                <Button
+                    icon="fa-solid fa-feather"
+                    title="Write your most Beautiful Citation"
+                    label="Post"
+                    className="PostButtonCss"
+                    onClick={handleaddCitaion}
+                />
+            ) : (
+               <></>
+            )}
+
+
 
             <div className="flex flex-grow"></div>
 
