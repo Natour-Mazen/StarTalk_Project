@@ -60,9 +60,6 @@ export default function AddCitation({visible, setVisible}) {
         <>
             <Toast ref={toast}
                    position="top-center"
-                   style={{
-                       backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                    }}
             />
             <Dialog header="Let your writer's soul express itself ✒️"
                     visible={visible} style={{ width: '30vw' }}
@@ -99,7 +96,7 @@ export default function AddCitation({visible, setVisible}) {
                             label="Post"
                             rounded
                             style={{
-                                width:'200px',
+                                width:'150px',
                                 margin: 'auto'
                             }}
                     />

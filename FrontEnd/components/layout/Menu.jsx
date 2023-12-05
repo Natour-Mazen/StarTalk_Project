@@ -113,13 +113,13 @@ export default function Menu() {
 
     const endContent = (
         <React.Fragment>
+            <ThemeToggleButton/>
+            <i className="mr-2" />
             <ButtonMenu
                 icon="fa-solid fa-circle-question"
                 to="/about"
                 title="About"
             />
-            <i className="mr-2" />
-            <ThemeToggleButton/>
         </React.Fragment>
     );
 
