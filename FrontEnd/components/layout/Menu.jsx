@@ -46,8 +46,8 @@ export default function Menu() {
 
         let items = [
             createMenuItem('Menu', null, null, [
-                createMenuItem('Home', 'fa-solid fa-home', '/'),
-                createMenuItem('Citations', 'fa-solid fa-book', '/citations'),
+                createMenuItem('Citations feed', 'fa-solid fa-home', '/'),
+                createMenuItem('About', 'fa-solid fa-circle-question', '/about'),
             ]),
         ];
 

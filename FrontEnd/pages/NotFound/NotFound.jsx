@@ -19,7 +19,7 @@ export default function NotFound()
             <FontAwesomeIcon icon={faFaceSadTear} shake style={{ fontSize: '5em' }}/>
             <h1 className='title'>StarTalk</h1>
             <p className='text'>Error 404 - Page not found</p>
-            <ButtonMenu label="Back Home" icon="fa-solid fa-home" to="/" severity="secondary"/>
+            <ButtonMenu label="Back About" icon="fa-solid fa-home" to="/" severity="secondary"/>
         </div>
     );
 }

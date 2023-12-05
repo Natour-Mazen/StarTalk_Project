@@ -8,7 +8,7 @@ import '@fortawesome/react-fontawesome';
 import {useContext} from "react";
 
 // Components
-import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
 import AddCitation from "./pages/AddCitation/AddCitation";
 import AdminAddCitation from "./pages/AdminAddCitation/AdminAddCitation";
 import AdminDeleteCitation from "./pages/AdminDeleteCitation/AdminDeleteCitation";
@@ -26,8 +26,8 @@ export default function App()
 
   return (
     <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/citations" element={<Citations />} />
+        <Route path="/" element={<Citations />} />
+        <Route path="/about" element={<About />} />
         <Route path="/citation/:id" element={<Citation />} />
         <Route path="*" element={<NotFound />} />
         {
