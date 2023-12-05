@@ -28,6 +28,7 @@ export default function CitationCard({citation})
             <div className="infoCard">
                 <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
                 <Button label={citation.numberLike} icon="pi pi-heart" rounded text severity="secondary"  />
+                <Button icon="fa-regular fa-star" rounded text severity="secondary"  />
                 <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>
             </div>
         </Card>
