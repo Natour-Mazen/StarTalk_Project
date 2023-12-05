@@ -6,6 +6,12 @@
     flex-direction: column;
 }
 
+.toolbarcss{
+    background-color:transparent;
+    border: 1px solid transparent;
+    padding:10px;
+}
+
 @media (max-width: 500px) {
     .three-dimensions-menu{
         width : 100%;
@@ -38,12 +44,15 @@
 .logo{
     width: 6vw;
     object-fit: contain;
+    pointer-events: none;
+    margin-right: 30px;
 }
 
 .titre{
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
 
     & h1{
         font-size: 4vw;

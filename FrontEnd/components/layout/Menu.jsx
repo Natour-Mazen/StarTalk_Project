@@ -132,27 +132,21 @@ export default function Menu() {
                     className="logo"
                     src={logo}
                     alt="StarTalk logo" />
-                <h1>StarTalk</h1>
+                <h1>
+                    StarTalk
+                </h1>
             </div>
 
             <nav>
                 <MenuP model={items} className="w-full pl-5 pr-5" />
             </nav>
+
             <div className="flex flex-grow"></div>
-
-            <div style={{ display: 'flex', alignItems: 'center' , margin: 'auto'}}>
-
-            </div>
-
 
             <Toolbar
                 start={startContent}
                 end={endContent}
-                style={{
-                    backgroundColor:'transparent',
-                    border: '1px solid transparent',
-                    padding:'10px'
-                }}
+                className="toolbarcss"
             />
 
         </div>
