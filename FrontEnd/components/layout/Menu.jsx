@@ -12,9 +12,9 @@ import { UserContext } from '../../utils/UserAuthContext';
 import logo from '../../assets/images/logoUpScale.png'
 import ButtonMenu from "../Button/ButtonMenu";
 import ThemeToggleButton  from "../Button/ToggleThemeButton"
-import {SplitButton} from "primereact/splitbutton";
 import {Toolbar} from "primereact/toolbar";
 import {Button} from "primereact/button";
+import AddCitation from "../../pages/AddCitation/AddCitation"
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -38,12 +38,10 @@ export default function Menu() {
         let userMenu = [
             createMenuItem('Profile', 'fa-regular fa-id-badge', '/profile'),
             createMenuItem('Bookmark', 'fa-solid fa-bookmark', '/bookmark'),
-            createMenuItem('Add Citation', 'fa-solid fa-plus', '/add'),
         ];
 
         let adminMenu = [
             createMenuItem('Admin', null, null, [
-                createMenuItem('Add Citation', 'fa-solid fa-square-plus', '/admin/add'),
                 createMenuItem('Remove Citation', 'fa-solid fa-square-minus', '/admin/delete'),
                 createMenuItem('Disconnect User', 'fa-solid fa-plug-circle-xmark', '/admin/disconnection'),
             ]),
@@ -125,8 +123,10 @@ export default function Menu() {
         </React.Fragment>
     );
 
-    const handleaddCitaion = async () => {
-        changePage('/addCitation')
+    const [visible, setVisible] = useState(false);
+
+    const handleOpenModalAddCitaion = () => {
+        setVisible(true);
     };
 
     return (
@@ -153,13 +153,14 @@ export default function Menu() {
                     title="Write your most Beautiful Citation"
                     label="Post"
                     className="PostButtonCss"
-                    onClick={handleaddCitaion}
+                    onClick={handleOpenModalAddCitaion}
+
                 />
             ) : (
                <></>
             )}
 
-
+            <AddCitation visible={visible} setVisible={setVisible} />
 
             <div className="flex flex-grow"></div>
 

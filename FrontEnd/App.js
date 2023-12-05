@@ -19,7 +19,7 @@ import Bookmark from "./pages/Bookmark/Bookmark";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from  "./pages/Profile/Profile"
 import {UserContext} from "./utils/UserAuthContext";
-
+// <Route path="/addCitation" element={<AddCitation />} />
 export default function App()
 {
     const { isAuthenticated, role } = useContext(UserContext);
@@ -36,7 +36,7 @@ export default function App()
                 <>
                     <Route path="/profile" element={<Profile/>} />
                     <Route path="/bookmark" element={<Bookmark />} />
-                    <Route path="/addCitation" element={<AddCitation />} />
+
                 </>
             )
         }
