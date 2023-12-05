@@ -126,7 +126,7 @@ export default function Menu() {
     );
 
     return (
-        <div className="three-dimensions-menu">
+        <div className="dimensions-menu">
             <div className="titre">
                 <img
                     className="logo"
