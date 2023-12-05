@@ -10,6 +10,11 @@ import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { UserContext } from '../../utils/UserAuthContext';
 import logo from '../../assets/images/logoUpScale.png'
+import ButtonMenu from "../Button/ButtonMenu";
+import ThemeToggleButton  from "../Button/ToggleThemeButton"
+import {SplitButton} from "primereact/splitbutton";
+import {Toolbar} from "primereact/toolbar";
+import {Button} from "primereact/button";
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -47,7 +52,6 @@ export default function Menu() {
         let items = [
             createMenuItem('Menu', null, null, [
                 createMenuItem('Citations feed', 'fa-solid fa-home', '/'),
-                createMenuItem('About', 'fa-solid fa-circle-question', '/about'),
             ]),
         ];
 
@@ -86,6 +90,41 @@ export default function Menu() {
         </>
     );
 
+    const startContent = (
+        <React.Fragment>
+            {isAuthenticated ? (
+                <Button
+                    className="buttonStyle"
+                    onClick={handleLogout}
+                    title="Click here to logout"
+                >
+                    <FontAwesomeIcon icon={faArrowRightToBracket} size="xl" />
+                    <span className="tex-sm p-1">Logout</span>
+                </Button>
+            ) : (
+                <Button
+                    className="buttonStyle"
+                    onClick={handleLogin}
+                    title="Click here to login with Discord for a better experience"
+                >
+                    {discordIcon}
+                </Button>
+            )}
+        </React.Fragment>
+    );
+
+    const endContent = (
+        <React.Fragment>
+            <ButtonMenu
+                icon="fa-solid fa-circle-question"
+                to="/about"
+                title="About"
+            />
+            <i className="mr-2" />
+            <ThemeToggleButton/>
+        </React.Fragment>
+    );
+
     return (
         <div className="three-dimensions-menu">
             <div className="titre">
@@ -100,25 +139,22 @@ export default function Menu() {
                 <MenuP model={items} className="w-full pl-5 pr-5" />
             </nav>
             <div className="flex flex-grow"></div>
-            {isAuthenticated ? (
 
-                <button
-                    className="buttonLO buttonStyle "
-                    onClick={handleLogout}
-                    title="Click here to logout"
-                >
-                    <FontAwesomeIcon icon={faArrowRightToBracket} size="xl" />
-                    <span className="tex-sm p-1">Logout</span>
-                </button>
-            ) : (
-                <a
-                    className="buttonStyle"
-                    onClick={handleLogin}
-                    title="Click here to login with Discord for a better experience"
-                >
-                    {discordIcon}
-                </a>
-            )}
+            <div style={{ display: 'flex', alignItems: 'center' , margin: 'auto'}}>
+
+            </div>
+
+
+            <Toolbar
+                start={startContent}
+                end={endContent}
+                style={{
+                    backgroundColor:'transparent',
+                    border: '1px solid transparent',
+                    padding:'10px'
+                }}
+            />
+
         </div>
     );
 }

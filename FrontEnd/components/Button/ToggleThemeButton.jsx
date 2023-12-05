@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { ThemeContext } from 'FrontEnd/utils/ThemeContext';
+import { ThemeContext } from '../../utils/ThemeContext';
+import {Button} from "primereact/button";
 
-function ThemeToggleButton() {
+export default function ThemeToggleButton() {
     const { toggleTheme } = useContext(ThemeContext);
 
     return (
-        <button onClick={toggleTheme}>
-            Changer de thème
-        </button>
+        <Button icon="fa-solid fa-circle-half-stroke" onClick={toggleTheme} title="Change theme (dark/light mode)"/>
     );
 }

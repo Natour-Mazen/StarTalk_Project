@@ -24,13 +24,11 @@
     align-items: center;
     justify-content: space-evenly;
     cursor: pointer;
-    width: 230px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
+    width: 210px;
     background-color: #5165f6;
     transition: background-color 0.5s ease;
     border: none;
+    height : 40px;
 }
 
 .buttonStyle:hover{
