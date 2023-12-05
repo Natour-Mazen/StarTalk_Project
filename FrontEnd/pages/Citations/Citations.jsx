@@ -32,8 +32,6 @@ export default function Citations()
     return (
         <Base>
             <div className="Citations">
-
-                <h1>Citations</h1>
                 {
                     allCitations.map( (citation, index) =>
                         <CitationCard
