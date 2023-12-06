@@ -4,12 +4,16 @@ import { Divider } from 'primereact/divider';
 import {Button} from "primereact/button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightToBracket, faAt, faClock} from "@fortawesome/free-solid-svg-icons";
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {UserContext} from "../../utils/UserAuthContext";
+import axios from 'axios';
 
 export default function CitationCard({citation})
 {
     const { isAuthenticated } = useContext(UserContext);
+    const [likes, setLikes] = useState(citation.numberLike);
+    const [isLiked, setIsLiked] = useState(false);
+
     // Fonction pour formater la date
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -23,6 +27,16 @@ export default function CitationCard({citation})
 
     const formattedDate = formatDate(citation.creationDate);
 
+    const handleLike = async () => {
+        try {
+            const response = await axios.post(`/api/citations/${citation._id}/like`);
+            setLikes(response.data.numberLike);
+            setIsLiked(true);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <Card title={citation.title} className="MyCitationCardCss">
             <Divider/>
@@ -32,7 +46,7 @@ export default function CitationCard({citation})
                 <div className="infoCard">
                     <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
                     <Button icon="fa-regular fa-eye" rounded text severity="secondary" title="See details"  />
-                    <Button label={citation.numberLike} icon="pi pi-heart" rounded text severity="secondary" title="like"  />
+                    <Button label={likes} icon={isLiked ? "fa-solid fa-heart" : "pi pi-heart" } rounded text severity="secondary" title="like" onClick={handleLike} />
                     <Button icon="fa-regular fa-star" rounded text severity="secondary" title="fav" />
                     <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>
                 </div>
