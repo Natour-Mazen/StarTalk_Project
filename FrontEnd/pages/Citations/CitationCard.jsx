@@ -3,10 +3,13 @@ import '../../assets/css/pages/Citations/CitationsCard.css';
 import { Divider } from 'primereact/divider';
 import {Button} from "primereact/button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAt, faClock} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRightToBracket, faAt, faClock} from "@fortawesome/free-solid-svg-icons";
+import React, {useContext} from "react";
+import {UserContext} from "../../utils/UserAuthContext";
 
 export default function CitationCard({citation})
 {
+    const { isAuthenticated } = useContext(UserContext);
     // Fonction pour formater la date
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -25,12 +28,17 @@ export default function CitationCard({citation})
             <Divider/>
             <p>{citation.description}</p>
             <Divider/>
-            <div className="infoCard">
-                <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
-                <Button label={citation.numberLike} icon="pi pi-heart" rounded text severity="secondary" title="like"  />
-                <Button icon="fa-regular fa-star" rounded text severity="secondary" title="fav" />
-                <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>
-            </div>
+            {isAuthenticated ? (
+                <div className="infoCard">
+                    <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
+                    <Button label={citation.numberLike} icon="pi pi-heart" rounded text severity="secondary" title="like"  />
+                    <Button icon="fa-regular fa-star" rounded text severity="secondary" title="fav" />
+                    <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>
+                </div>
+            ) : (
+                <></>
+            )}
+
         </Card>
     );
 }
