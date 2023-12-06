@@ -6,7 +6,7 @@ class UserController {
     static async getRandomCitationsForUser(discordId, res) {
         try {
             // Find the user by their discordId
-            const user = await User.findOne({ discordId: discordId });
+            const user = await User.findOne({ _id: discordId });
 
             // If the user is not found, return a 404 response
             if (user == null) {
@@ -44,7 +44,7 @@ class UserController {
     static async getRandomFavoritesForUser(discordId, res) {
         try {
             // Find the user by their discordId
-            const user = await User.findOne({ discordId: discordId });
+            const user = await User.findOne({ _id: discordId });
 
             // If the user is not found, return a 404 response
             if (user == null) {
@@ -81,7 +81,7 @@ class UserController {
     // Add a created citation to allCitations
     static async addCreatedCitation(req, citationId) {
         try {
-            const user = await User.findOne({ discordId: req.client.id });
+            const user = await User.findOne({ _id: req.client.id });
             if (user == null) {
                 throw new Error('Cannot find user');
             }
@@ -95,7 +95,7 @@ class UserController {
     // Add a liked citation to allLiked
     static async addLikedCitation(req, citationId) {
         try {
-            const user = await User.findOne({ discordId: req.client.id });
+            const user = await User.findOne({ _id: req.client.id });
             if (user == null) {
                 throw new Error('Cannot find user');
             }
@@ -111,7 +111,7 @@ class UserController {
     static async removeLikedCitation(req) {
         return new Promise(async (resolve, reject) => {
             try {
-                const user = await User.findOne({ discordId: req.client.id });
+                const user = await User.findOne({ _id: req.client.id });
                 if (user == null) {
                     reject('Cannot find user');
                 }
@@ -133,7 +133,7 @@ class UserController {
     // Retrieve all citations of a user
     static async getAllUserCitations(req, res) {
         try {
-            const user = await User.findOne({ discordId: req.client.id }).populate('allCitations');
+            const user = await User.findOne({ _id: req.client.id }).populate('allCitations');
             if (user == null) {
                 return res.status(404).json({ message: 'Cannot find user' });
             }
@@ -146,7 +146,7 @@ class UserController {
     // Retrieve all favorites of a user
     static async getAllUserFavorites(req, res) {
         try {
-            const user = await User.findOne({ discordId: req.client.id }).populate('allFavorite');
+            const user = await User.findOne({ _id: req.client.id }).populate('allFavorite');
             if (user == null) {
                 return res.status(404).json({ message: 'Cannot find user' });
             }
@@ -159,7 +159,7 @@ class UserController {
     // Retrieve all liked citations of a user
     static async getAllUserLiked(req, res) {
         try {
-            const user = await User.findOne({ discordId: req.client.id }).populate('allLiked');
+            const user = await User.findOne({ _id: req.client.id }).populate('allLiked');
             if (user == null) {
                 return res.status(404).json({ message: 'Cannot find user' });
             }

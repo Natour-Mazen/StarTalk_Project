@@ -56,14 +56,15 @@ class AuthController {
             pseudo: discordUser.username,
             Role: 'ROLE_USER',
             allCitations: [],
-            allFavorite: []
+            allFavorite: [],
+            allLiked: []
         });
     }
 
     // Create a new userToken object in the database
     static createNewUserToken(UserID, Token) {
         return new UserTokenModel({
-            discordUserId: UserID,
+            UserId: UserID,
             jwtToken: Token
         });
     }
@@ -72,7 +73,7 @@ class AuthController {
     static generateJwtToken(user, tokenExp) {
         const expirationDate = new Date(Date.now() + (tokenExp * 1000));
         const tokenPayload = {
-            id: user.discordId,
+            id: user._id,
             name: user.pseudo,
             roles: user.Role,
             exp: expirationDate.getTime() / 1000
@@ -94,7 +95,7 @@ class AuthController {
             const newUserDB = AuthController.createNewUser(discordUser);
 
             // Check if the user already exists in the database
-            const existingUser = await User.findOne({ discordId: newUserDB.discordId });
+            const existingUser = await User.findOne({ _id: newUserDB._id });
 
             // If the user doesn't exist, save the new user to the database
             if (!existingUser) {
@@ -105,7 +106,7 @@ class AuthController {
             const token = AuthController.generateJwtToken(newUserDB, myResponseData.expires_in);
 
             // Create a new user token and save it to the database
-            const newUserToken = AuthController.createNewUserToken(newUserDB.discordId, token);
+            const newUserToken = AuthController.createNewUserToken(newUserDB._id, token);
             await newUserToken.save();
 
             // Return the token and its expiration time

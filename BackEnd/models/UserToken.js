@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const UserTokenSchema = new mongoose.Schema({
-    discordUserId:{
-        type: String,
+    UserId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         unique:true,
         required:true
     },

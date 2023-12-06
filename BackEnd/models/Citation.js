@@ -15,7 +15,7 @@ const CitationSchema = new mongoose.Schema({
         default:0,
     },
     likes: [{
-        type: mongoose.Schema.Types.String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         unique:true,
     }],
@@ -24,7 +24,8 @@ const CitationSchema = new mongoose.Schema({
         default: Date.now
     },
     writerId:{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
     },
     writerName:{
