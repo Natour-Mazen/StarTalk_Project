@@ -14,6 +14,11 @@ const CitationSchema = new mongoose.Schema({
         type: Number,
         default:0,
     },
+    likes: [{
+        type: mongoose.Schema.Types.String,
+        ref: 'User',
+        unique:true,
+    }],
     creationDate:{
         type: Date,
         default: Date.now

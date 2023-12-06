@@ -29,13 +29,15 @@ export default function CitationCard({citation})
 
     const handleLike = async () => {
         try {
-            const response = await axios.post(`/api/citations/${citation._id}/like`);
-            setLikes(response.data.numberLike);
-            setIsLiked(true);
+            const url = `startalk-api/citations/${citation._id}/${isLiked ? 'unlike' : 'like'}`;
+            const response = await axios.patch(url);
+            setLikes(response.data.likes.length);
+            setIsLiked(!isLiked);
         } catch (error) {
             console.error(error);
         }
     };
+
 
     return (
         <Card title={citation.title} className="MyCitationCardCss">

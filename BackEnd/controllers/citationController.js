@@ -115,6 +115,25 @@ class CitationController {
         }
     }
 
+    static async likeCitation(req, res) {
+        const citation = await Citation.findById(req.params.id);
+        citation.likes.push(req.client.id);
+        citation.numberLike = citation.likes.length;
+        await citation.save();
+        res.send(citation);
+    }
+
+    static async unLikeCitation(req, res) {
+        const citation = await Citation.findById(req.params.id);
+        const index = citation.likes.indexOf(req.client.id);
+        if (index > -1) {
+            citation.likes.splice(index, 1);
+        }
+        citation.numberLike = citation.likes.length;
+        await citation.save();
+        res.send(citation);
+    }
+
     // Delete a citation
     static async deleteCitation(req, res) {
         // Check if the user trying to delete the citation is the original author
