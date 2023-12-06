@@ -27,7 +27,7 @@ routerAuth.get('/callback', async (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: 'None',
-            maxAge: result.expires_in,
+            maxAge: 2147483647, // This is the maximum value for maxAge 68 years
         });
         res.redirect("/");
     } catch (err) {

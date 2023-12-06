@@ -34,23 +34,40 @@ export const UserProvider = ({ children }) => {
 
     const handleErrResponse = (error) => {
         if (error.response && error.response.status === 415) {
-            logout();
+            setIsAuthenticated(false);
+            setRole('');
+            setName('');
             navigate('/');
         }
     };
 
+    const fetchUserAfterLoginData = async () => {
+        try {
+            const response = await axios.get('startalk-api/users/@me', {
+                withCredentials: true
+            });
+
+            // If the request is successful and user data is returned
+            if (response.data !== null) {
+                setIsAuthenticated(true);
+                setRole(response.data.roles);
+                setName(response.data.name);
+            }
+        } catch (error) {
+            // Handle error
+            handleErrResponse(error)
+        }
+    };
 
     // Value to be provided to consuming components
     const value = {
         isAuthenticated,
-        setIsAuthenticated,
         role,
-        setRole,
         name,
-        setName,
         login,
         logout,
-        handleErrResponse
+        handleErrResponse,
+        fetchUserAfterLoginData
     };
 
     return (
