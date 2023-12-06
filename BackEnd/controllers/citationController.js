@@ -128,10 +128,12 @@ class CitationController {
         const index = citation.likes.indexOf(req.client.id);
         if (index > -1) {
             citation.likes.splice(index, 1);
+            citation.numberLike = citation.likes.length;
+            await citation.save();
+            res.send(citation);
+        } else {
+            res.status(404).send({ message: 'Like not found for this citation' });
         }
-        citation.numberLike = citation.likes.length;
-        await citation.save();
-        res.send(citation);
     }
 
     // Delete a citation

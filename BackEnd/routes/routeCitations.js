@@ -14,7 +14,7 @@ routerCitations.post('/', authenticateToken(allowedRolesForRouteCitation), Citat
 routerCitations.patch('/:id', authenticateToken(allowedRolesForRouteCitation), CitationController.updateCitation);
 
 routerCitations.patch('/:id/like', authenticateToken(allowedRolesForRouteCitation), CitationController.likeCitation);
-routerCitations.patch('/:id/unlike', authenticateToken(allowedRolesForRouteCitation), CitationController.likeCitation);
+routerCitations.patch('/:id/unlike', authenticateToken(allowedRolesForRouteCitation), CitationController.unLikeCitation);
 
 routerCitations.delete('/:id', authenticateToken(allowedRolesForRouteCitation), CitationController.deleteCitation);
 
