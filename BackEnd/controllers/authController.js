@@ -95,7 +95,7 @@ class AuthController {
             const newUserDB = AuthController.createNewUser(discordUser);
 
             // Check if the user already exists in the database
-            const existingUser = await User.findOne({ _id: newUserDB._id });
+            const existingUser = await User.findOne({ discordId: newUserDB.discordId });
 
             // If the user doesn't exist, save the new user to the database
             if (!existingUser) {
@@ -123,7 +123,7 @@ class AuthController {
     // Handle user logout
     static async handleLogout(discordUserId) {
         // Find user token in the database based on discordUserId
-        const existingUser = await UserTokenModel.findOne({ discordUserId });
+        const existingUser = await UserTokenModel.findOne({ _id });
 
         // If the user token exists, delete it from the database
         if (existingUser) {
