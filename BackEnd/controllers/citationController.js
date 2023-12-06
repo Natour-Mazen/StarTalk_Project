@@ -1,4 +1,5 @@
 const Citation = require('../models/Citation');
+const UserController = require('../controllers/userController');
 
 class CitationController {
     // Retrieve all citations with pagination
@@ -65,23 +66,19 @@ class CitationController {
 
     // Create a new citation
     static async createCitation(req, res) {
-        // Create a new Citation object based on the request body
-        const citation = new Citation({
-            title: req.body.title,
-            description: req.body.description,
-            numberLike: req.body.numberLike,
-            writerId: req.client.id,
-            writerName: req.client.name,
-        });
-
         try {
-            // Attempt to save the new citation to the database
-            const newCitation = await citation.save();
+            const citation = new Citation({
+                title: req.body.title,
+                description: req.body.description,
+                numberLike: req.body.numberLike,
+                writerId: req.client.id,
+                writerName: req.client.name,
+            });
 
-            // Return a 201 response with the newly created citation
+            const newCitation = await citation.save();
+            await UserController.addCreatedCitation(req, newCitation.id);
             res.status(201).json(newCitation);
         } catch (err) {
-            // If an error occurs during the creation, return a 400 response with the error message
             res.status(400).json({ message: err.message });
         }
     }
@@ -116,11 +113,16 @@ class CitationController {
     }
 
     static async likeCitation(req, res) {
-        const citation = await Citation.findById(req.params.id);
-        citation.likes.push(req.client.id);
-        citation.numberLike = citation.likes.length;
-        await citation.save();
-        res.send(citation);
+        try {
+            const citation = await Citation.findById(req.params.id);
+            citation.likes.push(req.client.id);
+            citation.numberLike = citation.likes.length;
+            await citation.save();
+            await UserController.addLikedCitation(req, citation.id);
+            res.send(citation);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
     }
 
     static async unLikeCitation(req, res) {
@@ -130,11 +132,15 @@ class CitationController {
             citation.likes.splice(index, 1);
             citation.numberLike = citation.likes.length;
             await citation.save();
-            res.send(citation);
+            req.body.citationId = citation.id;
+            UserController.removeLikedCitation(req)
+                .then(() => res.send(citation))
+                .catch((err) => res.status(500).send({ message: err }));
         } else {
             res.status(404).send({ message: 'Like not found for this citation' });
         }
     }
+
 
     // Delete a citation
     static async deleteCitation(req, res) {

@@ -77,6 +77,61 @@ class UserController {
     static async getSpecificUserFavorites(req, res) {
         return this.getRandomFavoritesForUser(req.client.idUserToRead, res);
     }
+
+    // Add a created citation to allCitations
+    static async addCreatedCitation(req, citationId) {
+        try {
+            const user = await User.findOne({ discordId: req.client.id });
+            if (user == null) {
+                throw new Error('Cannot find user');
+            }
+            user.allCitations.push(citationId);
+            await user.save();
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    // Add a liked citation to allLiked
+    static async addLikedCitation(req, citationId) {
+        try {
+            const user = await User.findOne({ discordId: req.client.id });
+            if (user == null) {
+                throw new Error('Cannot find user');
+            }
+            user.allLiked.push(citationId);
+            await user.save();
+        } catch (err) {
+            throw err;
+        }
+    }
+
+
+    // Remove a liked citation from allLiked
+    static async removeLikedCitation(req) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const user = await User.findOne({ discordId: req.client.id });
+                if (user == null) {
+                    reject('Cannot find user');
+                }
+                const citationId = req.body.citationId;
+                const index = user.allLiked.indexOf(citationId);
+                if (index > -1) {
+                    user.allLiked.splice(index, 1);
+                    await user.save();
+                    resolve();
+                } else {
+                    reject('Citation not found in allLiked.');
+                }
+            } catch (err) {
+                reject(err.message);
+            }
+        });
+    }
+
+
+
 }
 
 module.exports = UserController;
