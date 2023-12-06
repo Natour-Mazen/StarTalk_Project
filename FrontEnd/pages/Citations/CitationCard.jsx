@@ -31,6 +31,7 @@ export default function CitationCard({citation})
             {isAuthenticated ? (
                 <div className="infoCard">
                     <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
+                    <Button icon="fa-regular fa-eye" rounded text severity="secondary" title="See details"  />
                     <Button label={citation.numberLike} icon="pi pi-heart" rounded text severity="secondary" title="like"  />
                     <Button icon="fa-regular fa-star" rounded text severity="secondary" title="fav" />
                     <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>
