@@ -34,7 +34,10 @@ export default function CitationCard({citation})
             setLikes(response.data.likes.length);
             setIsLiked(!isLiked);
         } catch (error) {
-            console.error(error);
+            if (error.response && error.response.status === 400) { // that's mean this citation has been already liked by the user
+                setIsLiked(true);
+                setLikes(error.response.data.likes.length);
+            }
         }
     };
 

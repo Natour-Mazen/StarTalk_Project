@@ -115,6 +115,11 @@ class CitationController {
     static async likeCitation(req, res) {
         try {
             const citation = await Citation.findById(req.params.id);
+            if (citation.likes.includes(req.client.id)) {
+                return res.status(400).json({
+                    data:citation,
+                    message: 'You have already liked this citation.' });
+            }
             citation.likes.push(req.client.id);
             citation.numberLike = citation.likes.length;
             await citation.save();
