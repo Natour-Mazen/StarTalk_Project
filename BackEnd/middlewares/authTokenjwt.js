@@ -25,7 +25,7 @@ const authMiddleware = (allowedRoles) => (req, res, next) => {
       return res.status(403).json({message: 'Access forbidden.'});
     }
 
-    const userToken = await UserToken.findOne({discordUserId: decoded.id});
+    const userToken = await UserToken.findOne({UserId: decoded.id});
 
     // Check if the user is logged in or logged out by an admin
     if (!userToken) {

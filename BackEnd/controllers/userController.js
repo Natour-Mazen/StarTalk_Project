@@ -146,6 +146,7 @@ class UserController {
     // Retrieve all favorites of a user
     static async getAllUserFavorites(req, res) {
         try {
+            console.log(req.client.id)
             const user = await User.findOne({ _id: req.client.id }).populate('allFavorite');
             if (user == null) {
                 return res.status(404).json({ message: 'Cannot find user' });

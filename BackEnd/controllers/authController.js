@@ -91,22 +91,21 @@ class AuthController {
             // Get the Discord user profile using the access token
             const discordUser = await AuthController.getDiscordUserProfile(accessToken);
 
-            // Create a new user in the local database based on the Discord user profile
-            const newUserDB = AuthController.createNewUser(discordUser);
-
             // Check if the user already exists in the database
-            const existingUser = await User.findOne({ discordId: newUserDB.discordId });
+            let existingUser = await User.findOne({ discordId: discordUser.id });
 
             // If the user doesn't exist, save the new user to the database
             if (!existingUser) {
-                await newUserDB.save();
+                // Create a new user in the local database based on the Discord user profile
+                existingUser = AuthController.createNewUser(discordUser);
+                await existingUser.save();
             }
 
             // Generate a JWT token for the user and set its expiration time
-            const token = AuthController.generateJwtToken(newUserDB, myResponseData.expires_in);
+            const token = AuthController.generateJwtToken(existingUser, myResponseData.expires_in);
 
             // Create a new user token and save it to the database
-            const newUserToken = AuthController.createNewUserToken(newUserDB._id, token);
+            const newUserToken = AuthController.createNewUserToken(existingUser._id, token);
             await newUserToken.save();
 
             // Return the token and its expiration time
@@ -121,9 +120,9 @@ class AuthController {
     }
 
     // Handle user logout
-    static async handleLogout(discordUserId) {
+    static async handleLogout(UserId) {
         // Find user token in the database based on discordUserId
-        const existingUser = await UserTokenModel.findOne({ _id });
+        const existingUser = await UserTokenModel.findOne({ UserId });
 
         // If the user token exists, delete it from the database
         if (existingUser) {
