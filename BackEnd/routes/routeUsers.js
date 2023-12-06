@@ -3,6 +3,7 @@ const routerUsers = express.Router();
 const User = require('../models/User');
 const authenticateToken = require('../middlewares/authTokenjwt')
 const dotenv = require('dotenv');
+const UserController = require('../controllers/userController');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -17,5 +18,8 @@ routerUsers.get('/@me', authenticateToken(allowedRolesForRouteUser), async (req,
         roles: req.client.roles
     });
 });
+
+routerUsers.get('/profile/allcitations', authenticateToken(allowedRolesForRouteUser), UserController.getAllUserCitations);
+routerUsers.get('/profile/alllikes', authenticateToken(allowedRolesForRouteUser), UserController.getAllUserLiked);
 
 module.exports = routerUsers;
