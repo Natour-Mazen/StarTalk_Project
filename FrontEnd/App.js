@@ -9,7 +9,7 @@ import {useContext} from "react";
 
 // Components
 import About from "./pages/About/About";
-import AddCitation from "./pages/AddCitation/AddCitation";
+import AddCitationModal from "./components/ForPages/AddCitations/AddCitationModal";
 import AdminAddCitation from "./pages/AdminAddCitation/AdminAddCitation";
 import AdminDeleteCitation from "./pages/AdminDeleteCitation/AdminDeleteCitation";
 import AdminDisconnect from "./pages/AdminDisconnect/AdminDisconnect";

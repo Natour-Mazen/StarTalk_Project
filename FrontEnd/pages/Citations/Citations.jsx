@@ -1,5 +1,5 @@
 import Base from "../../components/layout/Base";
-import CitationCard from "./CitationCard";
+import CitationCard from "../../components/ForPages/Citations/CitationCard";
 import axios from "axios";
 import {useEffect, useState} from "react";
 

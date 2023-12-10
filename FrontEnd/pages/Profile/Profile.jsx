@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Base from "../../components/layout/Base";
 import { Card } from 'primereact/card';
 import axios from 'axios';
-import CitationCard from '../Citations/CitationCard';
+import CitationCard from '../../components/ForPages/Citations/CitationCard';
 import {UserContext} from "../../utils/UserAuthContext";
 import {TabMenu} from "primereact/tabmenu";
 
@@ -12,30 +12,26 @@ export default function Profile() {
     const [likes, setLikes] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [fetched, setFetched] = useState({ citations: false, likes: false, favorites: false });
+    const [visited, setVisited] = useState([false, false, false]);
 
     useEffect(() => {
-        if (activeIndex === 0 && !fetched.citations) {
-            const fetchCitations = async () => {
-                const response = await axios.get('startalk-api/users/profile/allcitations');
-                setCitations(response.data);
-                setFetched(prevState => ({ ...prevState, citations: true }));
+        if (!visited[activeIndex]) {
+            const fetchItems = async () => {
+                let url;
+                if (activeIndex === 0) url = 'startalk-api/users/profile/allcitations';
+                else if (activeIndex === 1) url = 'startalk-api/users/profile/alllikes';
+                else url = 'startalk-api/users/profile/allfavorites';
+
+                const response = await axios.get(url);
+                if (activeIndex === 0) setCitations(response.data);
+                else if (activeIndex === 1) setLikes(response.data);
+                else setFavorites(response.data);
+
+                const newVisited = [...visited];
+                newVisited[activeIndex] = true;
+                setVisited(newVisited);
             };
-            fetchCitations();
-        } else if (activeIndex === 1 && !fetched.likes) {
-            const fetchLikes = async () => {
-                const response = await axios.get('startalk-api/users/profile/alllikes');
-                setLikes(response.data);
-                setFetched(prevState => ({ ...prevState, likes: true }));
-            };
-            fetchLikes();
-        } else if (activeIndex === 2 && !fetched.favorites) {
-            const fetchFavorites = async () => {
-                const response = await axios.get('startalk-api/users/profile/allfavorites');
-                setFavorites(response.data);
-                setFetched(prevState => ({ ...prevState, favorites: true }));
-            };
-            fetchFavorites();
+            fetchItems();
         }
     }, [activeIndex]);
 
@@ -49,7 +45,6 @@ export default function Profile() {
         <Base>
             <Card title="User Profile" style={{ marginBottom: '2em' }}>
                 <p>Name: {name}</p>
-                <p>Role: {role}</p>
             </Card>
             <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
             {activeIndex === 0 && citations.map(citation => (

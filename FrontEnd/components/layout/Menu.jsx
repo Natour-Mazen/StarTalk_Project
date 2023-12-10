@@ -14,7 +14,7 @@ import ButtonMenu from "../Button/ButtonMenu";
 import ThemeToggleButton  from "../Button/ToggleThemeButton"
 import {Toolbar} from "primereact/toolbar";
 import {Button} from "primereact/button";
-import AddCitation from "../../pages/AddCitation/AddCitation"
+import AddCitationModal from "../ForPages/AddCitations/AddCitationModal"
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -159,7 +159,7 @@ export default function Menu() {
                <></>
             )}
 
-            <AddCitation visible={visible} setVisible={setVisible} />
+            <AddCitationModal visible={visible} setVisible={setVisible} />
 
             <div className="flex flex-grow"></div>
 
