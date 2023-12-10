@@ -13,6 +13,7 @@ export default function CitationCard({citation})
     const { isAuthenticated } = useContext(UserContext);
     const [likes, setLikes] = useState(citation.numberLike);
     const [isLiked, setIsLiked] = useState(false);
+    const [isFav, setIsFav] = useState(false);
 
     // Fonction pour formater la date
     const formatDate = (dateString) => {
@@ -40,6 +41,17 @@ export default function CitationCard({citation})
         }
     };
 
+    const handleFav = async () => {
+        try {
+            const url = `startalk-api/citations/${citation._id}/${isFav ? 'unfav' : 'fav'}`;
+            const response = await axios.patch(url);
+            setIsFav(!isFav);
+        } catch (error) {
+            if (error.response && error.response.status === 400) { // that's mean this citation has been already favorited by the user
+                setIsFav(true);
+            }
+        }
+    };
 
     return (
         <Card title={citation.title} className="MyCitationCardCss">
@@ -51,7 +63,7 @@ export default function CitationCard({citation})
                     <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
                     <Button icon="fa-regular fa-eye" rounded text severity="secondary" title="See details"  />
                     <Button label={likes} icon={isLiked ? "fa-solid fa-heart" : "pi pi-heart" } rounded text severity="secondary" title="like" onClick={handleLike} />
-                    <Button icon="fa-regular fa-star" rounded text severity="secondary" title="fav" />
+                    <Button icon={isFav ? "fa-solid fa-star" : "fa-regular fa-star" } rounded text severity="secondary" title="fav" onClick={handleFav} />
                     <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>
                 </div>
             ) : (

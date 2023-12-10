@@ -130,6 +130,43 @@ class UserController {
         });
     }
 
+    // Add a favorited citation to allFavorite
+    static async addFavoriteCitation(req, citationId) {
+        try {
+            const user = await User.findOne({ _id: req.client.id });
+            if (user == null) {
+                throw new Error('Cannot find user');
+            }
+            user.allFavorite.push(citationId);
+            await user.save();
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    // Remove a favorited citation from allFavorite
+    static async removeFavoriteCitation(req) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const user = await User.findOne({ _id: req.client.id });
+                if (user == null) {
+                    reject('Cannot find user');
+                }
+                const citationId = req.body.citationId;
+                const index = user.allFavorite.indexOf(citationId);
+                if (index > -1) {
+                    user.allFavorite.splice(index, 1);
+                    await user.save();
+                    resolve();
+                } else {
+                    reject('Citation not found in allFavorite.');
+                }
+            } catch (err) {
+                reject(err.message);
+            }
+        });
+    }
+
     // Retrieve all citations of a user
     static async getAllUserCitations(req, res) {
         try {

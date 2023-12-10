@@ -16,6 +16,9 @@ routerCitations.patch('/:id', authenticateToken(allowedRolesForRouteCitation), C
 routerCitations.patch('/:id/like', authenticateToken(allowedRolesForRouteCitation), CitationController.likeCitation);
 routerCitations.patch('/:id/unlike', authenticateToken(allowedRolesForRouteCitation), CitationController.unLikeCitation);
 
+routerCitations.patch('/:id/fav', authenticateToken(allowedRolesForRouteCitation), CitationController.favoriteCitation);
+routerCitations.patch('/:id/unfav', authenticateToken(allowedRolesForRouteCitation), CitationController.unFavoriteCitation);
+
 routerCitations.delete('/:id', authenticateToken(allowedRolesForRouteCitation), CitationController.deleteCitation);
 
 module.exports = routerCitations;

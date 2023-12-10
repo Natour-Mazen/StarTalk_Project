@@ -146,6 +146,38 @@ class CitationController {
         }
     }
 
+    static async favoriteCitation(req, res) {
+        try {
+            const citation = await Citation.findById(req.params.id);
+            if (citation.favs.includes(req.client.id)) {
+                return res.status(400).json({
+                    data:citation,
+                    message: 'You have already favorited this citation.' });
+            }
+            citation.favs.push(req.client.id);
+            await citation.save();
+            await UserController.addFavoriteCitation(req, citation.id);
+            res.send(citation);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    }
+
+    static async unFavoriteCitation(req, res) {
+        const citation = await Citation.findById(req.params.id);
+        const index = citation.favs.indexOf(req.client.id);
+        if (index > -1) {
+            citation.favs.splice(index, 1);
+            await citation.save();
+            req.body.citationId = citation.id;
+            UserController.removeFavoriteCitation(req)
+                .then(() => res.send(citation))
+                .catch((err) => res.status(500).send({ message: err }));
+        } else {
+            res.status(404).send({ message: 'Favorite not found for this citation' });
+        }
+    }
+
 
     // Delete a citation
     static async deleteCitation(req, res) {

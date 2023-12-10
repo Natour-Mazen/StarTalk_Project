@@ -19,6 +19,11 @@ const CitationSchema = new mongoose.Schema({
         ref: 'User',
         unique:true,
     }],
+    favs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        unique:true,
+    }],
     creationDate:{
         type: Date,
         default: Date.now
