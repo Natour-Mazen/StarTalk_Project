@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [role, setRole] = useState('');
     const [name, setName] = useState('');
+    const [id, setID] = useState('');
     const navigate = useNavigate();
 
     const login = async () => {
@@ -25,6 +26,7 @@ export const UserProvider = ({ children }) => {
                 setIsAuthenticated(false);
                 setRole('');
                 setName('');
+                setID('');
                 navigate('/');
             }
         } catch (error) {
@@ -37,6 +39,7 @@ export const UserProvider = ({ children }) => {
             setIsAuthenticated(false);
             setRole('');
             setName('');
+            setID('');
             navigate('/');
         }
     };
@@ -52,6 +55,7 @@ export const UserProvider = ({ children }) => {
                 setIsAuthenticated(true);
                 setRole(response.data.roles);
                 setName(response.data.name);
+                setID(response.data.id)
             }
         } catch (error) {
             // Handle error
@@ -64,6 +68,7 @@ export const UserProvider = ({ children }) => {
         isAuthenticated,
         role,
         name,
+        id,
         login,
         logout,
         handleErrResponse,

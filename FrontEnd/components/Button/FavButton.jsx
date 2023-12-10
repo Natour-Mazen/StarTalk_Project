@@ -1,9 +1,11 @@
 import {Button} from "primereact/button";
 import axios from 'axios';
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import {UserContext} from "../../utils/UserAuthContext";
 
 export default function FavButton({citation}) {
-    const [isFav, setIsFav] = useState(false);
+    const { id } = useContext(UserContext);
+    const [isFav, setIsFav] = useState(citation.favs.includes(id));
 
     const handleFav = async () => {
         try {

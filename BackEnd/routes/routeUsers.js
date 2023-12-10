@@ -15,7 +15,8 @@ const allowedRolesForRouteUser = ['ROLE_USER','ROLE_ADMIN']
 routerUsers.get('/@me', authenticateToken(allowedRolesForRouteUser), async (req, res) => {
     res.json({
         name: req.client.name,
-        roles: req.client.roles
+        roles: req.client.roles,
+        id: req.client.id
     });
 });
 

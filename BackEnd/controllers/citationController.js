@@ -20,13 +20,15 @@ class CitationController {
                 .limit(pageSize);
 
             // Simplify citation objects by extracting only necessary attributes
-            const simplifiedCitations = citations.map(({ _id, title, description, numberLike, creationDate, writerName }) => ({
+            const simplifiedCitations = citations.map(({ _id, title, description, numberLike, creationDate, writerName, likes, favs }) => ({
                 _id,
                 title,
                 description,
                 numberLike,
                 creationDate,
                 writerName,
+                likes,
+                favs
             }));
 
             // Send paginated and simplified citations in the response

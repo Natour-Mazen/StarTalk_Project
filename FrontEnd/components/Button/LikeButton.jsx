@@ -1,9 +1,11 @@
 import {Button} from "primereact/button";
 import axios from 'axios';
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import {UserContext} from "../../utils/UserAuthContext";
 
 export default function LikeButton({citation, likes, setLikes}) {
-    const [isLiked, setIsLiked] = useState(false);
+    const { id } = useContext(UserContext);
+    const [isLiked, setIsLiked] = useState(citation.likes.includes(id));
 
     const handleLike = async () => {
         try {
