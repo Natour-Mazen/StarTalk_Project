@@ -21,5 +21,6 @@ routerUsers.get('/@me', authenticateToken(allowedRolesForRouteUser), async (req,
 
 routerUsers.get('/profile/allcitations', authenticateToken(allowedRolesForRouteUser), UserController.getAllUserCitations);
 routerUsers.get('/profile/alllikes', authenticateToken(allowedRolesForRouteUser), UserController.getAllUserLiked);
+routerUsers.get('/profile/allfavorites', authenticateToken(allowedRolesForRouteUser), UserController.getAllUserFavorites);
 
 module.exports = routerUsers;

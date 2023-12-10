@@ -15,11 +15,10 @@ import AdminDeleteCitation from "./pages/AdminDeleteCitation/AdminDeleteCitation
 import AdminDisconnect from "./pages/AdminDisconnect/AdminDisconnect";
 import Citations from "./pages/Citations/Citations";
 import Citation from "./pages/Citation/Citation";
-import Bookmark from "./pages/Bookmark/Bookmark";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from  "./pages/Profile/Profile"
 import {UserContext} from "./utils/UserAuthContext";
-// <Route path="/addCitation" element={<AddCitation />} />
+
 export default function App()
 {
     const { isAuthenticated, role } = useContext(UserContext);
@@ -28,15 +27,13 @@ export default function App()
     <Routes>
         <Route path="/" element={<Citations />} />
         <Route path="/about" element={<About />} />
-        <Route path="/citation/:id" element={<Citation />} />
         <Route path="*" element={<NotFound />} />
         {
             (isAuthenticated === true && (role === 'ROLE_USER' || role === 'ROLE_ADMIN')) &&
             (
                 <>
+                    <Route path="/citation/:id" element={<Citation />} />
                     <Route path="/profile" element={<Profile/>} />
-                    <Route path="/bookmark" element={<Bookmark />} />
-
                 </>
             )
         }

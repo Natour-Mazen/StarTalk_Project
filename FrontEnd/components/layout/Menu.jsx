@@ -36,8 +36,7 @@ export default function Menu() {
 
     function createRoleBasedMenuItems(role) {
         let userMenu = [
-            createMenuItem('Profile', 'fa-regular fa-id-badge', '/profile'),
-            createMenuItem('Bookmark', 'fa-solid fa-bookmark', '/bookmark'),
+            createMenuItem('Profile', 'fa-regular fa-id-badge', '/profile')
         ];
 
         let adminMenu = [

@@ -10,26 +10,39 @@ export default function Profile() {
     const { name, role} = useContext(UserContext);
     const [citations, setCitations] = useState([]);
     const [likes, setLikes] = useState([]);
+    const [favorites, setFavorites] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [fetched, setFetched] = useState({ citations: false, likes: false, favorites: false });
 
     useEffect(() => {
-        const fetchCitations = async () => {
-            const response = await axios.get('startalk-api/users/profile/allcitations');
-            setCitations(response.data);
-        };
-
-        const fetchLikes = async () => {
-            const response = await axios.get('startalk-api/users/profile/alllikes');
-            setLikes(response.data);
-        };
-
-        fetchCitations();
-        fetchLikes();
-    }, []);
+        if (activeIndex === 0 && !fetched.citations) {
+            const fetchCitations = async () => {
+                const response = await axios.get('startalk-api/users/profile/allcitations');
+                setCitations(response.data);
+                setFetched(prevState => ({ ...prevState, citations: true }));
+            };
+            fetchCitations();
+        } else if (activeIndex === 1 && !fetched.likes) {
+            const fetchLikes = async () => {
+                const response = await axios.get('startalk-api/users/profile/alllikes');
+                setLikes(response.data);
+                setFetched(prevState => ({ ...prevState, likes: true }));
+            };
+            fetchLikes();
+        } else if (activeIndex === 2 && !fetched.favorites) {
+            const fetchFavorites = async () => {
+                const response = await axios.get('startalk-api/users/profile/allfavorites');
+                setFavorites(response.data);
+                setFetched(prevState => ({ ...prevState, favorites: true }));
+            };
+            fetchFavorites();
+        }
+    }, [activeIndex]);
 
     const items = [
         {label: 'My Citations', icon: 'pi pi-fw pi-calendar'},
-        {label: 'My Likes', icon: 'pi pi-fw pi-heart'}
+        {label: 'My Likes', icon: 'pi pi-fw pi-heart'},
+        {label: 'My Favorites', icon: 'pi pi-fw pi-star'}
     ];
 
     return (
@@ -44,6 +57,11 @@ export default function Profile() {
             ))}
             {activeIndex === 1 && likes.map(like => (
                 <CitationCard key={like._id} citation={like} />
+            ))}
+            {activeIndex === 2 && (favorites.length > 0 ? favorites.map(favorite => (
+                <CitationCard key={favorite._id} citation={favorite} />
+            )) : (
+                <p>No favorites yet. Start exploring and favoriting citations!</p>
             ))}
         </Base>
     );
