@@ -3,17 +3,16 @@ import '../../assets/css/pages/Citations/CitationsCard.css';
 import { Divider } from 'primereact/divider';
 import {Button} from "primereact/button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRightToBracket, faAt, faClock} from "@fortawesome/free-solid-svg-icons";
+import {faAt, faClock} from "@fortawesome/free-solid-svg-icons";
 import React, {useContext, useState} from "react";
 import {UserContext} from "../../utils/UserAuthContext";
-import axios from 'axios';
+import LikeButton from '../../components/Button/LikeButton';
+import FavButton from '../../components/Button/FavButton';
 
 export default function CitationCard({citation})
 {
     const { isAuthenticated } = useContext(UserContext);
     const [likes, setLikes] = useState(citation.numberLike);
-    const [isLiked, setIsLiked] = useState(false);
-    const [isFav, setIsFav] = useState(false);
 
     // Fonction pour formater la date
     const formatDate = (dateString) => {
@@ -28,31 +27,6 @@ export default function CitationCard({citation})
 
     const formattedDate = formatDate(citation.creationDate);
 
-    const handleLike = async () => {
-        try {
-            const url = `startalk-api/citations/${citation._id}/${isLiked ? 'unlike' : 'like'}`;
-            const response = await axios.patch(url);
-            setLikes(response.data.likes.length);
-            setIsLiked(!isLiked);
-        } catch (error) {
-            if (error.response && error.response.status === 400) { // that's mean this citation has been already liked by the user
-                setIsLiked(true);
-            }
-        }
-    };
-
-    const handleFav = async () => {
-        try {
-            const url = `startalk-api/citations/${citation._id}/${isFav ? 'unfav' : 'fav'}`;
-            const response = await axios.patch(url);
-            setIsFav(!isFav);
-        } catch (error) {
-            if (error.response && error.response.status === 400) { // that's mean this citation has been already favorited by the user
-                setIsFav(true);
-            }
-        }
-    };
-
     return (
         <Card title={citation.title} className="MyCitationCardCss">
             <Divider/>
@@ -62,8 +36,8 @@ export default function CitationCard({citation})
                 <div className="infoCard">
                     <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
                     <Button icon="fa-regular fa-eye" rounded text severity="secondary" title="See details"  />
-                    <Button label={likes} icon={isLiked ? "fa-solid fa-heart" : "pi pi-heart" } rounded text severity="secondary" title="like" onClick={handleLike} />
-                    <Button icon={isFav ? "fa-solid fa-star" : "fa-regular fa-star" } rounded text severity="secondary" title="fav" onClick={handleFav} />
+                    <LikeButton citation={citation} likes={likes} setLikes={setLikes} />
+                    <FavButton citation={citation} />
                     <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>
                 </div>
             ) : (
