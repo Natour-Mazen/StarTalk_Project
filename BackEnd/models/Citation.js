@@ -36,6 +36,10 @@ const CitationSchema = new mongoose.Schema({
     writerName:{
         type: String,
         required: true,
+    },
+    humor:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CitationHumor',
     }
 })
 
