@@ -9,8 +9,8 @@ export default function RightSideBar()
         <div className="three-dimensions-rightside">
 
             <div className="p-inputgroup flex-1">
-                <Button icon="pi pi-search" />
-                <InputText placeholder="Search a Citation" />
+                <Button icon="pi pi-search" className="StartalkButton"/>
+                <InputText placeholder="Search a Citation"  />
             </div>
 
             <div className="mt-3"/>

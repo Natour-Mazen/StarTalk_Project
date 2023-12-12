@@ -20,6 +20,13 @@ export default function FavButton({citation}) {
     };
 
     return (
-        <Button icon={isFav ? "fa-solid fa-star" : "fa-regular fa-star" } rounded text severity="secondary" title="fav" onClick={handleFav} />
+        <Button
+            icon={isFav ? "fa-solid fa-star" : "fa-regular fa-star" }
+            rounded
+            text
+            className="StartalkButtonSpec"
+            title="fav"
+            onClick={handleFav}
+        />
     );
 }

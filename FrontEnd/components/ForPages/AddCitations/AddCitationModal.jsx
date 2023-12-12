@@ -99,6 +99,7 @@ export default function AddCitationModal({visible, setVisible}) {
                                 width:'150px',
                                 margin: 'auto'
                             }}
+                            className="StartalkButton"
                     />
                 </form>
             </Dialog>

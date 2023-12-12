@@ -1,5 +1,24 @@
+.StartalkButton, .StartalkButtonSpec {
+    transition: all 0.2s ease;
+}
+
 .StartalkButton{
     background-color: var(--primary);
-    border : none;
-    outline: none;
+    box-shadow: none;
+    border: none;
 }
+.StartalkButton:hover{
+    background-color: #4251f3;
+}
+
+.StartalkButtonSpec{
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    color: var(--text)
+}
+
+.StartalkButtonSpec:hover{
+    border: #c7c5c5 outset 2px;
+}
+

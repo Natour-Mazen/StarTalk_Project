@@ -1,5 +1,4 @@
 import { Card } from 'primereact/card';
-import '../../../assets/css/pages/Citations/CitationsCard.css';
 import { Divider } from 'primereact/divider';
 import {Button} from "primereact/button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -8,6 +7,7 @@ import React, {useContext, useState} from "react";
 import {UserContext} from "../../../utils/UserAuthContext";
 import LikeButton from '../../Button/LikeButton';
 import FavButton from '../../Button/FavButton';
+import '../../../assets/css/components/ForPages/Citaitons/CitationsCard.css'
 
 export default function CitationCard({citation})
 {

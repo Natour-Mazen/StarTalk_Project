@@ -21,6 +21,14 @@ export default function LikeButton({citation, likes, setLikes}) {
     };
 
     return (
-        <Button label={likes} icon={isLiked ? "fa-solid fa-heart" : "pi pi-heart" } rounded text severity="secondary" title="like" onClick={handleLike} />
+        <Button
+            label={likes}
+            icon={isLiked ? "fa-solid fa-heart" : "pi pi-heart" }
+            rounded
+            text
+            className="StartalkButtonSpec"
+            title="like"
+            onClick={handleLike}
+        />
     );
 }

@@ -1,11 +1,11 @@
 .MyCitationCardCss {
-    background-color: #ffffff;
+    background-color: var(--secondary);
     border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    color: #14171a;
     padding: 10px;
     margin: 20px 0;
     transition: all 0.8s ease;
+    color : var(--text)
 }
 
 .MyCitationCardCss:hover {

@@ -27,6 +27,7 @@ export default function ThemeToggleButton() {
                 icon={theIcon}
                 onClick={handlechangeTheme}
                 title={theTitle}
+                outlined={false}
         />
     );
 };

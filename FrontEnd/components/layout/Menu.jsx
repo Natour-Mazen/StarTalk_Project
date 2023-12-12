@@ -2,14 +2,15 @@
 import '../../assets/css/components/layout/Menu.css';
 
 // Imports
-import React, { useContext, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu as MenuP } from 'primereact/menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { UserContext } from '../../utils/UserAuthContext';
-import logo from '../../assets/images/logoUpScale.png'
+import logoLM from '../../assets/images/logoUpScaleLightMode.png'
+import logoDM from '../../assets/images/logoUpScaleDarkMode.png'
 import ButtonMenu from "../Button/ButtonMenu";
 import ThemeToggleButton  from "../Button/ToggleThemeButton"
 import {Toolbar} from "primereact/toolbar";
@@ -17,7 +18,7 @@ import {Button} from "primereact/button";
 import AddCitationModal from "../ForPages/AddCitations/AddCitationModal"
 import {useLocalStorage} from "primereact/hooks";
 
-export default function Menu() {
+export default function Menu(initialValue, key) {
     const navigate = useNavigate();
     const { isAuthenticated, role, login, logout } = useContext(UserContext);
     const [isDiscordButtonClicked, setDiscordButtonClicked] = useState(false);
@@ -28,12 +29,13 @@ export default function Menu() {
 
     function createMenuItem(label, icon, command, subItems) {
         return {
-            label,
-            icon,
+            label: <span className="labaelsIconMenu" style={{ marginLeft : '5px'}}>{label}</span>,
+            icon: <i className={`${icon} labaelsIconMenu`} />,
             command: () => changePage(command),
             items: subItems || [],
         };
     }
+
 
     function createRoleBasedMenuItems(role) {
         let userMenu = [
@@ -92,7 +94,7 @@ export default function Menu() {
         <React.Fragment>
             {isAuthenticated ? (
                 <Button
-                    className="buttonStyle"
+                    className="buttonStyle StartalkButton"
                     onClick={handleLogout}
                     title="Click here to logout"
                 >
@@ -101,7 +103,7 @@ export default function Menu() {
                 </Button>
             ) : (
                 <Button
-                    className="buttonStyle"
+                    className="buttonStyle StartalkButton"
                     onClick={handleLogin}
                     title="Click here to login with Discord for a better experience"
                 >
@@ -130,38 +132,37 @@ export default function Menu() {
         setVisible(true);
     };
 
+
     return (
         <div className="dimensions-menu">
             <div className="titre">
                 <img
                     className="logo"
-                    src={logo}
-                    alt="StarTalk logo" />
+                    src={logoDM}
+                    alt="StarTalk logo"/>
                 <h1>
                     StarTalk
                 </h1>
             </div>
 
-            <nav>
-                <MenuP model={items} className="w-full pl-5 pr-5" />
+            <nav className="MenuItemlLabel">
+                <MenuP model={items} className="w-full pl-5 pr-5 MenuP" labelClassName="labaelsMenu"/>
             </nav>
-
-
 
             {isAuthenticated ? (
                 <Button
                     icon="fa-solid fa-feather"
                     title="Write your most Beautiful Citation"
                     label="Post"
-                    className="PostButtonCss"
+                    className="StartalkButton PostButtonCss"
                     onClick={handleOpenModalAddCitaion}
 
                 />
             ) : (
-               <></>
+                <></>
             )}
 
-            <AddCitationModal visible={visible} setVisible={setVisible} />
+            <AddCitationModal visible={visible} setVisible={setVisible}/>
 
             <div className="flex flex-grow"></div>
 
