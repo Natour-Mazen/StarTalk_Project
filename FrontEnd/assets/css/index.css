@@ -14,8 +14,6 @@ le lien pour le style
   --primary: #5863b6;
   --secondary: #e0d8ee;
   --accent: #724cae;
-  --toggle-bg: #f0eb9d;
-  --toggle-fg: #ffd000;
 }
 
 [data-theme="dark"] {
@@ -24,8 +22,7 @@ le lien pour le style
   --primary: #4954a7;
   --secondary: #191127;
   --accent: #7751b3;
-  --toggle-bg: #283452;
-  --toggle-fg: #00a6ff;
+
 }
 
 body {
@@ -36,6 +33,7 @@ body {
   flex-direction: row;
   height: 100vh;
   background-color: var(--background-color);
+  transition: background-color 0.5s ease;
 }
 
 #root{

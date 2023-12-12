@@ -1,0 +1,5 @@
+.StartalkButton{
+    background-color: var(--primary);
+    border : none;
+    outline: none;
+}

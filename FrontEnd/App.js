@@ -5,6 +5,7 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/react-fontawesome';
+import './assets/css/components/Button/AllButtons.css'
 import {useContext} from "react";
 
 // Components

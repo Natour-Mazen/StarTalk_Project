@@ -116,6 +116,7 @@ export default function Menu() {
             <ThemeToggleButton />
             <i className="mr-2" />
             <ButtonMenu
+                className='StartalkButton'
                 icon="fa-solid fa-circle-question"
                 to="/about"
                 title="About"
