@@ -6,7 +6,7 @@ import 'primeicons/primeicons.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/react-fontawesome';
 import './assets/css/components/Button/AllButtons.css'
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 
 // Components
 import About from "./pages/About/About";
@@ -22,32 +22,38 @@ import {UserContext} from "./utils/UserAuthContext";
 
 export default function App()
 {
-    const { isAuthenticated, role } = useContext(UserContext);
 
-  return (
-    <Routes>
-        <Route path="/" element={<Citations />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-        {
-            (isAuthenticated === true && (role === 'ROLE_USER' || role === 'ROLE_ADMIN')) &&
-            (
-                <>
-                    <Route path="/citation/:id" element={<Citation />} />
-                    <Route path="/profile" element={<Profile/>} />
-                </>
-            )
-        }
-        {
-            (isAuthenticated === true && role === 'ROLE_ADMIN') &&
-            (
-                <>
-                    <Route path="/admin/add" element={<AdminAddCitation />} />
-                    <Route path="/admin/delete" element={<AdminDeleteCitation />} />
-                    <Route path="/admin/disconnection" element={<AdminDisconnect />} />
-                </>
-            )
-        }
-    </Routes>
-  );
+    const { isAuthenticated, role, fetchUserAfterLoginData} = useContext(UserContext);
+
+    useEffect(() => {
+        fetchUserAfterLoginData();
+    }, []);
+
+    return (
+        isAuthenticated !== null &&
+        <Routes>
+            <Route path="/" element={<Citations />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+            {
+                (isAuthenticated === true && (role === 'ROLE_USER' || role === 'ROLE_ADMIN')) &&
+                (
+                    <>
+                        <Route path="/citation/:id" element={<Citation />} />
+                        <Route path="/profile" element={<Profile/>} />
+                    </>
+                )
+            }
+            {
+                (isAuthenticated === true && role === 'ROLE_ADMIN') &&
+                (
+                    <>
+                        <Route path="/admin/add" element={<AdminAddCitation />} />
+                        <Route path="/admin/delete" element={<AdminDeleteCitation />} />
+                        <Route path="/admin/disconnection" element={<AdminDisconnect />} />
+                    </>
+                )
+            }
+        </Routes>
+    );
 }

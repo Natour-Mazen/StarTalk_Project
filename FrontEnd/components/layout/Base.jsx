@@ -10,12 +10,6 @@ import {UserContext} from "../../utils/UserAuthContext";
 
 export default function Base({ children })
 {
-    const { fetchUserAfterLoginData} = useContext(UserContext);
-
-    useEffect(() => {
-            fetchUserAfterLoginData();
-    }, []);
-
     return (
         <div className="Base">
             <Menu/>

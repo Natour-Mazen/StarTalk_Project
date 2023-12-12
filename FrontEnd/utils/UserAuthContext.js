@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 export const UserContext = createContext();
 // Create a provider component
 export const UserProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [role, setRole] = useState('');
     const [name, setName] = useState('');
     const [id, setID] = useState('');
@@ -40,7 +40,7 @@ export const UserProvider = ({ children }) => {
             setRole('');
             setName('');
             setID('');
-            navigate('/');
+            //navigate('/'); To avoid a probleme for the notFound page.
         }
     };
 
