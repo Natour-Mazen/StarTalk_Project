@@ -4,6 +4,7 @@ const CitationHumorSchema = new mongoose.Schema({
     description:{
         type: String,
         unique:true,
+        maxLength:15
     },
 });
 
