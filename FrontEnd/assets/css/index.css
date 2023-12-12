@@ -5,24 +5,27 @@ https://www.realtimecolors.com/?colors=0b1319-f5f9fa-5863b6-e0d8ee-724cae&fonts=
 le lien pour le style
 */
 
+
 :root {
   --three-dimensions-menu-left-side-width: 1rem;
 
   --text: #0b1319;
-  --background-light: #f4f8fa;
+  --background-color: #f4f8fa;
   --primary: #5863b6;
   --secondary: #e0d8ee;
   --accent: #724cae;
+  --toggle-bg: #f0eb9d;
+  --toggle-fg: #ffd000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #e6eef4;
-    --background: #05090a;
-    --primary: #4954a7;
-    --secondary: #191127;
-    --accent: #7751b3;
-  }
+[data-theme="dark"] {
+  --text: #e6eef4;
+  --background-color: #05090a;
+  --primary: #4954a7;
+  --secondary: #191127;
+  --accent: #7751b3;
+  --toggle-bg: #283452;
+  --toggle-fg: #00a6ff;
 }
 
 body {
@@ -32,7 +35,7 @@ body {
   display: flex;
   flex-direction: row;
   height: 100vh;
-  background-color: var(--background-light);
+  background-color: var(--background-color);
 }
 
 #root{

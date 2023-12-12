@@ -15,6 +15,7 @@ import ThemeToggleButton  from "../Button/ToggleThemeButton"
 import {Toolbar} from "primereact/toolbar";
 import {Button} from "primereact/button";
 import AddCitationModal from "../ForPages/AddCitations/AddCitationModal"
+import {useLocalStorage} from "primereact/hooks";
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -112,7 +113,7 @@ export default function Menu() {
 
     const endContent = (
         <React.Fragment>
-            <ThemeToggleButton/>
+            <ThemeToggleButton />
             <i className="mr-2" />
             <ButtonMenu
                 icon="fa-solid fa-circle-question"
