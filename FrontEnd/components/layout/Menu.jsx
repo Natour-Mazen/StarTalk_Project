@@ -138,7 +138,7 @@ export default function Menu(initialValue, key) {
             <div className="titre">
                 <img
                     className="logo"
-                    src={logoDM}
+                    src={logoLM}
                     alt="StarTalk logo"/>
                 <h1>
                     StarTalk

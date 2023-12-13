@@ -39,8 +39,7 @@
     margin:10px auto;
     width: 100px;
 }
-/*
-A remttre plus tared
+
 .MenuItemlLabel {
     background-color: var(--secondary);
     border-radius: 5px;
@@ -68,15 +67,13 @@ A remttre plus tared
     background-color: var(--menuHoverItem) !important ;
     box-shadow: none;
 }
-*/
-
-
 
 .logo{
     width: 6vw;
     object-fit: contain;
     pointer-events: none;
     margin-right: 30px;
+    filter: invert(var(--valfilter));
 }
 
 .titre{

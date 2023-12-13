@@ -1,25 +1,26 @@
-import React, {useContext, useEffect} from 'react';
-import {Button} from "primereact/button";
-import {useLocalStorage} from "primereact/hooks";
-
+import React, { useState, useEffect } from 'react';
+import { Button } from "primereact/button";
 
 export default function ThemeToggleButton() {
-    const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+    const [isDark, setIsDark] = useState(localStorage.getItem('isDark') === 'true');
 
-    useEffect(() => {
+    applyTheme(isDark);
+
+    function applyTheme(isDark) {
         if (isDark) {
             document.body.setAttribute('data-theme', 'dark');
         } else {
-            document.body.removeAttribute('data-theme')
+            document.body.removeAttribute('data-theme');
         }
-    }, [isDark]);
+    }
 
-    const handlechangeTheme = async () => {
-        setIsDark(!isDark);
+    function handlechangeTheme() {
+        const newIsDark = !isDark;
+        setIsDark(newIsDark);
+        localStorage.setItem('isDark', newIsDark.toString());
     };
 
-    const theIcon = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    const theIcon = isDark ? "pi pi-sun" :  "pi pi-moon";
     const theTitle = isDark ? "Change to light theme" : "Change to dark theme";
 
     return (
