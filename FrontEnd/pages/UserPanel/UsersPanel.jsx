@@ -6,7 +6,7 @@ export default function AdminDisconnect()
         <Base>
             <div className="UserPanel">
 
-                <h1>User Panel Administration</h1>
+                <h1>Users Panel Administration</h1>
 
             </div>
         </Base>

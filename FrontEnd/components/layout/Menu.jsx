@@ -44,7 +44,7 @@ export default function Menu(initialValue, key) {
 
         let adminMenu = [
             createMenuItem('Admin', null, null, [
-                createMenuItem('User Panel', 'fa-solid fa-users-gear', '/admin/userPanel'),
+                createMenuItem('Users Panel', 'fa-solid fa-users-gear', '/admin/userspanel'),
             ]),
         ];
 
