@@ -63,6 +63,11 @@
     box-sizing: border-box;
 }
 
+.p-submenu-header {
+    background-color: transparent !important;
+    text-decoration: underline var(--text);
+}
+
 .p-menuitem-link:hover {
     background-color: var(--menuHoverItem) !important ;
     box-shadow: none;

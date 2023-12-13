@@ -146,7 +146,7 @@ export default function Menu(initialValue, key) {
             </div>
 
             <nav className="MenuItemlLabel">
-                <MenuP model={items} className="w-full pl-5 pr-5 MenuP" labelClassName="labaelsMenu"/>
+                <MenuP model={items} className="w-full pl-5 pr-5 MenuP"/>
             </nav>
 
             {isAuthenticated ? (
