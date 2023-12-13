@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "primereact/button";
 
 export default function ThemeToggleButton() {
-    const [isDark, setIsDark] = useState(localStorage.getItem('isDark') === 'true');
+    const [isDark, setIsDark] = useState(localStorage.getItem('isDarkStarTalk') === 'true');
 
     applyTheme(isDark);
 
@@ -17,7 +17,7 @@ export default function ThemeToggleButton() {
     function handlechangeTheme() {
         const newIsDark = !isDark;
         setIsDark(newIsDark);
-        localStorage.setItem('isDark', newIsDark.toString());
+        localStorage.setItem('isDarkStarTalk', newIsDark.toString());
     };
 
     const theIcon = isDark ? "pi pi-sun" :  "pi pi-moon";

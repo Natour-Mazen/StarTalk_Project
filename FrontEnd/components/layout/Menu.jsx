@@ -44,8 +44,7 @@ export default function Menu(initialValue, key) {
 
         let adminMenu = [
             createMenuItem('Admin', null, null, [
-                createMenuItem('Remove Citation', 'fa-solid fa-square-minus', '/admin/delete'),
-                createMenuItem('Disconnect User', 'fa-solid fa-plug-circle-xmark', '/admin/disconnection'),
+                createMenuItem('User Panel', 'fa-solid fa-users-gear', '/admin/userPanel'),
             ]),
         ];
 

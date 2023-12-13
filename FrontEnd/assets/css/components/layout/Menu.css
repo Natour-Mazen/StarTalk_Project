@@ -66,6 +66,7 @@
 .p-submenu-header {
     background-color: transparent !important;
     text-decoration: underline var(--text);
+    user-select : none;
 }
 
 .p-menuitem-link:hover {

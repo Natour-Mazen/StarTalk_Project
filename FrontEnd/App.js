@@ -18,6 +18,7 @@ import Citations from "./pages/Citations/Citations";
 import Citation from "./pages/Citation/Citation";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from  "./pages/Profile/Profile"
+import UserPanel from "./pages/UserPanel/UserPanel"
 import {UserContext} from "./utils/UserAuthContext";
 
 export default function App()
@@ -48,6 +49,7 @@ export default function App()
                 (isAuthenticated === true && role === 'ROLE_ADMIN') &&
                 (
                     <>
+                        <Route path="/admin/userPanel" element={<UserPanel />} />
                         <Route path="/admin/add" element={<AdminAddCitation />} />
                         <Route path="/admin/delete" element={<AdminDeleteCitation />} />
                         <Route path="/admin/disconnection" element={<AdminDisconnect />} />
