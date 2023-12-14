@@ -9,25 +9,24 @@ export default function Citation({ match }) {
     const [citation, setCitation] = useState(null);
     const [humorcitatio, setHumor] = useState(null);
 
+    const fetchData = async (url) => {
+        try {
+            const response = await axios.get(url, { withCredentials: true });
+            if (response.status === 200) {
+                return response.data;
+            }
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    }
+
     useEffect(() => {
-        axios.get(`/startalk-api/citations/${id}`)
-            .then(response => {
-                setCitation(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
+        fetchData(`/startalk-api/citations/${id}`).then(data => setCitation(data));
     }, [id]);
 
     useEffect(() => {
         if(citation){
-            axios.get(`/startalk-api/citations/possiblehumor/${citation.humor}`)
-                .then(response => {
-                    setHumor(response.data);
-                })
-                .catch(error => {
-                    console.error('There was an error!', error);
-                });
+            fetchData(`/startalk-api/citations/possiblehumor/${citation.humor}`).then(data => setHumor(data));
         }
     }, [citation?.humor]);
 
@@ -58,7 +57,7 @@ export default function Citation({ match }) {
         </Base>
     ) : (
         <Base>
-        <div>Loading...</div>
+            <div>Loading...</div>
         </Base>
     );
 }
