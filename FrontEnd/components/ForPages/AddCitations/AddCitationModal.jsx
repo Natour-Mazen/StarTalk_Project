@@ -91,7 +91,7 @@ export default function AddCitationModal({visible, setVisible}) {
                    position="top-center"
             />
             <Dialog header="Let your writer's soul express itself ✒️"
-                    visible={visible} style={{ width: '34vw' }}
+                    visible={visible} style={{ width: '34vw', minWidth: '80%' }}
                     onHide={handleClose}
                     draggable={false}
             >

@@ -13,7 +13,7 @@
 }
 
 @media (max-width: 500px) {
-    .three-dimensions-menu{
+    .dimensions-menu{
         width : 100%;
     }
 }
@@ -65,7 +65,6 @@
 
 .p-submenu-header {
     background-color: transparent !important;
-    text-decoration: underline var(--text);
     user-select : none;
 }
 
