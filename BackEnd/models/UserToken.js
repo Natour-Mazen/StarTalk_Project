@@ -7,6 +7,10 @@ const UserTokenSchema = new mongoose.Schema({
         unique:true,
         required:true
     },
+    discordID:{
+        type: String,
+        unique:true,
+    },
     jwtToken: {
         type:String,
         required:true

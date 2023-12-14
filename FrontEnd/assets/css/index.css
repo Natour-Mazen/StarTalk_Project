@@ -13,7 +13,7 @@ le lien pour le style
   --secondary: #f8f8f8;
   --accent: #89c9b8;
   --menuHoverItem: rgba(62,65,73, 10%);
-  --valfilter : 0;
+  --valfilter : 25%;
 }
 
 [data-theme="dark"] {

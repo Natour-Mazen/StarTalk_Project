@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const User = require('../models/User');
 const UserTokenModel = require('../models/UserToken');
+const CitationHumor = require("../models/CitationHumor");
 
 dotenv.config();
 
@@ -62,9 +63,10 @@ class AuthController {
     }
 
     // Create a new userToken object in the database
-    static createNewUserToken(UserID, Token) {
+    static createNewUserToken(UserID, Token, idDiscord) {
         return new UserTokenModel({
             UserId: UserID,
+            discordID: idDiscord,
             jwtToken: Token
         });
     }
@@ -105,7 +107,7 @@ class AuthController {
             const token = AuthController.generateJwtToken(existingUser, myResponseData.expires_in);
 
             // Create a new user token and save it to the database
-            const newUserToken = AuthController.createNewUserToken(existingUser._id, token);
+            const newUserToken = AuthController.createNewUserToken(existingUser._id, token, discordUser.id);
             await newUserToken.save();
 
             // Return the token and its expiration time
@@ -115,6 +117,7 @@ class AuthController {
             };
         } catch (err) {
             // Handle errors by throwing the exception
+            console.log(err)
             throw err;
         }
     }
