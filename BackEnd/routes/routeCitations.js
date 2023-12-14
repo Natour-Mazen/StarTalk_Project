@@ -7,9 +7,9 @@ const allowedRolesForRouteCitation = ['ROLE_USER','ROLE_ADMIN'];
 
 routerCitations.get('/', CitationController.getAllCitations);
 
-routerCitations.get('/:id', authenticateToken(allowedRolesForRouteCitation), CitationController.getCitationById);
-routerCitations.get('/possiblehumors', authenticateToken(allowedRolesForRouteCitation), CitationController.getAllCitationsHumor);
 
+routerCitations.get('/possiblehumors', authenticateToken(allowedRolesForRouteCitation), CitationController.getAllCitationsHumor);
+routerCitations.get('/:id', authenticateToken(allowedRolesForRouteCitation), CitationController.getCitationById);
 routerCitations.post('/', authenticateToken(allowedRolesForRouteCitation), CitationController.createCitation);
 
 routerCitations.patch('/:id', authenticateToken(allowedRolesForRouteCitation), CitationController.updateCitation);

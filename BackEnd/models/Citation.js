@@ -4,7 +4,7 @@ const CitationSchema = new mongoose.Schema({
     title:{
         type:String,
         required:true,
-        maxLength:50,
+        maxLength:25,
     },
     description:{
         type:String,

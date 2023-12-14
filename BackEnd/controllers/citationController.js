@@ -1,4 +1,5 @@
 const Citation = require('../models/Citation');
+const CitationHumor = require('../models/CitationHumor')
 const UserController = require('../controllers/userController');
 
 class CitationController {
@@ -73,7 +74,7 @@ class CitationController {
             const citation = new Citation({
                 title: req.body.title,
                 description: req.body.description,
-                numberLike: req.body.numberLike,
+                humor: req.body.humor,
                 writerId: req.client.id,
                 writerName: req.client.name,
             });

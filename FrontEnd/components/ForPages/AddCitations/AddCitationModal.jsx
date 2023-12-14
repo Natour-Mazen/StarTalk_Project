@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
@@ -7,8 +7,12 @@ import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 import { InputTextarea } from "primereact/inputtextarea";
 import {InputText} from "primereact/inputtext";
+import {Dropdown} from "primereact/dropdown";
 
 export default function AddCitationModal({visible, setVisible}) {
+
+    const [humors, setHumors] = useState([]);
+    const [selectedHumor, setSelectedHumor] = useState(null);
 
     const toast = useRef(null);
 
@@ -28,11 +32,13 @@ export default function AddCitationModal({visible, setVisible}) {
         setVisible(false);
         const titre = data.titre;
         const description = data.description;
+        const humor = selectedHumor._id;
         if (titre !== '' && description !== '') {
             try {
                 const response = await axios.post('startalk-api/citations', {
                     title: titre,
                     description: description,
+                    humor: humor
                 });
 
                 if (response.status === 201) {
@@ -56,26 +62,69 @@ export default function AddCitationModal({visible, setVisible}) {
         form.reset();
     };
 
+
+
+    useEffect(() => {
+        const fetchHumors = async () => {
+            try {
+                const response = await axios.get('startalk-api/citations/possiblehumors');
+                setHumors(response.data);
+            } catch (error) {
+            }
+        };
+
+        fetchHumors();
+    }, []);
+
     return (
         <>
             <Toast ref={toast}
                    position="top-center"
             />
             <Dialog header="Let your writer's soul express itself ✒️"
-                    visible={visible} style={{ width: '30vw' }}
+                    visible={visible} style={{ width: '34vw' }}
                     onHide={handleClose}
                     draggable={false}
             >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
-
                     <Controller
                         name="titre"
                         control={form.control}
-                        rules={{ required: 'Title is required.' }}
+                        rules={{
+                            required: 'Title is required.',
+                            maxLength: {
+                                value: 25,
+                                message: 'Title cannot exceed 25 characters.'
+                            }
+                        }}
                         render={({ field, fieldState }) => (
                             <>
                                 <label htmlFor={field.name}>Title</label>
                                 <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.error })} />
+                                {getFormErrorMessage(field.name)}
+                            </>
+                        )}
+                    />
+                    <Controller
+                        name="humor"
+                        control={form.control}
+                        render={({ field }) => (
+                            <>
+                                <label htmlFor={field.name}>Humor
+                                    <small className="p-d-block"
+                                           style={{color: 'gray', marginLeft: '5px', fontSize: '10px'}}> <i>(This field
+                                        is optional)</i>
+                                    </small>
+                                </label>
+                                <Dropdown
+                                    id={field.name}
+                                    {...field}
+                                    value={selectedHumor}
+                                    options={humors}
+                                    onChange={(e) => setSelectedHumor(e.value)}
+                                    optionLabel="name"
+                                    placeholder="Select a Humor"
+                                />
                                 {getFormErrorMessage(field.name)}
                             </>
                         )}

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const CitationHumorSchema = new mongoose.Schema({
-    type:{
+    name:{
         type: String,
         unique:true,
         maxLength:25
