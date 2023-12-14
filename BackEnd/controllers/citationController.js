@@ -21,7 +21,7 @@ class CitationController {
                 .limit(pageSize);
 
             // Simplify citation objects by extracting only necessary attributes
-           /* const simplifiedCitations = citations.map(({ _id, title, description, numberLike, creationDate, writerName, likes, favs, humor }) => ({
+           const simplifiedCitations = citations.map(({ _id, title, description, numberLike, creationDate, writerName, likes, favs, humor }) => ({
                 _id,
                 title,
                 description,
@@ -29,9 +29,8 @@ class CitationController {
                 creationDate,
                 writerName,
                 likes,
-                favs,
-                humor
-            }));*/
+                favs
+            }));
 
             // Send paginated and simplified citations in the response
             res.status(200).json({
@@ -39,7 +38,7 @@ class CitationController {
                 currentPage: page,
                 pageSize,
                 totalCitations,
-                citations: citations,
+                citations: simplifiedCitations,
             });
         } catch (err) {
             // Handle errors by sending a 500 Internal Server Error response
@@ -58,14 +57,11 @@ class CitationController {
             if (citation == null) {
                 return res.status(404).json({ message: 'Cannot find citation' });
             }
+            res.status(200).json(citation);
         } catch (err) {
             // If an error occurs during the retrieval, return a 500 response
             return res.status(500).json({ message: err.message });
         }
-
-        // If the citation is found, attach the citation object to the response for later use
-        res.citation = citation;
-        next();
     }
 
     // Create a new citation

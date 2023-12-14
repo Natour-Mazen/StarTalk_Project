@@ -8,11 +8,19 @@ import {UserContext} from "../../../utils/UserAuthContext";
 import LikeButton from '../../Button/LikeButton';
 import FavButton from '../../Button/FavButton';
 import '../../../assets/css/components/ForPages/Citaitons/CitationsCard.css'
+import {useNavigate} from "react-router-dom";
+import LookButton from "../../Button/LookButton";
 
 export default function CitationCard({citation})
 {
     const { isAuthenticated } = useContext(UserContext);
     const [likes, setLikes] = useState(citation.numberLike);
+
+    const navigate = useNavigate();
+    const handleClick = () =>
+    {
+        navigate(`/citation/${citation._id}`);
+    };
 
     // Fonction pour formater la date
     const formatDate = (dateString) => {
@@ -35,7 +43,7 @@ export default function CitationCard({citation})
             {isAuthenticated ? (
                 <div className="infoCard">
                     <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
-                    <Button icon="fa-regular fa-eye" rounded text severity="secondary" title="See details"  />
+                    <LookButton citation={citation}/>
                     <LikeButton citation={citation} likes={likes} setLikes={setLikes} />
                     <FavButton citation={citation} />
                     <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>

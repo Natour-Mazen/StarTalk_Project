@@ -20,7 +20,9 @@ routerAuth.get('/logout', authenticateToken(allowedRolesForRouteAuth), async (re
 
 routerAuth.get('/callback', async (req, res) => {
     const code = req.query.code;
-
+    if(req.query.error === 'access_denied'){
+        res.redirect('/')
+    }
     try {
         const result = await AuthController.handleOAuthCallback(code);
         res.cookie('accessToken', result.token, {
@@ -31,7 +33,7 @@ routerAuth.get('/callback', async (req, res) => {
         });
         res.redirect("/");
     } catch (err) {
-        res.status(500).json({ message: err.message });
+       res.status(500);
     }
 });
 

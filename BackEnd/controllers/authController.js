@@ -116,9 +116,7 @@ class AuthController {
                 expires_in: myResponseData.expires_in,
             };
         } catch (err) {
-            // Handle errors by throwing the exception
-            console.log(err)
-            throw err;
+                throw err;
         }
     }
 
