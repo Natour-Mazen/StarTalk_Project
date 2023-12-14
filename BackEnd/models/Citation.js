@@ -40,6 +40,7 @@ const CitationSchema = new mongoose.Schema({
     humor:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CitationHumor',
+        default: '657adf42d0dcd0b6a4af73e6'
     }
 })
 

@@ -30,28 +30,37 @@ export default function AddCitationModal({visible, setVisible}) {
 
     const onSubmit = async (data) => {
         setVisible(false);
-        const titre = data.titre;
-        const description = data.description;
-        const humor = selectedHumor._id;
+        const { titre, description } = data;
+        let humor = null;
+
+        if (selectedHumor !== null) {
+            humor = selectedHumor._id;
+        }
+
         if (titre !== '' && description !== '') {
             try {
-                const response = await axios.post('startalk-api/citations', {
+                const payload = {
                     title: titre,
                     description: description,
-                    humor: humor
-                });
+                };
+
+                if (humor) {
+                    payload.humor = humor;
+                }
+
+                const response = await axios.post('startalk-api/citations', payload);
 
                 if (response.status === 201) {
                     showSuccessToast();
                 }
             } catch (error) {
-                // Handle error
-
                 showErrorToast();
             }
         }
+
         form.reset();
     };
+
 
     const getFormErrorMessage = (name) => {
         return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
