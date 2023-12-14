@@ -10,6 +10,7 @@ routerCitations.get('/', CitationController.getAllCitations);
 routerCitations.get('/possiblehumors', authenticateToken(allowedRolesForRouteCitation), CitationController.getAllCitationsHumor);
 
 routerCitations.get('/:id', authenticateToken(allowedRolesForRouteCitation), CitationController.getCitationById);
+routerCitations.get('/possiblehumor/:id', authenticateToken(allowedRolesForRouteCitation), CitationController.getHumorById);
 
 routerCitations.post('/', authenticateToken(allowedRolesForRouteCitation), CitationController.createCitation);
 

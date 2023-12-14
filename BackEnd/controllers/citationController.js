@@ -64,6 +64,25 @@ class CitationController {
         }
     }
 
+
+    // Retrieve a specific Humor by ID
+    static async getHumorById(req, res, next) {
+        let citation;
+        try {
+            // Attempt to find a citation by its ID
+            const humor = await CitationHumor.findById(req.params.id);
+
+            // If the citation is not found, return a 404 response
+            if (humor == null) {
+                return res.status(404).json({ message: 'Cannot find citation' });
+            }
+            res.status(200).json(humor);
+        } catch (err) {
+            // If an error occurs during the retrieval, return a 500 response
+            return res.status(500).json({ message: err.message });
+        }
+    }
+
     // Create a new citation
     static async createCitation(req, res) {
         try {
