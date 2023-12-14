@@ -20,7 +20,7 @@ class CitationController {
                 .limit(pageSize);
 
             // Simplify citation objects by extracting only necessary attributes
-            const simplifiedCitations = citations.map(({ _id, title, description, numberLike, creationDate, writerName, likes, favs }) => ({
+           /* const simplifiedCitations = citations.map(({ _id, title, description, numberLike, creationDate, writerName, likes, favs, humor }) => ({
                 _id,
                 title,
                 description,
@@ -28,8 +28,9 @@ class CitationController {
                 creationDate,
                 writerName,
                 likes,
-                favs
-            }));
+                favs,
+                humor
+            }));*/
 
             // Send paginated and simplified citations in the response
             res.status(200).json({
@@ -37,7 +38,7 @@ class CitationController {
                 currentPage: page,
                 pageSize,
                 totalCitations,
-                citations: simplifiedCitations,
+                citations: citations,
             });
         } catch (err) {
             // Handle errors by sending a 500 Internal Server Error response
@@ -177,6 +178,20 @@ class CitationController {
                 .catch((err) => res.status(500).send({ message: err }));
         } else {
             res.status(404).send({ message: 'Favorite not found for this citation' });
+        }
+    }
+
+
+    static async getAllCitationsHumor(req, res) {
+        try {
+            // Récupérer toutes les citations de la base de données
+            const citations = await CitationHumor.find();
+
+            // Retourner une réponse 200 avec les citations
+            res.status(200).json(citations);
+        } catch (err) {
+            // Si une erreur se produit lors de la récupération, retourner une réponse 500 avec le message d'erreur
+            res.status(500).json({ message: err.message });
         }
     }
 
