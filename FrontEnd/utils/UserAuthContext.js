@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            const response = await axios.get('startalk-api/auth/logout', {
+            const response = await axios.get('/startalk-api/auth/logout', {
                 withCredentials: true,
             });
 
@@ -46,7 +46,7 @@ export const UserProvider = ({ children }) => {
 
     const fetchUserAfterLoginData = async () => {
         try {
-            const response = await axios.get('startalk-api/users/@me', {
+            const response = await axios.get('/startalk-api/users/@me', {
                 withCredentials: true
             });
 

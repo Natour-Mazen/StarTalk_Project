@@ -12,7 +12,7 @@ export default function Citations()
         async function getCitations()
         {
             try {
-                const response = await axios.get('startalk-api/citations', {
+                const response = await axios.get('/startalk-api/citations', {
                     withCredentials: true,
                 });
 

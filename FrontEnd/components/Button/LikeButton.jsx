@@ -9,7 +9,7 @@ export default function LikeButton({citation, likes, setLikes}) {
 
     const handleLike = async () => {
         try {
-            const url = `startalk-api/citations/${citation._id}/${isLiked ? 'unlike' : 'like'}`;
+            const url = `/startalk-api/citations/${citation._id}/${isLiked ? 'unlike' : 'like'}`;
             const response = await axios.patch(url);
             setLikes(response.data.likes.length);
             setIsLiked(!isLiked);

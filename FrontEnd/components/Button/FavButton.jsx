@@ -9,7 +9,7 @@ export default function FavButton({citation}) {
 
     const handleFav = async () => {
         try {
-            const url = `startalk-api/citations/${citation._id}/${isFav ? 'unfav' : 'fav'}`;
+            const url = `/startalk-api/citations/${citation._id}/${isFav ? 'unfav' : 'fav'}`;
             const response = await axios.patch(url);
             setIsFav(!isFav);
         } catch (error) {

@@ -48,7 +48,7 @@ export default function AddCitationModal({visible, setVisible}) {
                     payload.humor = humor;
                 }
 
-                const response = await axios.post('startalk-api/citations', payload);
+                const response = await axios.post('/startalk-api/citations', payload);
 
                 if (response.status === 201) {
                     showSuccessToast();
@@ -76,7 +76,7 @@ export default function AddCitationModal({visible, setVisible}) {
     useEffect(() => {
         const fetchHumors = async () => {
             try {
-                const response = await axios.get('startalk-api/citations/possiblehumors');
+                const response = await axios.get('/startalk-api/citations/possiblehumors');
                 setHumors(response.data);
             } catch (error) {
             }

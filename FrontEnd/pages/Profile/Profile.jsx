@@ -18,9 +18,9 @@ export default function Profile() {
         if (!visited[activeIndex]) {
             const fetchItems = async () => {
                 let url;
-                if (activeIndex === 0) url = 'startalk-api/users/profile/allcitations';
-                else if (activeIndex === 1) url = 'startalk-api/users/profile/alllikes';
-                else url = 'startalk-api/users/profile/allfavorites';
+                if (activeIndex === 0) url = '/startalk-api/users/profile/allcitations';
+                else if (activeIndex === 1) url = '/startalk-api/users/profile/alllikes';
+                else url = '/startalk-api/users/profile/allfavorites';
 
                 const response = await axios.get(url);
                 if (activeIndex === 0) setCitations(response.data);
