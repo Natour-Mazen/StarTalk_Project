@@ -1,10 +1,11 @@
+
 const mongoose = require('mongoose');
 
 const CitationHumorSchema = new mongoose.Schema({
-    description:{
+    type:{
         type: String,
         unique:true,
-        maxLength:15
+        maxLength:25
     },
 });
 

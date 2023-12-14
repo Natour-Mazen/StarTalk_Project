@@ -31,7 +31,6 @@ app.use('/startalk-api/users', routerUsers);
 app.use('/startalk-api/auth', routerAuth);
 app.use('/startalk-api/discordbot', routerBot);
 
-
 app.get('/*', (req, res) => {
     fs.readFile(
       "./public/index.html",
