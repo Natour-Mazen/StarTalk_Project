@@ -9,6 +9,8 @@ import { InputTextarea } from "primereact/inputtextarea";
 import {InputText} from "primereact/inputtext";
 import {Dropdown} from "primereact/dropdown";
 
+import '../../../assets/css/components/ForPages/AddCitations/AddCitationModal.css'
+
 export default function AddCitationModal({visible, setVisible}) {
 
     const [humors, setHumors] = useState([]);
@@ -91,9 +93,10 @@ export default function AddCitationModal({visible, setVisible}) {
                    position="top-center"
             />
             <Dialog header="Let your writer's soul express itself ✒️"
-                    visible={visible} style={{ width: '34vw', minWidth: '80%' }}
+                    visible={visible}
                     onHide={handleClose}
                     draggable={false}
+                    className='dialog'
             >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-column gap-2">
                     <Controller
