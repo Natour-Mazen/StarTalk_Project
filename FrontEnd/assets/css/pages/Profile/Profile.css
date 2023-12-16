@@ -5,5 +5,10 @@
     margin-bottom: 30px;
     transition: all 0.8s ease;
     width: 100%;
-    height:18em;
+    height:13.05em;
+}
+.p-fieldset-legend{
+    background-color: var(--third) !important;
+    color : var(--text);
+    transition: all 0.3s ease-in-out;
 }

@@ -7,9 +7,10 @@ import {UserContext} from "../../utils/UserAuthContext";
 import '../../assets/css/pages/Profile/Profile.css'
 import {TabPanel, TabView} from "primereact/tabview";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBookBookmark, faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
+import {faAt, faBookBookmark, faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
 import "../../assets/css/pages/Profile/Profile.css"
 import ScrollToTop from "../../components/Button/ScrollToTopButton";
+import {Fieldset} from "primereact/fieldset";
 
 export default function Profile() {
     const { name, role} = useContext(UserContext);
@@ -40,13 +41,19 @@ export default function Profile() {
         }
     }, [activeIndex]);
 
-
+    const legendTemplate = (
+        <div className="flex align-items-center">
+            <span className="pi pi-user mr-2"></span>
+            <span className="font-bold text-lg">Profile</span>
+        </div>
+    );
     return (
         <Base>
-
-            <Card title={<p>User Profile</p>} className="userProfile">
-                    <p>Name: {name}</p>
-                <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+            <Fieldset legend={legendTemplate} className="userProfile">
+                    <p><FontAwesomeIcon icon={faAt} title="Name"/> {name}</p>
+                <TabView activeIndex={activeIndex}
+                         onTabChange={(e) => setActiveIndex(e.index)}
+                >
                     <TabPanel header={<>
                                         <FontAwesomeIcon icon={faBookBookmark} /> My Citations
                                       </>}
@@ -75,8 +82,7 @@ export default function Profile() {
                         )}
                     </TabPanel>
                 </TabView>
-            </Card>
-
+            </Fieldset>
         </Base>
     );
 }

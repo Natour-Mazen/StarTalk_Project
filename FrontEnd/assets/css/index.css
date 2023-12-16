@@ -11,6 +11,7 @@ le lien pour le style
   --background-color: #f4f8fa;
   --primary: #5865f2;
   --secondary: #f8f8f8;
+  --third: rgb(239,239,239);
   --accent: #6ebfb5;
   --HoverItem: rgba(62,65,73, 10%);
   --valfilter : 25%;
@@ -21,6 +22,7 @@ le lien pour le style
   --background-color: #36393f;
   --primary: #5865f2;
   --secondary: #4f545c;
+  --third: #393d44;
   --accent: #3fa77d;
   --HoverItem:rgba(220,221,221, 20%) ;
   --valfilter : 90%;

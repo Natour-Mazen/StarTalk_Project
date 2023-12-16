@@ -6,6 +6,7 @@ const authenticateToken = require('../middlewares/authTokenjwt');
 const allowedRolesForRouteCitation = ['ROLE_USER','ROLE_ADMIN'];
 
 routerCitations.get('/', CitationController.getAllCitations);
+routerCitations.get('/search', CitationController.searchCitations);
 
 routerCitations.get('/possiblehumors', authenticateToken(allowedRolesForRouteCitation), CitationController.getAllCitationsHumor);
 
