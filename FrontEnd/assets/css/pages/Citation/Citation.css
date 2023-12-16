@@ -1,0 +1,45 @@
+.ulStyleCitation{
+    list-style-type: none;
+}
+
+.scrollPanelStyle{
+    height: 200px;
+    width : 100%;
+}
+
+.noneFavsLikePara{
+    user-select:  none;
+    font-style: italic;
+    text-align: center;
+}
+
+.myPanelHeader{
+    font-size : 20px;
+}
+
+.infoCitaiton{
+    font-size:15px;
+    display: flex;
+    justify-Content: space-between;
+    user-select: none;
+}
+
+.principalPanel{
+    background-color : var(--secondary);
+    transition: all 0.8s ease;
+}
+
+.p-panel-content, .p-panel-header, .p-tabview-panels{
+    background-color : transparent !important;
+}
+
+.p-tabview-nav-link{
+    background-color : transparent !important;
+    color : var(--text);
+    border : var(--HoverItem)  solid 1px !important;
+}
+
+.p-tabview-selected {
+    background-color:var(--HoverItem) ;
+}
+

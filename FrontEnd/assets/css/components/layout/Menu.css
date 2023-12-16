@@ -69,7 +69,7 @@
 }
 
 .p-menuitem-link:hover {
-    background-color: var(--menuHoverItem) !important ;
+    background-color: var(--HoverItem) !important ;
     box-shadow: none;
 }
 

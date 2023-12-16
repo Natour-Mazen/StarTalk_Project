@@ -12,7 +12,7 @@ le lien pour le style
   --primary: #5865f2;
   --secondary: #f8f8f8;
   --accent: #89c9b8;
-  --menuHoverItem: rgba(62,65,73, 10%);
+  --HoverItem: rgba(62,65,73, 10%);
   --valfilter : 25%;
 }
 
@@ -22,7 +22,7 @@ le lien pour le style
   --primary: #5865f2;
   --secondary: #4f545c;
   --accent: #57f287;
-  --menuHoverItem:rgba(220,221,221, 20%) ;
+  --HoverItem:rgba(220,221,221, 20%) ;
   --valfilter : 90%;
 }
 
