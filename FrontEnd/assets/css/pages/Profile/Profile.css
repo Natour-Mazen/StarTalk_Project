@@ -1,15 +1,9 @@
-.p-tabmenu-nav, .p-menuitem-link{
-    background-color : transparent !important;
-
-}
-
-.tabMenuProfile{
-    background-color : var(--background-color) !important;
-    color : var(--text);
-    border : var(--HoverItem)  solid 1px !important;
-
-}
-
-.p-tabmenuitem-selected {
-    background-color:var(--HoverItem) ;
+.userProfile{
+    background-color: var(--secondary);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+    transition: all 0.8s ease;
+    width: 100%;
+    height:18em;
 }

@@ -5,8 +5,9 @@ import RightSideBar from "./RightSideBar";
 import { Divider } from 'primereact/divider';
 
 import '../../assets/css/components/layout/Base.css';
-import {useContext, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {UserContext} from "../../utils/UserAuthContext";
+import ScrollToTopButton from "../Button/ScrollToTopButton";
 
 export default function Base({ children })
 {
@@ -17,6 +18,7 @@ export default function Base({ children })
             <Main>
                 {children}
             </Main>
+            <ScrollToTopButton />
             <Divider layout="vertical" className="separator"/>
             <RightSideBar/>
         </div>

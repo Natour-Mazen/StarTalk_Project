@@ -49,6 +49,8 @@
     border : var(--HoverItem)  solid 1px !important;
 }
 
+
+
 .p-tabview-selected {
     background-color:var(--HoverItem) ;
 }
