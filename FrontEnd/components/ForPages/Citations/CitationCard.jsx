@@ -22,7 +22,7 @@ export default function CitationCard({citation})
             <Divider/>
             {isAuthenticated ? (
                 <div className="infoCard">
-                    <p><FontAwesomeIcon icon={faAt} /> {citation.writerName} </p>
+                    <p><FontAwesomeIcon icon={faAt} title="writerName" /> {citation.writerName} </p>
                     <LookButton citation={citation}/>
                     <LikeButton citation={citation} likes={likes} setLikes={setLikes} />
                     <FavButton citation={citation} />

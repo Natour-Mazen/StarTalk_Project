@@ -17,6 +17,16 @@
     font-size : 20px;
 }
 
+.descCitation{
+    background-color: var(--secondary);
+    border-radius: 10px;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+    transition: all 0.8s ease;
+    width: 100%;
+    height:10%;
+}
+
 .infoCitaiton{
     font-size:15px;
     display: flex;
@@ -42,4 +52,5 @@
 .p-tabview-selected {
     background-color:var(--HoverItem) ;
 }
+
 

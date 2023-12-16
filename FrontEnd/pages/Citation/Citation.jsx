@@ -10,6 +10,7 @@ import {ScrollPanel} from "primereact/scrollpanel";
 import '../../assets/css/pages/Citation/Citation.css'
 import { Divider } from 'primereact/divider';
 import DateField from "../../components/Utils/DateField";
+import {Card} from "primereact/card";
 
 
 export default function Citation({ match }) {
@@ -41,12 +42,9 @@ export default function Citation({ match }) {
     return citation ? (
         <Base>
             <Panel header={<strong><p className="myPanelHeader">{citation.title}  </p></strong>} className="principalPanel">
-                <p>
-
-                       {citation.description}
-
-                </p>
-
+                <Card className="descCitation">
+                   <p> {citation.description} </p>
+                </Card>
                 <div className="infoCitaiton">
                     <p><FontAwesomeIcon icon={faAt} title="writerName"/> {citation.writerName} </p>
                     <p><FontAwesomeIcon icon={faMasksTheater} title="Humor"/> {humorcitation?.name} </p>
