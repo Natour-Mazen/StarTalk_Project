@@ -5,6 +5,11 @@ import axios from 'axios';
 import CitationCard from '../../components/ForPages/Citations/CitationCard';
 import {UserContext} from "../../utils/UserAuthContext";
 import {TabMenu} from "primereact/tabmenu";
+import '../../assets/css/pages/Profile/Profile.css'
+import {TabPanel, TabView} from "primereact/tabview";
+import {ScrollPanel} from "primereact/scrollpanel";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAt} from "@fortawesome/free-solid-svg-icons";
 
 export default function Profile() {
     const { name, role} = useContext(UserContext);
@@ -35,29 +40,33 @@ export default function Profile() {
         }
     }, [activeIndex]);
 
-    const items = [
-        {label: 'My Citations', icon: 'pi pi-fw pi-calendar'},
-        {label: 'My Likes', icon: 'pi pi-fw pi-heart'},
-        {label: 'My Favorites', icon: 'pi pi-fw pi-star'}
-    ];
 
     return (
         <Base>
-            <Card title="User Profile" style={{ marginBottom: '2em' }}>
+            <Card title="User Profile" style={{marginBottom: '2em'}}>
                 <p>Name: {name}</p>
             </Card>
-            <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
-            {activeIndex === 0 && citations.map(citation => (
-                <CitationCard key={citation._id} citation={citation} />
-            ))}
-            {activeIndex === 1 && likes.map(like => (
-                <CitationCard key={like._id} citation={like} />
-            ))}
-            {activeIndex === 2 && (favorites.length > 0 ? favorites.map(favorite => (
-                <CitationCard key={favorite._id} citation={favorite} />
-            )) : (
-                <p>No favorites yet. Start exploring and favoriting citations!</p>
-            ))}
+            <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+                <TabPanel header={<><i className="fa-regular fa-book-bookmark"/> My Citations </>}
+                          style={{marginLeft: 'auto'}}>
+                    {citations.map(citation => (
+                        <CitationCard key={citation._id} citation={citation}/>
+                    ))}
+                </TabPanel>
+                <TabPanel header={<><i className="pi pi-heart"/> My Likes </>}>
+                    {likes.map(like => (
+                        <CitationCard key={like._id} citation={like}/>
+                    ))}
+                </TabPanel>
+                <TabPanel header={<><i className="pi pi-star"/> My Favorites </>}
+                          style={{marginRight: 'auto'}}>
+                    {favorites.length > 0 ? favorites.map(favorite => (
+                        <CitationCard key={favorite._id} citation={favorite}/>
+                    )) : (
+                        <p>No favorites yet. Start exploring and favoriting citations!</p>
+                    )}
+                </TabPanel>
+            </TabView>
         </Base>
     );
 }

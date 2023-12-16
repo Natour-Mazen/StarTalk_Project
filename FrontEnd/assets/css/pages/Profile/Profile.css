@@ -1,0 +1,15 @@
+.p-tabmenu-nav, .p-menuitem-link{
+    background-color : transparent !important;
+
+}
+
+.tabMenuProfile{
+    background-color : var(--background-color) !important;
+    color : var(--text);
+    border : var(--HoverItem)  solid 1px !important;
+
+}
+
+.p-tabmenuitem-selected {
+    background-color:var(--HoverItem) ;
+}
