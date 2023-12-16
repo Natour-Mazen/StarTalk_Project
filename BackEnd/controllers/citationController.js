@@ -139,7 +139,8 @@ class CitationController {
                     data:citation,
                     message: 'You have already liked this citation.' });
             }
-            citation.likes.push(req.client.id);
+            citation.likes.push({userId: req.client.id, userName: req.client.name});
+            //citation.likes.push(req.client.id);
             citation.numberLike = citation.likes.length;
             await citation.save();
             await UserController.addLikedCitation(req, citation.id);
@@ -151,7 +152,8 @@ class CitationController {
 
     static async unLikeCitation(req, res) {
         const citation = await Citation.findById(req.params.id);
-        const index = citation.likes.indexOf(req.client.id);
+        //const index = citation.likes.indexOf(req.client.id);
+        const index = citation.likes.findIndex(like => like.userId.equals(req.client.id));
         if (index > -1) {
             citation.likes.splice(index, 1);
             citation.numberLike = citation.likes.length;
@@ -173,7 +175,8 @@ class CitationController {
                     data:citation,
                     message: 'You have already favorited this citation.' });
             }
-            citation.favs.push(req.client.id);
+            citation.favs.push({userId: req.client.id, userName: req.client.name});
+            //citation.favs.push(req.client.id);
             await citation.save();
             await UserController.addFavoriteCitation(req, citation.id);
             res.send(citation);
@@ -184,7 +187,8 @@ class CitationController {
 
     static async unFavoriteCitation(req, res) {
         const citation = await Citation.findById(req.params.id);
-        const index = citation.favs.indexOf(req.client.id);
+        //const index = citation.favs.indexOf(req.client.id);
+        const index = citation.favs.findIndex(like => like.userId.equals(req.client.id));
         if (index > -1) {
             citation.favs.splice(index, 1);
             await citation.save();

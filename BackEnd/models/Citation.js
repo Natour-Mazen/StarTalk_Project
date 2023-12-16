@@ -1,5 +1,18 @@
 const mongoose = require("mongoose");
 
+const UserRefSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        unique: true,
+    },
+    userName: {
+        type: String,
+        required: true,
+    }
+}, {_id: false}); // _id: false is added to prevent creation of an ObjectId for each subdocument
+
 const CitationSchema = new mongoose.Schema({
     title:{
         type:String,
@@ -14,16 +27,8 @@ const CitationSchema = new mongoose.Schema({
         type: Number,
         default:0,
     },
-    likes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        unique:true,
-    }],
-    favs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        unique:true,
-    }],
+    likes: [UserRefSchema],
+    favs: [UserRefSchema],
     creationDate:{
         type: Date,
         default: Date.now

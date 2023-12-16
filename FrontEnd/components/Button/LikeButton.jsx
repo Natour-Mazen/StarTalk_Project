@@ -4,8 +4,9 @@ import React, {useContext, useState} from "react";
 import {UserContext} from "../../utils/UserAuthContext";
 
 export default function LikeButton({citation, likes, setLikes}) {
-    const { id } = useContext(UserContext);
-    const [isLiked, setIsLiked] = useState(citation.likes.includes(id));
+    const { id, name } = useContext(UserContext);
+    const [isLiked, setIsLiked] = useState(citation.likes && citation.likes.some(
+        like => like.userId && like.userId === id));
 
     const handleLike = async () => {
         try {
