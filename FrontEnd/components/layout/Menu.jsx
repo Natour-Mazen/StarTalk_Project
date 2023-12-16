@@ -10,13 +10,11 @@ import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { UserContext } from '../../utils/UserAuthContext';
 import logoLM from '../../assets/images/logoUpScaleLightMode.png'
-import logoDM from '../../assets/images/logoUpScaleDarkMode.png'
 import ButtonMenu from "../Button/ButtonMenu";
 import ThemeToggleButton  from "../Button/ToggleThemeButton"
 import {Toolbar} from "primereact/toolbar";
 import {Button} from "primereact/button";
 import AddCitationModal from "../ForPages/AddCitations/AddCitationModal"
-import {useLocalStorage} from "primereact/hooks";
 
 export default function Menu(initialValue, key) {
     const navigate = useNavigate();
