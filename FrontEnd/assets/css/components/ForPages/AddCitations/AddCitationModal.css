@@ -1,9 +1,27 @@
 .dialog{
     width: 34vw;
+    color: var(--text);
 }
-
 @media (max-width: 500px) {
     .dialog{
         width : 80%;
     }
 }
+
+/* Override PrimeReact Css */
+.p-dropdown, .p-dialog-content, .p-dialog-header, .p-inputtextarea, .p-inputtext, .p-dropdown-trigger,
+.p-dialog-header-icon , .p-dropdown-items-wrapper, .p-dropdown-item
+{
+    background: var(--secondary) !important;
+    color: var(--text);
+}
+.p-dropdown-item:focus,.p-inputtext:focus, .p-inputwrapper-focus {
+    border: var(--text) solid 1px;
+    box-shadow: none;
+}
+
+
+.p-dropdown-item:hover{
+    background: var(--HoverItem) !important;
+}
+

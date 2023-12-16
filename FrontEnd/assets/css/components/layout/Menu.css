@@ -63,15 +63,6 @@
     box-sizing: border-box;
 }
 
-.p-submenu-header {
-    background-color: transparent !important;
-    user-select : none;
-}
-
-.p-menuitem-link:hover {
-    background-color: var(--HoverItem) !important ;
-    box-shadow: none;
-}
 
 .logo{
     width: 6vw;
@@ -100,4 +91,15 @@
     .logo{
         width: 60px;
     }
+}
+
+/* Override PrimeReact Css */
+.p-submenu-header {
+    background-color: transparent !important;
+    user-select : none;
+}
+
+.p-menuitem-link:hover {
+    background-color: var(--HoverItem) !important ;
+    box-shadow: none;
 }

@@ -38,7 +38,7 @@
     background-color : var(--secondary);
     transition: all 0.8s ease;
 }
-
+/* Override PrimeReact Css */
 .p-panel-content, .p-panel-header, .p-tabview-panels{
     background-color : transparent !important;
 }
@@ -48,8 +48,6 @@
     color : var(--text);
     border : var(--HoverItem)  solid 1px !important;
 }
-
-
 
 .p-tabview-selected {
     background-color:var(--HoverItem) ;
