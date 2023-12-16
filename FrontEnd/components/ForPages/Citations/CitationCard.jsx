@@ -8,24 +8,12 @@ import LikeButton from '../../Button/LikeButton';
 import FavButton from '../../Button/FavButton';
 import '../../../assets/css/components/ForPages/Citaitons/CitationsCard.css'
 import LookButton from "../../Button/LookButton";
+import DateField from "../../Utils/DateField";
 
 export default function CitationCard({citation})
 {
     const { isAuthenticated } = useContext(UserContext);
     const [likes, setLikes] = useState(citation.numberLike);
-
-    // Fonction pour formater la date
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0 en JS
-        const year = date.getFullYear();
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        return `${day}/${month}/${year} ${hours}:${minutes}`;
-    }
-
-    const formattedDate = formatDate(citation.creationDate);
 
     return (
         <Card title={citation.title} className="MyCitationCardCss">
@@ -38,7 +26,7 @@ export default function CitationCard({citation})
                     <LookButton citation={citation}/>
                     <LikeButton citation={citation} likes={likes} setLikes={setLikes} />
                     <FavButton citation={citation} />
-                    <p><FontAwesomeIcon icon={faClock} /> {formattedDate}</p>
+                    <DateField dateString={citation.creationDate} />
                 </div>
             ) : (
                 <></>

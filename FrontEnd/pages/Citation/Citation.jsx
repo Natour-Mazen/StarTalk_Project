@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ScrollPanel} from "primereact/scrollpanel";
 import '../../assets/css/pages/Citation/Citation.css'
 import { Divider } from 'primereact/divider';
+import DateField from "../../components/Utils/DateField";
 
 
 export default function Citation({ match }) {
@@ -37,19 +38,6 @@ export default function Citation({ match }) {
         }
     }, [citation?.humor]);
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0 en JS
-        const year = date.getFullYear();
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        return `${day}/${month}/${year} ${hours}:${minutes}`;
-    }
-
-    const formattedDate = formatDate(citation?.creationDate);
-
-
     return citation ? (
         <Base>
             <Panel header={<strong><p className="myPanelHeader">{citation.title}  </p></strong>} className="principalPanel">
@@ -57,13 +45,12 @@ export default function Citation({ match }) {
 
                        {citation.description}
 
-
                 </p>
 
                 <div className="infoCitaiton">
                     <p><FontAwesomeIcon icon={faAt} title="writerName"/> {citation.writerName} </p>
                     <p><FontAwesomeIcon icon={faMasksTheater} title="Humor"/> {humorcitation?.name} </p>
-                    <p><FontAwesomeIcon icon={faClock} title="creationDate"/> {formattedDate}</p>
+                    <DateField dateString={citation.creationDate} />
                 </div>
                 <TabView>
                     <TabPanel header={<><i className="pi pi-heart"/> Likes <small>( {citation.numberLike} )</small></>}
