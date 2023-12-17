@@ -11,6 +11,7 @@ import '../../assets/css/pages/Citation/Citation.css'
 import { Divider } from 'primereact/divider';
 import DateField from "../../components/Utils/DateField";
 import {Card} from "primereact/card";
+import FavButton from "../../components/Button/FavButton";
 
 
 export default function Citation({ match }) {
@@ -49,6 +50,7 @@ export default function Citation({ match }) {
                     <p><FontAwesomeIcon icon={faAt} title="writerName"/> {citation.writerName} </p>
                     <p><FontAwesomeIcon icon={faMasksTheater} title="Humor"/> {humorcitation?.name} </p>
                     <DateField dateString={citation.creationDate} />
+                    <FavButton citation={citation}/>
                 </div>
                 <TabView>
                     <TabPanel header={<><i className="pi pi-heart"/> Likes <small>( {citation.numberLike} )</small></>}

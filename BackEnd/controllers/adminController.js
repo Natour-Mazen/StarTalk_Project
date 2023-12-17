@@ -61,7 +61,24 @@ class AdminController {
 
 
     // Retrieve a specific user by ID
-    static async getUserById(req, res, next) {
+    static async getUserCitationById(req, res, next) {
+        let user;
+        try {
+            // Attempt to find a user by their ID
+            user = await User.findById(req.params.id).populate('allCitations');
+
+            // If the user is not found, return a 404 response
+            if (user == null) {
+                return res.status(404).json({ message: 'Cannot find user' });
+            }
+            res.json(user.allCitations);
+        } catch (err) {
+            // If an error occurs during the retrieval, return a 500 response
+            return res.status(500).json({ message: err.message });
+        }
+    }
+
+    static async deleteUserCitationById(req, res) {
         let user;
         try {
             // Attempt to find a user by their ID
@@ -71,14 +88,43 @@ class AdminController {
             if (user == null) {
                 return res.status(404).json({ message: 'Cannot find user' });
             }
+
+            // Find the citation in the user's citations
+            const citationIndex = user.allCitations.indexOf(req.params.citationId);
+            if (citationIndex === -1) {
+                return res.status(404).json({ message: 'Cannot find citation' });
+            }
+
+            // Remove the citation from the user's citations
+            user.allCitations.splice(citationIndex, 1);
+
+            // Save the user
+            await user.save();
+
+            // Find all users who have liked or favorited the citation
+            const users = await User.find({
+                $or: [
+                    { allLiked: req.params.citationId },
+                    { allFavorite: req.params.citationId }
+                ]
+            });
+
+            // For each user, remove the citation from their liked and favorite citations
+            for (let i = 0; i < users.length; i++) {
+                users[i].allLiked.pull(req.params.citationId);
+                users[i].allFavorite.pull(req.params.citationId);
+                await users[i].save();
+            }
+
+            // Delete the citation
+            await Citation.findByIdAndDelete(req.params.citationId);
         } catch (err) {
-            // If an error occurs during the retrieval, return a 500 response
+            // If an error occurs during the deletion, return a 500 response
             return res.status(500).json({ message: err.message });
         }
 
-        // If the user is found, attach the user object to the response for later use
-        res.user = user;
-        next();
+        // If the citation is successfully deleted, return a success message
+        res.status(201).json({ message: 'Citation successfully deleted' });
     }
 
     // Create a new user

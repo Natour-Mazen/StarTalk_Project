@@ -7,7 +7,7 @@ const allowedRolesForRouteAdminUser = 'ROLE_ADMIN';
 
 routerAdmin.get('/', authenticateToken(allowedRolesForRouteAdminUser), AdminController.getAllUsers);
 
-routerAdmin.get('/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.getUserById);
+routerAdmin.get('/allcitation/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.getUserCitationById);
 
 
 routerAdmin.post('/addcitation/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.addCitationByAdmin);
@@ -17,5 +17,6 @@ routerAdmin.post('/', authenticateToken(allowedRolesForRouteAdminUser), AdminCon
 routerAdmin.patch('/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.updateUser);
 
 routerAdmin.delete('/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.deleteUser);
+routerAdmin.delete('/removecitation/:id/:citationId', authenticateToken(allowedRolesForRouteAdminUser), AdminController.deleteUserCitationById);
 
 module.exports = routerAdmin;

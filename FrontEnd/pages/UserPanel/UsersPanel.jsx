@@ -12,6 +12,7 @@ import {Divider} from "primereact/divider";
 import AddCitationModal from '../../components/ForPages/AddCitations/AddCitationModal';
 import {UserContext} from "../../utils/UserAuthContext";
 import ButtonMenu from "../../components/Button/ButtonMenu";
+import DeleteCitationModal from "../../components/ForPages/DeleteCitation/DeleteCitationModal";
 
 export default function AdminUsers() {
 
@@ -20,8 +21,9 @@ export default function AdminUsers() {
     const [users, setUsers] = useState([]);
     const [totalRecords, setTotalRecords] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-    const [rows, setRows] = useState(3);
+    const [rows, setRows] = useState(4);
     const [visible, setVisible] = useState(false);
+    const [visibleDelModal, setVisibleDelModal] = useState(false);
     const [writernameToAdd, setWriternameToAdd] = useState('');
     const [userIdToEdit, setUserIdToEdit] = useState(null);
 
@@ -82,6 +84,11 @@ export default function AdminUsers() {
 
     const deleteQuote = (user) => {
         // Supprimer une citation de l'utilisateur
+        if(user._id){
+            setUserIdToEdit(user._id)
+            setWriternameToAdd(user.pseudo);
+            setVisibleDelModal(true);
+        }
         console.log(user)
     }
 
@@ -112,6 +119,10 @@ export default function AdminUsers() {
                 <AddCitationModal visible={visible} setVisible={setVisible}
                                   apiUrl={`/startalk-api/admin/users/addcitation/${userIdToEdit}`}
                                   writernameToAdd={writernameToAdd}
+                />
+                <DeleteCitationModal visibleDelModal={visibleDelModal} setVisibleDelModal={setVisibleDelModal}
+                                     writerIdToDel={userIdToEdit}
+                                     writernameToDel={writernameToAdd}
                 />
             </div>
         </Base>
