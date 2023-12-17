@@ -12,12 +12,14 @@ import { Divider } from 'primereact/divider';
 import DateField from "../../components/Utils/DateField";
 import {Card} from "primereact/card";
 import FavButton from "../../components/Button/FavButton";
+import LikeButton from "../../components/Button/LikeButton";
 
 
 export default function Citation({ match }) {
     const { id } = useParams();
     const [citation, setCitation] = useState(null);
     const [humorcitation, setHumor] = useState(null);
+    const [likes, setLikes] = useState(null);
 
     const fetchData = async (url) => {
         try {
@@ -31,7 +33,10 @@ export default function Citation({ match }) {
     }
 
     useEffect(() => {
-        fetchData(`/startalk-api/citations/${id}`).then(data => setCitation(data));
+        fetchData(`/startalk-api/citations/${id}`).then(data => {
+            setCitation(data);
+            setLikes(data.numberLike);
+        });
     }, [id]);
 
     useEffect(() => {
@@ -40,17 +45,28 @@ export default function Citation({ match }) {
         }
     }, [citation?.humor]);
 
+
+
     return citation ? (
         <Base>
-            <Panel header={<strong><p className="myPanelHeader">{citation.title}  </p></strong>} className="principalPanel">
-                <Card className="descCitation">
-                   <p> {citation.description} </p>
+            <Panel header={<strong><p className="myPanelHeader">{citation.title}  </p></strong>}
+                   className="principalPanel">
+                <Card className="descCitation" footer={
+                    <div className="infoCitaiton">
+                        <p></p>
+                        <LikeButton citation={citation} likes={likes} setLikes={setLikes}/>
+                        <p></p>
+                        <FavButton citation={citation}/>
+                        <p></p>
+                    </div>
+                }
+                >
+                    <p> {citation.description} </p>
                 </Card>
                 <div className="infoCitaiton">
                     <p><FontAwesomeIcon icon={faAt} title="writerName"/> {citation.writerName} </p>
                     <p><FontAwesomeIcon icon={faMasksTheater} title="Humor"/> {humorcitation?.name} </p>
-                    <DateField dateString={citation.creationDate} />
-                    <FavButton citation={citation}/>
+                    <DateField dateString={citation.creationDate}/>
                 </div>
                 <TabView>
                     <TabPanel header={<><i className="pi pi-heart"/> Likes <small>( {citation.numberLike} )</small></>}
