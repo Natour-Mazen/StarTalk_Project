@@ -7,6 +7,7 @@ const allowedRolesForRouteCitation = ['ROLE_USER','ROLE_ADMIN'];
 
 routerCitations.get('/', CitationController.getAllCitations);
 routerCitations.get('/random', CitationController.getRandomCitations);
+
 routerCitations.get('/search',authenticateToken(allowedRolesForRouteCitation), CitationController.searchCitations);
 
 routerCitations.get('/possiblehumors', authenticateToken(allowedRolesForRouteCitation), CitationController.getAllCitationsHumor);

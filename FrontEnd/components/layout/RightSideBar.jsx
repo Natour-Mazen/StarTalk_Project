@@ -2,7 +2,7 @@ import '../../assets/css/components/layout/RightSideBar.css';
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import {Dropdown} from "primereact/dropdown";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {ScrollPanel} from "primereact/scrollpanel";
 import axios from "axios";
 import {UserContext} from "../../utils/UserAuthContext";
@@ -16,16 +16,31 @@ export default function RightSideBar()
     const { isAuthenticated} = useContext(UserContext);
 
     const [search, setSearch] = useState('');
-    const [filter, setFilter] = useState(null);
+    const [filter, setFilter] = useState('title');
     const [quotes, setQuotes] = useState([]);
+    const [lastSearch, setLastSearch] = useState('');
 
     const filters = [
         {label: 'Title', value: 'title'},
         {label: 'Author', value: 'author'},
     ];
 
+
+    const [isTyping, setIsTyping] = useState(false);
+    const typingTimeoutRef = useRef(null);
+
+    const handleSearchChange = (e) => {
+        setSearch(e.target.value);
+        if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+        setIsTyping(true);
+        typingTimeoutRef.current = setTimeout(() => {
+            setIsTyping(false);
+        }, 1000); // reset isTyping state after 1 second of inactivity
+    };
+
     useEffect(() => {
-        if (search.length > 0 && filter) {
+        if (search !== lastSearch && filter) {
+            setLastSearch(search);
             axios.get(`/startalk-api/citations/search?filter=${filter}&value=${search}`,{
                 withCredentials: true
             })
@@ -55,16 +70,14 @@ export default function RightSideBar()
     }, [search, filter, quotes]);
 
 
-
     return (
         <div className="three-dimensions-rightside">
-
             {
                 isAuthenticated ? (
                     <>
                         <div className="p-inputgroup flex-1">
                             <InputText placeholder="Search a Citation" value={search}
-                                       onChange={(e) => setSearch(e.target.value)}/>
+                                       onChange={handleSearchChange}/>
                             <Dropdown value={filter} options={filters} onChange={(e) => setFilter(e.value)}
                                       placeholder="Select a Filter"/>
                         </div>
@@ -75,7 +88,7 @@ export default function RightSideBar()
             }
             <Divider align="center" className="DeviderSearchTitle" >
                 <p>{
-                    isAuthenticated ? 'Research' : 'Inspiration'
+                    isAuthenticated ? (isTyping ? 'Research' : 'Inspiration') : 'Inspiration'
                 }</p>
             </Divider>
 
