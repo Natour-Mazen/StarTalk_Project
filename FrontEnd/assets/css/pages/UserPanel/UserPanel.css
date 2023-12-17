@@ -58,6 +58,11 @@
     background-color: var(--HoverItem);
 }
 
+.p-confirm-popup{
+    border: var(--text) solid 1px;
+    border-radius:2px;
+}
+
 .p-confirm-popup-content, .p-confirm-popup-footer{
     background-color: var(--secondary);
     width: 300px;
@@ -67,7 +72,7 @@
     border-bottom: var(--text) solid 1px;
 }
 .p-confirm-popup-footer{
-    padding-top: 10px
+    padding-top: 10px;
 }
 
 .p-confirm-popup-accept, .p-confirm-popup-reject {

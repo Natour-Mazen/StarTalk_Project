@@ -138,7 +138,7 @@ export default function AdminUsers() {
                 />
                 <ConfirmPopup target={disconnectButtonRef} visible={showConfirm} onHide={() => setShowConfirm(false)}
                               message={<p>Are you sure you want to disconnect <strong>{selectedUser?.pseudo}</strong> ?
-                                  Remember, eliminating other writers might just make your citations the talk of the
+                                  Remember, disconnecting other writers might just make your citations the talk of the
                                   town! 😎</p>}
                     accept={() => handleDisconnect(selectedUser)}
                 />
