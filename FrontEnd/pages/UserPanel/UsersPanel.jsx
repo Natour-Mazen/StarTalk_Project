@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Base from "../../components/layout/Base";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -10,8 +10,13 @@ import { faPlus, faTrash, faSignOutAlt } from '@fortawesome/free-solid-svg-icons
 import "../../assets/css/pages/UserPanel/UserPanel.css"
 import {Divider} from "primereact/divider";
 import AddCitationModal from '../../components/ForPages/AddCitations/AddCitationModal';
+import {UserContext} from "../../utils/UserAuthContext";
+import ButtonMenu from "../../components/Button/ButtonMenu";
 
 export default function AdminUsers() {
+
+    const { id } = useContext(UserContext);
+
     const [users, setUsers] = useState([]);
     const [totalRecords, setTotalRecords] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
@@ -39,14 +44,28 @@ export default function AdminUsers() {
         return (
             <React.Fragment>
                 <p>
-                    <Button icon={<FontAwesomeIcon icon={faPlus}/>} className="StartalkButton"
-                            onClick={() => addQuote(rowData)}/>
-                    <span className="m-1"/>
-                    <Button icon={<FontAwesomeIcon icon={faTrash}/>} className="StartalkButton"
-                            onClick={() => deleteQuote(rowData)}/>
-                    <span className="m-1"/>
-                    <Button icon={<FontAwesomeIcon icon={faSignOutAlt}/>} className="StartalkButton"
-                            onClick={() => disconnect(rowData)}/>
+                    {
+                        id !== rowData._id ? (
+                            <>
+                                <Button icon={<FontAwesomeIcon icon={faPlus}/>} className="StartalkButton"
+                                        onClick={() => addQuote(rowData)}/>
+                                <span className="m-1"/>
+                                <Button icon={<FontAwesomeIcon icon={faTrash}/>} className="StartalkButton"
+                                        onClick={() => deleteQuote(rowData)}/>
+                                <span className="m-1"/>
+                                <Button icon={<FontAwesomeIcon icon={faSignOutAlt}/>} className="StartalkButton"
+                                        onClick={() => disconnect(rowData)}/>
+                            </>
+                        ): (
+                            <>
+                                <ButtonMenu label="Profile" icon="fa-regular fa-id-badge"
+                                            to='/profile' className="StartalkButton"
+                                            title="Go to your Profile"
+                                />
+                            </>
+                        )
+                    }
+
                 </p>
             </React.Fragment>
         );
@@ -78,6 +97,7 @@ export default function AdminUsers() {
                     <p>Users Panel Administration</p>
                 </Divider>
                 <DataTable value={users} className="UserDataTable">
+                    <Column field="_id" header="User ID"></Column>
                     <Column field="discordId" header="Discord ID"></Column>
                     <Column field="pseudo" header="Pseudo"></Column>
                     <Column field="Role" header="Role"></Column>

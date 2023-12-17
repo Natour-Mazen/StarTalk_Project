@@ -48,7 +48,7 @@ class AdminController {
             // Sauvegarder la citation et l'utilisateur
             await citation.save();
             await user.save();
-            
+
             res.status(201).json({
                 message: 'Citation added successfully',
                 citation,
