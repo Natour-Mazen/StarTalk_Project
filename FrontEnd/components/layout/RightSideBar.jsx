@@ -6,6 +6,7 @@ import {useContext, useEffect, useState} from "react";
 import {ScrollPanel} from "primereact/scrollpanel";
 import axios from "axios";
 import {UserContext} from "../../utils/UserAuthContext";
+import MiniCitationCard from "../ForPages/Citations/MiniCitationCard";
 
 export default function RightSideBar()
 {
@@ -31,22 +32,27 @@ export default function RightSideBar()
                 .catch(error => {
                     console.error(error);
                 });
-        } else if (quotes.length === 0) { // Ajoutez cette condition
-            axios.get(`/startalk-api/citations/random`, {
-                withCredentials: true
-            })
-                .then(response => {
-                    setQuotes(response.data);
-                })
-                .catch(error => {
-                    console.error(error);
+        } else if (quotes.length === 0) {
+            const promises = Array.from({length: 3}, () => fetch('https://api.quotable.io/random'));
+            Promise.all(promises)
+                .then(responses => Promise.all(responses.map(response => response.clone().json())))
+                .then(quotes => {
+                    const formattedQuotes = quotes.map(quote => {
+                        const randomIndex = Math.floor(Math.random() * quote.tags.length);
+                        return {
+                            title: quote.tags[randomIndex] || 'Unknown 🙄',
+                            description: quote.content,
+                            writerName: quote.author,
+                            StartalkQuote:false,
+                        };
+                    });
+                    setQuotes(formattedQuotes);
                 });
         }
-    }, [search, filter, quotes]); // Ajoutez quotes comme dépendance
+    }, [search, filter, quotes]);
 
     return (
         <div className="three-dimensions-rightside">
-
             {
                 isAuthenticated ? (
                     <>
@@ -69,9 +75,7 @@ export default function RightSideBar()
             <ScrollPanel style={{height: '800px'}}>
                 {quotes.map((quote, index) => (
                     <>
-                        <Card key={index} title={quote.title} subTitle={quote.writerName}>
-                            <p>{quote.text}</p>
-                        </Card>
+                        <MiniCitationCard key={index} citation={quote}/>
                         <div className="mb-2"></div>
 
                     </>

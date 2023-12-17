@@ -1,0 +1,27 @@
+.MyMiniCitationCardCss {
+    background-color: var(--secondary);
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    padding: 5px;
+    margin: 20px;
+    width: 90%;
+    transition: all 0.8s ease;
+    color : var(--text)
+}
+.MiniCardDesc{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.MyMiniCitationCardCss:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.MiniInfoCard{
+    font-size:13px;
+    display: flex;
+    justify-Content: space-between;
+    user-select: none;
+}
