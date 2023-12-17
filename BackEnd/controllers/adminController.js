@@ -3,9 +3,19 @@ const User = require('../models/User');
 class AdminController {
     // Retrieve all users
     static async getAllUsers(req, res) {
+        const page = parseInt(req.query.page) || 1; // par défaut à la page 1
+        const limit = parseInt(req.query.limit) || 5; // par défaut 5 utilisateurs par page
+        const skip = (page - 1) * limit;
+
         try {
-            const users = await User.find();
-            res.json(users);
+            const users = await User.find().skip(skip).limit(limit);
+            const total = await User.countDocuments();
+
+            res.json({
+                totalPages: Math.ceil(total / limit),
+                currentPage: page,
+                users
+            });
         } catch (err) {
             res.status(500).json({ message: err.message });
         }

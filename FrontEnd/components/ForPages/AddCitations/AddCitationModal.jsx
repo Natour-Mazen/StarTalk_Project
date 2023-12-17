@@ -11,7 +11,7 @@ import {Dropdown} from "primereact/dropdown";
 
 import '../../../assets/css/components/ForPages/AddCitations/AddCitationModal.css'
 
-export default function AddCitationModal({visible, setVisible}) {
+export default function AddCitationModal({visible, setVisible, apiUrl = '/startalk-api/citations', writernameToAdd}) {
 
     const [humors, setHumors] = useState([]);
     const [selectedHumor, setSelectedHumor] = useState(null);
@@ -50,7 +50,7 @@ export default function AddCitationModal({visible, setVisible}) {
                     payload.humor = humor;
                 }
 
-                const response = await axios.post('/startalk-api/citations', payload);
+                const response = await axios.post(apiUrl, payload);
 
                 if (response.status === 201) {
                     showSuccessToast();
@@ -92,7 +92,7 @@ export default function AddCitationModal({visible, setVisible}) {
             <Toast ref={toast}
                    position="top-center"
             />
-            <Dialog header="Let your writer's soul express itself ✒️"
+            <Dialog header={writernameToAdd ? `Let ${writernameToAdd} writer's soul express itself ✒️`  : 'Let your writer\'s soul express itself ✒️'}
                     visible={visible}
                     onHide={handleClose}
                     draggable={false}
