@@ -123,6 +123,17 @@ class CitationController {
         }
     }
 
+    static async getRandomCitations(req, res) {
+        try {
+            const count = req.body.count || 10 ; // Nombre de citations à récupérer
+            const citations = await Citation.aggregate([{ $sample: { size: count } }]);
+            res.json(citations);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    }
+
+
 
 
 

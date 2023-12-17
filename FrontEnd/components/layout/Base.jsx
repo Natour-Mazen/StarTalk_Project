@@ -11,6 +11,7 @@ import ScrollToTopButton from "../Button/ScrollToTopButton";
 
 export default function Base({ children })
 {
+    const { isAuthenticated, role, fetchUserAfterLoginData} = useContext(UserContext);
     return (
         <div className="Base">
             <Menu/>

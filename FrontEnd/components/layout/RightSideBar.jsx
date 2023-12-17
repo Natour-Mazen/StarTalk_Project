@@ -2,12 +2,15 @@ import '../../assets/css/components/layout/RightSideBar.css';
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import {Dropdown} from "primereact/dropdown";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {ScrollPanel} from "primereact/scrollpanel";
 import axios from "axios";
+import {UserContext} from "../../utils/UserAuthContext";
 
 export default function RightSideBar()
 {
+    const { isAuthenticated} = useContext(UserContext);
+
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState(null);
     const [quotes, setQuotes] = useState([]);
@@ -19,7 +22,19 @@ export default function RightSideBar()
 
     useEffect(() => {
         if (search.length > 0 && filter) {
-            axios.get(`/startalk-api/citations/search?filter=${filter}&value=${search}`)
+            axios.get(`/startalk-api/citations/search?filter=${filter}&value=${search}`,{
+                withCredentials: true
+            })
+                .then(response => {
+                    setQuotes(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        } else if (quotes.length === 0) { // Ajoutez cette condition
+            axios.get(`/startalk-api/citations/random`, {
+                withCredentials: true
+            })
                 .then(response => {
                     setQuotes(response.data);
                 })
@@ -27,19 +42,31 @@ export default function RightSideBar()
                     console.error(error);
                 });
         }
-    }, [search, filter]);
+    }, [search, filter, quotes]); // Ajoutez quotes comme dépendance
+
     return (
         <div className="three-dimensions-rightside">
 
-            <div className="p-inputgroup flex-1">
-                <InputText placeholder="Search a Citation" value={search} onChange={(e) => setSearch(e.target.value)}/>
-                <Dropdown value={filter} options={filters} onChange={(e) => setFilter(e.value)}
-                          placeholder="Select a Filter"/>
-            </div>
+            {
+                isAuthenticated ? (
+                    <>
+                        <div className="p-inputgroup flex-1">
+                            <InputText placeholder="Search a Citation" value={search}
+                                       onChange={(e) => setSearch(e.target.value)}/>
+                            <Dropdown value={filter} options={filters} onChange={(e) => setFilter(e.value)}
+                                      placeholder="Select a Filter"/>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        Inspiration
+                    </>
+                )
+            }
 
             <div className="mt-3"/>
 
-            <ScrollPanel style={{height: '800px' }}>
+            <ScrollPanel style={{height: '800px'}}>
                 {quotes.map((quote, index) => (
                     <>
                         <Card key={index} title={quote.title} subTitle={quote.writerName}>
@@ -51,19 +78,6 @@ export default function RightSideBar()
                 ))}
             </ScrollPanel>
 
-            <div className="mb-3"></div>
-
-            {
-                /* si on enleve le card suivant ça casse tout aussi jsp pk */
-            }
-            <Card title="Title2" subTitle="Subtitle" >
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandaeLorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
-                    numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-                </p>
-            </Card>
-
-            <div className="mb-2"></div>
 
         </div>
     );
