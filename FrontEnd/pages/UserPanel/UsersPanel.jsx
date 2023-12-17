@@ -18,6 +18,7 @@ export default function AdminUsers() {
     const [rows, setRows] = useState(3);
     const [visible, setVisible] = useState(false);
     const [writernameToAdd, setWriternameToAdd] = useState('');
+    const [userIdToEdit, setUserIdToEdit] = useState(null);
 
     const fetchUsers = (page, rows) => {
         axios.get(`/startalk-api/admin/users?page=${page + 1}&limit=${rows}`)
@@ -53,8 +54,11 @@ export default function AdminUsers() {
 
     const addQuote = (user) => {
         // Ajouter une citation à l'utilisateur
-        setWriternameToAdd(user.pseudo);
-        setVisible(true);
+        if(user._id){
+            setUserIdToEdit(user._id)
+            setWriternameToAdd(user.pseudo);
+            setVisible(true);
+        }
     }
 
     const deleteQuote = (user) => {
@@ -85,7 +89,10 @@ export default function AdminUsers() {
                                setRows(e.rows);
                            }} rowsPerPageOptions={[1, 2, 3, 4, 5, 6]}
                 />
-                <AddCitationModal visible={visible} setVisible={setVisible} apiUrl={`/startalk-api/citations/${writernameToAdd}`} writernameToAdd={writernameToAdd} />
+                <AddCitationModal visible={visible} setVisible={setVisible}
+                                  apiUrl={`/startalk-api/admin/users/${userIdToEdit}`}
+                                  writernameToAdd={writernameToAdd}
+                />
             </div>
         </Base>
     );

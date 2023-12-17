@@ -154,7 +154,7 @@ export default function AddCitationModal({visible, setVisible, apiUrl = '/starta
                         )}
                     />
                     <Button icon="fa-brands fa-usps"
-                            label="Post"
+                            label={writernameToAdd ? `Post For ${writernameToAdd}`  : 'Post'}
                             rounded
                             style={{
                                 width:'150px',
