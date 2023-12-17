@@ -90,7 +90,7 @@ export default function AdminUsers() {
                            }} rowsPerPageOptions={[1, 2, 3, 4, 5, 6]}
                 />
                 <AddCitationModal visible={visible} setVisible={setVisible}
-                                  apiUrl={`/startalk-api/admin/users/${userIdToEdit}`}
+                                  apiUrl={`/startalk-api/admin/users/addcitation/${userIdToEdit}`}
                                   writernameToAdd={writernameToAdd}
                 />
             </div>

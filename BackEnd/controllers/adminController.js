@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Citation = require("../models/Citation");
 
 class AdminController {
     // Retrieve all users
@@ -20,6 +21,44 @@ class AdminController {
             res.status(500).json({ message: err.message });
         }
     }
+    static async addCitationByAdmin(req, res) {
+        try {
+            // Récupérer l'ID de l'utilisateur et les détails de la citation à partir de la requête
+            const { title, description, humor } = req.body;
+            const userId  = req.params.id;
+
+            // Trouver l'utilisateur par ID
+            const user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            // Créer une nouvelle citation
+            const citation = new Citation({
+                title,
+                description,
+                writerId: user._id,
+                writerName: user.pseudo,
+                humor
+            });
+
+            // Ajouter la citation à la liste des citations de l'utilisateur
+            user.allCitations.push(citation._id);
+
+            // Sauvegarder la citation et l'utilisateur
+            await citation.save();
+            await user.save();
+            
+            res.status(201).json({
+                message: 'Citation added successfully',
+                citation,
+                user
+            });
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    }
+
 
     // Retrieve a specific user by ID
     static async getUserById(req, res, next) {

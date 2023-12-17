@@ -9,7 +9,10 @@ routerAdmin.get('/', authenticateToken(allowedRolesForRouteAdminUser), AdminCont
 
 routerAdmin.get('/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.getUserById);
 
+
+routerAdmin.post('/addcitation/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.addCitationByAdmin);
 routerAdmin.post('/', authenticateToken(allowedRolesForRouteAdminUser), AdminController.createUser);
+
 
 routerAdmin.patch('/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.updateUser);
 
