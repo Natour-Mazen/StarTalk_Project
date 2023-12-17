@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import Base from "../../components/layout/Base";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -13,6 +13,7 @@ import AddCitationModal from '../../components/ForPages/AddCitations/AddCitation
 import {UserContext} from "../../utils/UserAuthContext";
 import ButtonMenu from "../../components/Button/ButtonMenu";
 import DeleteCitationModal from "../../components/ForPages/DeleteCitation/DeleteCitationModal";
+import {ConfirmPopup} from "primereact/confirmpopup";
 
 export default function AdminUsers() {
 
@@ -26,6 +27,9 @@ export default function AdminUsers() {
     const [visibleDelModal, setVisibleDelModal] = useState(false);
     const [writernameToAdd, setWriternameToAdd] = useState('');
     const [userIdToEdit, setUserIdToEdit] = useState(null);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [disconnectButtonRef, setDisconnectButtonRef] = useState(null);
+    const [selectedUser, setSelectedUser] = useState(null);
 
     const fetchUsers = (page, rows) => {
         axios.get(`/startalk-api/admin/users?page=${page + 1}&limit=${rows}`)
@@ -50,13 +54,15 @@ export default function AdminUsers() {
                         id !== rowData._id ? (
                             <>
                                 <Button icon={<FontAwesomeIcon icon={faPlus}/>} className="StartalkButton"
-                                        onClick={() => addQuote(rowData)}/>
+                                        onClick={() => addQuote(rowData)} title="Add a Citation to User"/>
                                 <span className="m-1"/>
                                 <Button icon={<FontAwesomeIcon icon={faTrash}/>} className="StartalkButton"
-                                        onClick={() => deleteQuote(rowData)}/>
+                                        onClick={() => deleteQuote(rowData)} title="Remove a Citation from User"/>
                                 <span className="m-1"/>
                                 <Button icon={<FontAwesomeIcon icon={faSignOutAlt}/>} className="StartalkButton"
-                                        onClick={() => disconnect(rowData)}/>
+                                        onClick={(e) => showDisconnectPopUp(rowData, e)}  title="Disconnect User"
+                                        ref={disconnectButtonRef}
+                                />
                             </>
                         ): (
                             <>
@@ -89,13 +95,18 @@ export default function AdminUsers() {
             setWriternameToAdd(user.pseudo);
             setVisibleDelModal(true);
         }
-        console.log(user)
     }
 
-    const disconnect = (user) => {
-        // Déconnecter l'utilisateur
-        console.log(user)
+    const showDisconnectPopUp = (user, e) => {
+        setShowConfirm(!showConfirm);
+        setDisconnectButtonRef(e.currentTarget);
+        setSelectedUser(user)
     }
+
+    const handleDisconnect = (user) => {
+        console.log('Utilisateur déconnecté :', user);
+    }
+
 
     return (
         <Base>
@@ -103,18 +114,19 @@ export default function AdminUsers() {
                 <Divider align="center" className="DeviderUserPanel">
                     <p>Users Panel Administration</p>
                 </Divider>
-                <DataTable value={users} className="UserDataTable">
+                <DataTable value={users} className="UserDataTable" unstyled={true} >
                     <Column field="_id" header="User ID"></Column>
                     <Column field="discordId" header="Discord ID"></Column>
                     <Column field="pseudo" header="Pseudo"></Column>
                     <Column field="Role" header="Role"></Column>
-                    <Column body={actionBodyTemplate} header="Action"></Column>
+                    <Column body={actionBodyTemplate} header="Actions"></Column>
                 </DataTable>
                 <Paginator first={currentPage * rows} rows={rows} totalRecords={totalRecords}
                            onPageChange={(e) => {
                                setCurrentPage(e.page);
                                setRows(e.rows);
-                           }} rowsPerPageOptions={[1, 2, 3, 4, 5, 6]}
+                           }}
+                           rowsPerPageOptions={[1, 2, 3, 4, 5]}
                 />
                 <AddCitationModal visible={visible} setVisible={setVisible}
                                   apiUrl={`/startalk-api/admin/users/addcitation/${userIdToEdit}`}
@@ -123,6 +135,12 @@ export default function AdminUsers() {
                 <DeleteCitationModal visibleDelModal={visibleDelModal} setVisibleDelModal={setVisibleDelModal}
                                      writerIdToDel={userIdToEdit}
                                      writernameToDel={writernameToAdd}
+                />
+                <ConfirmPopup target={disconnectButtonRef} visible={showConfirm} onHide={() => setShowConfirm(false)}
+                              message={<p>Are you sure you want to disconnect <strong>{selectedUser?.pseudo}</strong> ?
+                                  Remember, eliminating other writers might just make your citations the talk of the
+                                  town! 😎</p>}
+                    accept={() => handleDisconnect(selectedUser)}
                 />
             </div>
         </Base>

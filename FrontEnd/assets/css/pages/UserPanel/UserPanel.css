@@ -5,12 +5,79 @@
     border-radius:10px;
 }
 
-.UserPanel .p-datatable-thead .p-datatable-table{
-    background: var(--secondary) !important;
+.UserDataTable table {
+    width: 97%;
+    margin: 20px 20px 0px 20px;
+    border-collapse: collapse;
+    background-color: var(--secondary);
+    color: var(--text);
+    border-radius:5px;
+    border: var(--text) solid 1px;
+    border-bottom: none;
 }
 
-.pagination{
-    display: flex;
-    justify-content: center;
-    align-items: center ;
+.UserDataTable th {
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    user-select:none;
+}
+
+.UserDataTable td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.UserDataTable tr:last-child td {
+    border-bottom: none;
+}
+
+/* Override PrimeReact Css */
+.p-paginator{
+    width: 97%;
+    margin: 0px 20px 0px 20px;
+    border: var(--text) solid 1px;
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+}
+
+.p-paginator, .p-icon, .p-paginator-page, .p-paginator-element, .p-highlight {
+    background-color: var(--secondary);
+    color: var(--text);
+
+}
+
+.p-paginator-element, .p-highlight {
+    border-radius: 5px;
+}
+
+.p-paginator-element {
+    border: var(--text) solid 1px;
+}
+
+.p-highlight {
+    background-color: var(--HoverItem);
+}
+
+.p-confirm-popup-content, .p-confirm-popup-footer{
+    background-color: var(--secondary);
+    width: 300px;
+    user-select: none;
+}
+.p-confirm-popup-content{
+    border-bottom: var(--text) solid 1px;
+}
+.p-confirm-popup-footer{
+    padding-top: 10px
+}
+
+.p-confirm-popup-accept, .p-confirm-popup-reject {
+    background-color: transparent;
+    color: var(--text);
+    border:none
+}
+.p-confirm-popup-accept {
+    background-color: rgba(127, 255, 0, 0.53);
+}
+.p-confirm-popup-reject {
+    background-color: rgba(139, 0, 0, 0.53);
 }

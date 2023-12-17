@@ -110,7 +110,7 @@ export default function DeleteCitationModal({visibleDelModal, setVisibleDelModal
                                         field.onChange(e.value); // Update the form field value
                                     }}
                                     optionLabel="title"
-                                    placeholder="Select a citaion"
+                                    placeholder="Select a citation"
                                 />
                                 {getFormErrorMessage(field.name)}
                             </>
