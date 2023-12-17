@@ -1,7 +1,7 @@
 .Main{
     flex: 1; /* La div flexible occupe tout l'espace restant à droite */
-    padding: 20px 0;
-    margin: 0 20px;
+    padding: 20px 5px;
+    margin: 0 15px;
     height: 100%;
     overflow: auto;
 }
