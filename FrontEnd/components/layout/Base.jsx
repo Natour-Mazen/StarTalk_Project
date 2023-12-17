@@ -14,7 +14,7 @@ export default function Base({ children })
 {
     const location = useLocation();
     //We don't show the right part when we are in the admin users panel
-    const isSpecificRoute = location.pathname === '/admin/userspanel';
+    const isAdminRoute = location.pathname === '/admin/userspanel';
 
     return (
         <div className="Base">
@@ -24,7 +24,7 @@ export default function Base({ children })
                 {children}
             </Main>
             <ScrollToTopButton />
-            {!isSpecificRoute ?  (
+            {!isAdminRoute ?  (
                 <>
                     <Divider layout="vertical" className="separator"/>
                     <RightSideBar/>
