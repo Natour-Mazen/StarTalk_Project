@@ -2,11 +2,14 @@ import '../../assets/css/components/layout/RightSideBar.css';
 import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import {Dropdown} from "primereact/dropdown";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ScrollPanel} from "primereact/scrollpanel";
 import axios from "axios";
 import {UserContext} from "../../utils/UserAuthContext";
 import MiniCitationCard from "../ForPages/Citations/MiniCitationCard";
+import {Steps} from "primereact/steps";
+import {Fieldset} from "primereact/fieldset";
+import {Divider} from "primereact/divider";
 
 export default function RightSideBar()
 {
@@ -51,8 +54,11 @@ export default function RightSideBar()
         }
     }, [search, filter, quotes]);
 
+
+
     return (
         <div className="three-dimensions-rightside">
+
             {
                 isAuthenticated ? (
                     <>
@@ -64,24 +70,22 @@ export default function RightSideBar()
                         </div>
                     </>
                 ) : (
-                    <>
-                        Inspiration
-                    </>
+                    <></>
                 )
             }
+            <Divider align="center" className="DeviderSearchTitle" >
+                <p>{
+                    isAuthenticated ? 'Research' : 'Inspiration'
+                }</p>
+            </Divider>
 
-            <div className="mt-3"/>
-
-            <ScrollPanel style={{height: '800px'}}>
+            <ScrollPanel style={{height: '700px'}}>
                 {quotes.map((quote, index) => (
                     <>
                         <MiniCitationCard key={index} citation={quote}/>
-                        <div className="mb-2"></div>
-
                     </>
                 ))}
             </ScrollPanel>
-
 
         </div>
     );
