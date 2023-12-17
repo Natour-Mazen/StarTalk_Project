@@ -14,11 +14,11 @@
 .StartalkButtonSpec{
     background-color: transparent;
     box-shadow: none;
-    border: none;
+    border: 2px outset transparent;
     color: var(--text)
 }
 
 .StartalkButtonSpec:hover{
-    border: #c7c5c5 outset 2px;
+    border-color: #c7c5c5;
 }
 
