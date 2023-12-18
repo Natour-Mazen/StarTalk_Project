@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
@@ -10,8 +10,11 @@ import {InputText} from "primereact/inputtext";
 import {Dropdown} from "primereact/dropdown";
 
 import '../../../assets/css/components/ForPages/AddCitations/AddCitationModal.css'
+import {UserContext} from "../../../utils/UserAuthContext";
 
 export default function AddCitationModal({visible, setVisible, apiUrl = '/startalk-api/citations', writernameToAdd}) {
+
+    const { handleDisconnectErrResponse } = useContext(UserContext);
 
     const [humors, setHumors] = useState([]);
     const [selectedHumor, setSelectedHumor] = useState(null);
@@ -50,12 +53,15 @@ export default function AddCitationModal({visible, setVisible, apiUrl = '/starta
                     payload.humor = humor;
                 }
 
-                const response = await axios.post(apiUrl, payload);
+                const response = await axios.post(apiUrl, payload, {
+                    withCredentials: true,
+                });
 
                 if (response.status === 201) {
                     showSuccessToast();
                 }
             } catch (error) {
+                handleDisconnectErrResponse(error);
                 showErrorToast();
             }
         }

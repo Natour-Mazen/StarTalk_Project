@@ -34,13 +34,13 @@ export const UserProvider = ({ children }) => {
         }
     };
 
-    const handleErrResponse = (error) => {
-        if (error.response && error.response.status === 415) {
+    const handleDisconnectErrResponse = (error) => {
+        if (error.response && error.response.status === 415) { // that's mean backend send a disconnect error
             setIsAuthenticated(false);
             setRole('');
             setName('');
             setID('');
-            navigate('/');// To avoid a probleme for the notFound page.
+            navigate('/');
         }
     };
 
@@ -59,7 +59,7 @@ export const UserProvider = ({ children }) => {
             }
         } catch (error) {
             // Handle error
-            handleErrResponse(error)
+            handleDisconnectErrResponse(error)
         }
     };
 
@@ -71,7 +71,7 @@ export const UserProvider = ({ children }) => {
         id,
         login,
         logout,
-        handleErrResponse,
+        handleDisconnectErrResponse,
         fetchUserAfterLoginData
     };
 

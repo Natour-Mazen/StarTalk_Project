@@ -18,7 +18,7 @@ import { Toast } from 'primereact/toast';
 
 export default function AdminUsers() {
 
-    const { id , hand } = useContext(UserContext);
+    const { id , handleDisconnectErrResponse } = useContext(UserContext);
 
     const [users, setUsers] = useState([]);
     const [totalRecords, setTotalRecords] = useState(0);
@@ -41,7 +41,7 @@ export default function AdminUsers() {
                 setTotalRecords(response.data.totalPages * rows);
             })
             .catch(error => {
-                console.error('There was an error!', error);
+                handleDisconnectErrResponse(error)
             });
     }
 
@@ -118,6 +118,7 @@ export default function AdminUsers() {
                 toast.current.show({severity:'success', summary: 'Success', detail: response.data.message, life: 3000});
             })
             .catch(error => {
+                handleDisconnectErrResponse(error);
                 // Affichez l'erreur dans un toast
                 toast.current.show({severity:'error', summary: 'Erreur', detail: error.response.data.message, life: 3000});
             });

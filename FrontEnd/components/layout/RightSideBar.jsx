@@ -7,13 +7,11 @@ import {ScrollPanel} from "primereact/scrollpanel";
 import axios from "axios";
 import {UserContext} from "../../utils/UserAuthContext";
 import MiniCitationCard from "../ForPages/Citations/MiniCitationCard";
-import {Steps} from "primereact/steps";
-import {Fieldset} from "primereact/fieldset";
 import {Divider} from "primereact/divider";
 
 export default function RightSideBar()
 {
-    const { isAuthenticated} = useContext(UserContext);
+    const { isAuthenticated , handleDisconnectErrResponse} = useContext(UserContext);
 
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('title');
@@ -48,7 +46,7 @@ export default function RightSideBar()
                     setQuotes(response.data);
                 })
                 .catch(error => {
-                    console.error(error);
+                    handleDisconnectErrResponse(error);
                 });
         } else if (quotes.length === 0) {
             const promises = Array.from({length: 3}, () => fetch('https://api.quotable.io/random'));

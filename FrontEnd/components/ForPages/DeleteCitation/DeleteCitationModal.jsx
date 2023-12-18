@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
@@ -11,9 +11,11 @@ import {Dropdown} from "primereact/dropdown";
 
 import '../../../assets/css/components/ForPages/AddCitations/AddCitationModal.css'
 import MiniCitationCard from "../Citations/MiniCitationCard";
+import {UserContext} from "../../../utils/UserAuthContext";
 
 export default function DeleteCitationModal({visibleDelModal, setVisibleDelModal, writerIdToDel, writernameToDel}) {
 
+    const { handleDisconnectErrResponse } = useContext(UserContext);
     const [citaions, setCitaions] = useState([]);
     const [selectedCitaion, setSelectedCitaion] = useState(null);
 
@@ -60,8 +62,8 @@ export default function DeleteCitationModal({visibleDelModal, setVisibleDelModal
                             withCredentials:true,
                         });
                     setCitaions(response.data);
-                    console.log(response.data)
                 } catch (error) {
+                    handleDisconnectErrResponse(error);
                 }
             };
 

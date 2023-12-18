@@ -13,7 +13,7 @@ import ScrollToTop from "../../components/Button/ScrollToTopButton";
 import {Fieldset} from "primereact/fieldset";
 
 export default function Profile() {
-    const { name, role} = useContext(UserContext);
+    const { name, handleDisconnectErrResponse} = useContext(UserContext);
     const [citations, setCitations] = useState([]);
     const [likes, setLikes] = useState([]);
     const [favorites, setFavorites] = useState([]);
@@ -28,14 +28,23 @@ export default function Profile() {
                 else if (activeIndex === 1) url = '/startalk-api/users/profile/alllikes';
                 else url = '/startalk-api/users/profile/allfavorites';
 
-                const response = await axios.get(url);
-                if (activeIndex === 0) setCitations(response.data);
-                else if (activeIndex === 1) setLikes(response.data);
-                else setFavorites(response.data);
+                try {
+                    const response = await axios.get(url,{
+                        withCredentials:true,
+                    });
+                    if (activeIndex === 0) setCitations(response.data);
+                    else if (activeIndex === 1) setLikes(response.data);
+                    else setFavorites(response.data);
 
-                const newVisited = [...visited];
-                newVisited[activeIndex] = true;
-                setVisited(newVisited);
+                    const newVisited = [...visited];
+                    newVisited[activeIndex] = true;
+                    setVisited(newVisited);
+
+                } catch (error) {
+                    // Handle error
+                    handleDisconnectErrResponse(error)
+                }
+
             };
             fetchItems();
         }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { Panel } from 'primereact/panel';
 import axios from 'axios';
@@ -13,9 +13,11 @@ import DateField from "../../components/Utils/DateField";
 import {Card} from "primereact/card";
 import FavButton from "../../components/Button/FavButton";
 import LikeButton from "../../components/Button/LikeButton";
+import {UserContext} from "../../utils/UserAuthContext";
 
 
 export default function Citation({ match }) {
+    const { handleDisconnectErrResponse} = useContext(UserContext);
     const { id } = useParams();
     const [citation, setCitation] = useState(null);
     const [humorcitation, setHumor] = useState(null);
@@ -28,7 +30,7 @@ export default function Citation({ match }) {
                 return response.data;
             }
         } catch (error) {
-            console.error('There was an error!', error);
+            handleDisconnectErrResponse(error)
         }
     }
 
