@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAnglesUp} from "@fortawesome/free-solid-svg-icons";
+import "../../assets/css/components/Button/ScrollToTop.css"
 
 export default function ScrollToTopButton() {
     const [showButton, setShowButton] = useState(false);

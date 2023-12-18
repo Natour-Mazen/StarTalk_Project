@@ -1,5 +1,4 @@
 import '../../assets/css/components/layout/Main.css';
-import '../../assets/css/components/Utils/ScrollToTop.css';
 import React from "react";
 
 export default function Main({ children })
