@@ -17,6 +17,7 @@ class CitationController {
 
             // Retrieve paginated citations from the database
             const citations = await Citation.find()
+                .sort({ creationDate: -1 })
                 .skip((page - 1) * pageSize)
                 .limit(pageSize);
 
@@ -116,7 +117,7 @@ class CitationController {
             }
 
             // Recherche dans la base de données avec le filtre
-            const citations = await Citation.find(query);
+            const citations = await Citation.find(query).sort({ creationDate: -1 })
             res.json(citations);
         } catch (err) {
             res.status(500).json({ message: err.message });
