@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Citation = require("../models/Citation");
+const UserToken = require("../models/UserToken");
 
 class AdminController {
     // Retrieve all users
@@ -125,6 +126,30 @@ class AdminController {
 
         // If the citation is successfully deleted, return a success message
         res.status(201).json({ message: 'Citation successfully deleted' });
+    }
+
+    // Disconnect a user
+    static async disconnectUser(req, res) {
+        const id = req.params.id; // Get the id from the query parameters
+
+        try {
+            // Find the user token by UserId
+            const userToken = await UserToken.findOne({ UserId: id });
+
+            // If the user token does not exist, send an error message
+            if (!userToken) {
+                return res.status(404).json({ message: "User not found/Connected" });
+            }
+
+            // Remove the user token
+            await UserToken.deleteOne({ UserId: id });
+
+            // Send a success message
+            res.json({ message: "User disconnected successfully" });
+        } catch (err) {
+            // If there is an error, send a server error message
+            res.status(500).json({ message: err.message });
+        }
     }
 
     // Create a new user

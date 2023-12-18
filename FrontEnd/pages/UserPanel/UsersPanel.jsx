@@ -14,10 +14,11 @@ import {UserContext} from "../../utils/UserAuthContext";
 import ButtonMenu from "../../components/Button/ButtonMenu";
 import DeleteCitationModal from "../../components/ForPages/DeleteCitation/DeleteCitationModal";
 import {ConfirmPopup} from "primereact/confirmpopup";
+import { Toast } from 'primereact/toast';
 
 export default function AdminUsers() {
 
-    const { id } = useContext(UserContext);
+    const { id , hand } = useContext(UserContext);
 
     const [users, setUsers] = useState([]);
     const [totalRecords, setTotalRecords] = useState(0);
@@ -32,7 +33,9 @@ export default function AdminUsers() {
     const [selectedUser, setSelectedUser] = useState(null);
 
     const fetchUsers = (page, rows) => {
-        axios.get(`/startalk-api/admin/users?page=${page + 1}&limit=${rows}`)
+        axios.get(`/startalk-api/admin/users?page=${page + 1}&limit=${rows}`,{
+            withCredentials : true,
+        })
             .then(response => {
                 setUsers(response.data.users);
                 setTotalRecords(response.data.totalPages * rows);
@@ -103,13 +106,27 @@ export default function AdminUsers() {
         setSelectedUser(user)
     }
 
+    // Créez une référence pour le toast
+    const toast = useRef(null);
+
     const handleDisconnect = (user) => {
-        console.log('Utilisateur déconnecté :', user);
-    }
+        axios.delete(`/startalk-api/admin/users/disconnect/${user._id}`, {
+            withCredentials : true,
+        })
+            .then(response => {
+                console.log('response')
+                toast.current.show({severity:'success', summary: 'Success', detail: response.data.message, life: 3000});
+            })
+            .catch(error => {
+                // Affichez l'erreur dans un toast
+                toast.current.show({severity:'error', summary: 'Erreur', detail: error.response.data.message, life: 3000});
+            });
+    };
 
 
     return (
         <Base>
+            <Toast position="top-center" ref={toast} />
             <div className="UserPanel">
                 <Divider align="center" className="DeviderUserPanel">
                     <p>Users Panel Administration</p>

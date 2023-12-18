@@ -9,14 +9,16 @@ routerAdmin.get('/', authenticateToken(allowedRolesForRouteAdminUser), AdminCont
 
 routerAdmin.get('/allcitation/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.getUserCitationById);
 
-
 routerAdmin.post('/addcitation/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.addCitationByAdmin);
-routerAdmin.post('/', authenticateToken(allowedRolesForRouteAdminUser), AdminController.createUser);
 
+routerAdmin.post('/', authenticateToken(allowedRolesForRouteAdminUser), AdminController.createUser);
 
 routerAdmin.patch('/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.updateUser);
 
 routerAdmin.delete('/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.deleteUser);
+
+routerAdmin.delete('/disconnect/:id', authenticateToken(allowedRolesForRouteAdminUser), AdminController.disconnectUser);
+
 routerAdmin.delete('/removecitation/:id/:citationId', authenticateToken(allowedRolesForRouteAdminUser), AdminController.deleteUserCitationById);
 
 module.exports = routerAdmin;

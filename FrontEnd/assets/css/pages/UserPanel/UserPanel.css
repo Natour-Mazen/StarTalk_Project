@@ -33,32 +33,32 @@
 }
 
 /* Override PrimeReact Css */
-.p-paginator{
+.UserPanel .p-paginator{
     width: 97%;
     margin: 0px 20px 0px 20px;
     border: var(--text) solid 1px;
     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
 }
 
-.p-paginator, .p-icon, .p-paginator-page, .p-paginator-element, .p-highlight {
+.UserPanel .p-paginator,.UserPanel .p-icon,.UserPanel .p-paginator-page,.UserPanel .p-paginator-element,.UserPanel .p-highlight {
     background-color: var(--secondary);
     color: var(--text);
 
 }
 
-.p-paginator-element, .p-highlight {
+.UserPanel .p-paginator-element,.UserPanel .p-highlight {
     border-radius: 5px;
 }
 
-.p-paginator-element {
+.UserPanel .p-paginator-element {
     border: var(--text) solid 1px;
 }
 
-.p-highlight {
+.UserPanel .p-highlight {
     background-color: var(--HoverItem);
 }
 
-.p-confirm-popup{
+.UserPanel .p-confirm-popup{
     border: var(--text) solid 1px;
     border-radius:2px;
 }

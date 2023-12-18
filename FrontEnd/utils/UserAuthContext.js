@@ -40,7 +40,7 @@ export const UserProvider = ({ children }) => {
             setRole('');
             setName('');
             setID('');
-            //navigate('/'); To avoid a probleme for the notFound page.
+            navigate('/');// To avoid a probleme for the notFound page.
         }
     };
 

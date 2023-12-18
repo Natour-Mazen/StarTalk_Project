@@ -10,10 +10,6 @@ import {useContext, useEffect} from "react";
 
 // Components
 import About from "./pages/About/About";
-import AddCitationModal from "./components/ForPages/AddCitations/AddCitationModal";
-import AdminAddCitation from "./pages/AdminAddCitation/AdminAddCitation";
-import AdminDeleteCitation from "./pages/AdminDeleteCitation/AdminDeleteCitation";
-import AdminDisconnect from "./pages/AdminDisconnect/AdminDisconnect";
 import Citations from "./pages/Citations/Citations";
 import Citation from "./pages/Citation/Citation";
 import NotFound from "./pages/NotFound/NotFound";
@@ -50,9 +46,6 @@ export default function App()
                 (
                     <>
                         <Route path="/admin/userspanel" element={<UsersPanel />} />
-                        <Route path="/admin/add" element={<AdminAddCitation />} />
-                        <Route path="/admin/delete" element={<AdminDeleteCitation />} />
-                        <Route path="/admin/disconnection" element={<AdminDisconnect />} />
                     </>
                 )
             }
