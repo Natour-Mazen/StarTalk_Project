@@ -91,7 +91,7 @@ export default function RightSideBar()
             </Divider>
 
             <ScrollPanel style={{height: '700px'}}>
-                {quotes.map((quote, index) => (
+                {quotes.map((quote) => (
                     <>
                         <MiniCitationCard citation={quote}/>
                     </>
