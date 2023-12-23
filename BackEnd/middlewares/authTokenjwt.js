@@ -29,7 +29,7 @@ const authMiddleware = (allowedRoles) => (req, res, next) => {
 
     // Check if the user is logged in or logged out by an admin
     if (!userToken) {
-      return res.status(415).json({message: 'User has been logged out'});
+      return res.status(999).json({message: 'User has been logged out'});
     }
 
     //Add the user to the request to use it more easily

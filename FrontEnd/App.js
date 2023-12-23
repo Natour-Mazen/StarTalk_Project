@@ -27,7 +27,6 @@ export default function App()
     }, []);
 
     return (
-        isAuthenticated !== null &&
         <Routes>
             <Route path="/" element={<Citations />} />
             <Route path="/about" element={<About />} />

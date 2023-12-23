@@ -35,7 +35,7 @@ export const UserProvider = ({ children }) => {
     };
 
     const handleDisconnectErrResponse = (error) => {
-        if (error.response && error.response.status === 415) { // that's mean backend send a disconnect error
+        if (error.response && error.response.status === 999) { // that's mean backend send a disconnect error
             setIsAuthenticated(false);
             setRole('');
             setName('');
