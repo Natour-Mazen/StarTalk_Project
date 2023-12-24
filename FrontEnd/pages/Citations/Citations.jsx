@@ -8,7 +8,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 
 export default function Citations() {
     let [allCitations, setAllCitations] = useState([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(null);
     const [loading, setLoading] = useState(false);
     const loader = useRef(null);
@@ -52,7 +52,7 @@ export default function Citations() {
                 const data = response.data.citations;
 
                 // Vérifier si la page actuelle est la première page
-                const isFirstPage = page === 1;
+                const isFirstPage = page === 0;
 
                 setTotalPages(response.data.totalPages);
 
