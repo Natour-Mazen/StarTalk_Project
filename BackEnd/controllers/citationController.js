@@ -256,18 +256,32 @@ class CitationController {
     // Delete a citation
     static async deleteCitation(req, res) {
         const citationId = req.params.id;
-        // Find the citation by its ID
-        const citation = await Citation.findById(citationId);
-
-        if (!citation) {
-            return res.status(404).json({ message: 'Citation not found.' });
-        }
-        // Check if the user trying to delete the citation is the original author
-        if (req.client.id !== citation.writerId.toString()) {
-            return res.status(403).json({ message: 'Access forbidden.' });
-        }
-
         try {
+            // Find the citation by its ID
+            const citation = await Citation.findById(citationId);
+
+            if (!citation) {
+                return res.status(404).json({ message: 'Citation not found.' });
+            }
+            // Check if the user trying to delete the citation is the original author
+            if (req.client.id !== citation.writerId.toString()) {
+                return res.status(403).json({ message: 'Access forbidden.' });
+            }
+
+            const user = await User.findById(req.client.id);
+            // Find the citation in the user's citations
+            const citationIndex = user.allCitations.indexOf(citationId);
+            if (citationIndex === -1) {
+                return res.status(404).json({ message: 'Cannot find citation' });
+            }
+
+            // Remove the citation from the user's citations
+            user.allCitations.splice(citationIndex, 1);
+
+            // Save the user
+            await user.save();
+
+
             // Remove the citation from the likes and favorites of all users
             await User.updateMany(
                 { },
