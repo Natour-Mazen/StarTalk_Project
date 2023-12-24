@@ -76,7 +76,7 @@ export default function AddCitationModal({visible, setVisible, apiUrl = '/starta
 
     const handleClose = () => {
         setVisible(false);
-        setSelectedHumor(null)
+        selectedHumor(null);
         form.reset();
     };
 

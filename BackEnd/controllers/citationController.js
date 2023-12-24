@@ -1,4 +1,5 @@
 const Citation = require('../models/Citation');
+const User = require ('../models/User')
 const CitationHumor = require('../models/CitationHumor')
 const UserController = require('../controllers/userController');
 
@@ -254,13 +255,27 @@ class CitationController {
 
     // Delete a citation
     static async deleteCitation(req, res) {
+        const citationId = req.params.id;
+        // Find the citation by its ID
+        const citation = await Citation.findById(citationId);
+
+        if (!citation) {
+            return res.status(404).json({ message: 'Citation not found.' });
+        }
         // Check if the user trying to delete the citation is the original author
-        if (req.client.id !== res.citation.writerId)
+        if (req.client.id !== citation.writerId.toString()) {
             return res.status(403).json({ message: 'Access forbidden.' });
+        }
 
         try {
+            // Remove the citation from the likes and favorites of all users
+            await User.updateMany(
+                { },
+                { $pull: { allLiked: citation._id, allFavorite: citation._id } }
+            );
+
             // Attempt to remove the citation from the database
-            await res.citation.remove();
+            await Citation.findByIdAndDelete(citationId);
 
             // Return a 200 response indicating successful deletion
             res.status(200).json({ message: 'Deleted Citation' });
@@ -269,6 +284,8 @@ class CitationController {
             res.status(500).json({ message: err.message });
         }
     }
+
+
 }
 
 module.exports = CitationController;

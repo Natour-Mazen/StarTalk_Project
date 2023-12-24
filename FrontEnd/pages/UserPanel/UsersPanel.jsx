@@ -120,7 +120,7 @@ export default function AdminUsers() {
             .catch(error => {
                 handleDisconnectErrResponse(error);
                 // Affichez l'erreur dans un toast
-                toast.current.show({severity:'error', summary: 'Erreur', detail: error.response.data.message, life: 3000});
+                toast.current.show({severity:'error', summary: 'Error', detail: error.response.data.message, life: 3000});
             });
     };
 
