@@ -34,7 +34,7 @@ export default function DeleteButton({citation}) {
             <Toast position="center" ref={toast} />
             {showButton && (
                 <Button
-                    icon="fa-solid fa-trash"
+                    icon="fa-regular fa-trash-can"
                     rounded
                     text
                     className="StartalkButtonSpec"
