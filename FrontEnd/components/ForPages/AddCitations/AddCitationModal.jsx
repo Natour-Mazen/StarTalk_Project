@@ -65,7 +65,7 @@ export default function AddCitationModal({visible, setVisible, apiUrl = '/starta
                 showErrorToast();
             }
         }
-
+        setSelectedHumor(null)
         form.reset();
     };
 
@@ -76,6 +76,7 @@ export default function AddCitationModal({visible, setVisible, apiUrl = '/starta
 
     const handleClose = () => {
         setVisible(false);
+        setSelectedHumor(null)
         form.reset();
     };
 

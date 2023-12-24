@@ -4,7 +4,7 @@ import {faFaceSadTear} from "@fortawesome/free-solid-svg-icons";
 
 // CSS
 import '../../assets/css/pages/NotFound/NotFound.css';
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import {UserContext} from "../../utils/UserAuthContext";
 
 export default function NotFound() {
