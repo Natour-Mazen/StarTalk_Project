@@ -77,9 +77,9 @@ export default function Citations() {
         <Base>
             <div className="Citations">
                 {
-                    allCitations.map((citation) =>
+                    allCitations.map((citation, key) =>
                         <CitationCard
-                            citation={citation}
+                            citation={citation} key={key}
                         />
                     )
                 }
