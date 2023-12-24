@@ -45,13 +45,27 @@ export default function Citations() {
 
             if (response.status === 200) {
                 const data = response.data.citations;
-                setAllCitations((prev) => [...prev, ...data]);
+
+                // Vérifier si la page actuelle est la première page
+                const isFirstPage = page === 1;
+
                 setTotalPages(response.data.totalPages);
+
+                setAllCitations((prev) => {
+                    if (isFirstPage) {
+                        // Remplacer les anciennes citations par les nouvelles pour la première page car 2 appels
+                        return data;
+                    } else {
+                        // Ajouter les nouvelles citations à la liste existante pour les pages suivantes
+                        return [...prev, ...data];
+                    }
+                });
             }
         } catch (error) {
             // Handle error
         }
     }
+
 
     return (
         <Base>
