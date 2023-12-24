@@ -23,7 +23,6 @@ export default function Base({ children })
             <Main>
                 {children}
             </Main>
-            <ScrollToTopButton />
             {!isAdminRoute ?  (
                 <>
                     <Divider layout="vertical" className="separator"/>
