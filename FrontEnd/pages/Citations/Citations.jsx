@@ -2,12 +2,15 @@ import Base from "../../components/layout/Base";
 import CitationCard from "../../components/ForPages/Citations/CitationCard";
 import axios from "axios";
 import {useEffect, useRef, useState} from "react";
+import { ProgressSpinner } from 'primereact/progressspinner';
+
 
 
 export default function Citations() {
     let [allCitations, setAllCitations] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
+    const [loading, setLoading] = useState(false);
     const loader = useRef(null);
 
     useEffect(() => {
@@ -40,6 +43,8 @@ export default function Citations() {
     }
 
     async function getCitations() {
+        setLoading(true);
+
         try {
             const response = await axios.get(`/startalk-api/citations?page=${page}`);
 
@@ -53,10 +58,10 @@ export default function Citations() {
 
                 setAllCitations((prev) => {
                     if (isFirstPage) {
-                        // Remplacer les anciennes citations par les nouvelles pour la première page car 2 appels
+                        // On remplace les anciennes citations par les nouvelles pour la première page car 2 appels
                         return data;
                     } else {
-                        // Ajouter les nouvelles citations à la liste existante pour les pages suivantes
+                        // On ajoute les nouvelles citations à la liste existante pour les pages suivantes
                         return [...prev, ...data];
                     }
                 });
@@ -64,8 +69,9 @@ export default function Citations() {
         } catch (error) {
             // Handle error
         }
+        await new Promise(resolve => setTimeout(resolve, 800)); // on met un sleep histoire de voir le spinner
+        setLoading(false);
     }
-
 
     return (
         <Base>
@@ -77,7 +83,20 @@ export default function Citations() {
                         />
                     )
                 }
-                <div ref={loader} />
+                <div ref={loader}/>
+                {loading &&
+                    <ProgressSpinner style={{
+                        width: '50px',
+                        height: '50px',
+                        top: '50%',
+                        left: '45%',
+                    }}
+                     pt={{
+                         spinner: {style: {animationDuration: '0.8s'}},
+                         circle: {style: {stroke: '#5a67f6', strokeWidth: 4, animation: '-moz-initial'}}
+                     }}
+                    />
+                }
             </div>
         </Base>
     );

@@ -30,7 +30,6 @@ export default function App()
         <Routes>
             <Route path="/" element={<Citations />} />
             <Route path="/about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
             {
                 (isAuthenticated === true && (role === 'ROLE_USER' || role === 'ROLE_ADMIN')) &&
                 (
@@ -48,6 +47,7 @@ export default function App()
                     </>
                 )
             }
+            <Route path="*" element={<NotFound />} />
         </Routes>
     );
 }
