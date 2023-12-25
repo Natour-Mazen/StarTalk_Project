@@ -3,7 +3,8 @@ import CitationCard from "../../components/ForPages/Citations/CitationCard";
 import axios from "axios";
 import {useEffect, useRef, useState} from "react";
 import { ProgressSpinner } from 'primereact/progressspinner';
-
+import Steve from '../../assets/images/SteveMC.png';
+import '../../assets/css/pages/Citations/Citations.css'
 
 
 export default function Citations() {
@@ -12,6 +13,7 @@ export default function Citations() {
     const [totalPages, setTotalPages] = useState(null);
     const [loading, setLoading] = useState(false);
     const loader = useRef(null);
+    const [reachedEnd, setReachedEnd] = useState(false);
 
     useEffect(() => {
         var options = {
@@ -32,6 +34,12 @@ export default function Citations() {
             getCitations();
         }
     }, [page]);
+
+    useEffect(() => {
+        if (page === totalPages) {
+            setReachedEnd(true);
+        }
+    }, [page, totalPages]);
 
     const handleObserver = (entities) => {
         const target = entities[0];
@@ -96,6 +104,12 @@ export default function Citations() {
                     />
                 }
             </div>
+            {!loading && reachedEnd &&
+                <div className="end-of-content">
+                    <img src={Steve} alt="Steve" className="steve-image"
+                         title="Credit to DALLE.E-3 for generating the initial photo and Mazen for correcting some small errors in the image"/>
+                </div>
+            }
         </Base>
     );
 }
