@@ -24,13 +24,11 @@ export default function Citations() {
         if (loader.current) {
             observer.observe(loader.current)
         }
-
-
     }, []);
 
 
     useEffect(() => {
-        if (totalPages === null || page <= totalPages) {
+        if (page <= totalPages) {
             getCitations();
         }
     }, [page]);

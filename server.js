@@ -35,24 +35,24 @@ app.use('/startalk-api/discordbot', routerBot);
 
 app.get('/*', (req, res) => {
     fs.readFile(
-      "./public/index.html",
+        "./public/index.html",
         'utf-8',
         (err,html) => {
-          if(err){
-            console.log(err);
-          }
-          else{
-              const mode = process.env.MODE
-              let result= ''
-              if(mode === 'DEV'){
-                  result = html.replace("$jsurl","http://localhost:3000/index.js")
-                      .replace("$cssurl","http://localhost:3000/index.css")
-              }else{
-                  result = html.replace("$jsurl","/index.js")
-                                .replace("$cssurl","/index.css")
-              }
-              res.send(result);
-          }
+            if(err){
+                console.log(err);
+            }
+            else{
+                const mode = process.env.MODE
+                let result= ''
+                if(mode === 'DEV'){
+                    result = html.replace("$jsurl","http://localhost:3000/index.js")
+                        .replace("$cssurl","http://localhost:3000/index.css")
+                }else{
+                    result = html.replace("$jsurl","/index.js")
+                        .replace("$cssurl","/index.css")
+                }
+                res.send(result);
+            }
         }
 
     )

@@ -10,7 +10,7 @@ export default function ScrollToTopButton() {
     const scrollToTop = () => {
         const mainElement = document.querySelector('.Main');
         if(mainElement) {
-            const scrollDuration = 200;
+            const scrollDuration = 600;
             let currentTop = mainElement.scrollTop;
             let step = currentTop * 20 / scrollDuration;
 
