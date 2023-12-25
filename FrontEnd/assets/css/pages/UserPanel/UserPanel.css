@@ -6,7 +6,7 @@
 }
 
 .UserDataTable table {
-    width: 97%;
+    width: 95%;
     margin: 20px 20px 0px 20px;
     border-collapse: collapse;
     background-color: var(--secondary);
@@ -34,7 +34,7 @@
 
 /* Override PrimeReact Css */
 .UserPanel .p-paginator{
-    width: 97%;
+    width: 95%;
     margin: 0px 20px 0px 20px;
     border: var(--text) solid 1px;
     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
