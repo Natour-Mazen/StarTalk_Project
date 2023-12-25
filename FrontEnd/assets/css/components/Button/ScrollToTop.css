@@ -1,12 +1,11 @@
 .scroll-to-top {
-    position: fixed;
+    position: sticky;
     top: 10%;
-    left: 48%;
+    left: calc(50% - 17.5px);
     cursor: pointer;
     background-color: var(--primary);
     color: #fff;
     border-radius: 50%;
-    margin-left:auto;
     height: 35px;
     width: 35px;
     display: flex;
