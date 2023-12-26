@@ -1,6 +1,6 @@
 const express = require('express');
 const routerCitations = express.Router();
-const CitationController = require('../controllers/CitationController');
+const CitationController = require('../controllers/citationController');
 const authenticateToken = require('../middlewares/authTokenjwt');
 
 const allowedRolesForRouteCitation = ['ROLE_USER','ROLE_ADMIN'];
