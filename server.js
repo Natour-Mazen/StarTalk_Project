@@ -59,7 +59,7 @@ app.get('/*', (req, res) => {
 });
 
 // Define a port for the server
-const port = 8000;
+const port = 8080;
 
 // Start the server
 app.listen(port, () => {
