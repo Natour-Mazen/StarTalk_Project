@@ -49,7 +49,7 @@ app.get('/*', (req, res) => {
                         .replace("$cssurl","http://localhost:3000/index.css")
                 }else{
                     result = html.replace("$jsurl","/index.js")
-                        .replace("$cssurl","/index.css")
+                        .replace("$cssurl","/index.scss")
                 }
                 res.send(result);
             }
