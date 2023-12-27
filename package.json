@@ -42,7 +42,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "start": "nodemon server.js & parcel FrontEnd/index.js",
+    "start": "parcel build FrontEnd/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:web": "parcel FrontEnd/index.js",
     "build": "parcel build FrontEnd/index.js"
