@@ -44,7 +44,7 @@ export default function Citations() {
     const handleObserver = (entities) => {
         const target = entities[0];
         if (target.isIntersecting) {
-            setPage((prev) => prev + 0.5);
+            setPage((prev) => prev + 1);
         }
     }
 

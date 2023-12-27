@@ -43,7 +43,6 @@
     "node": "18.x",
     "browsers": "> 0.2%"
   },
-  "includeNodeModules": true,
   "outputFormat": "esmodule",
   "scripts": {
     "start": "node server.js",
