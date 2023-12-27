@@ -37,12 +37,12 @@
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
-  "main": "server.js",
+  "main": "BackEnd/server.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
-    "start": "parcel build FrontEnd/index.js",
+    "start": "parcel build FrontEnd/index.js & nodemon BackEnd/server.js & parcel FrontEnd/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:web": "parcel FrontEnd/index.js",
     "build": "parcel build FrontEnd/index.js"

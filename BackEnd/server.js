@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
-const DBConnection = require('./BackEnd/config/database');
+const DBConnection = require('./config/database');
 const fs = require('fs');
 
 app.use(express.static('dist'));
@@ -18,12 +18,12 @@ app.use(cors());
 app.use(cookieParser()); // Use cookie-parser
 
 // Import route files
-const routerCitations = require('./BackEnd/routes/routeCitations');
-const routerAdmin = require('./BackEnd/routes/routeAdmin');
-const routerUsers = require('./BackEnd/routes/routeUsers');
-const routerAuth = require('./BackEnd/routes/routeAuth');
-const routerBot = require('./BackEnd/routes/routeDiscordBot');
-const CitationHumor = require("./BackEnd/models/CitationHumor");
+const routerCitations = require('./routes/routeCitations');
+const routerAdmin = require('./routes/routeAdmin');
+const routerUsers = require('./routes/routeUsers');
+const routerAuth = require('./routes/routeAuth');
+const routerBot = require('./routes/routeDiscordBot');
+const CitationHumor = require("./models/CitationHumor");
 
 // Use the route files
 app.use('/startalk-api/citations', routerCitations);
