@@ -40,8 +40,11 @@
   "name": "StarTalk",
   "source": "public/index.html",
   "engines": {
-    "node": "18.x"
+    "node": "18.x",
+    "browsers": "> 0.2%"
   },
+  "includeNodeModules": true,
+  "outputFormat": "esmodule",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
