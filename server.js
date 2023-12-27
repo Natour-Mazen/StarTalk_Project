@@ -7,8 +7,8 @@ const cookieParser = require('cookie-parser');
 const DBConnection = require('./BackEnd/config/database');
 const fs = require('fs');
 
-app.use(express.static('dist'));
-
+//app.use(express.static('dist'));
+app.use('/', express.static('dist'));
 // Load environment variables from .env file
 dotenv.config()
 

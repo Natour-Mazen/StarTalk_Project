@@ -37,7 +37,8 @@
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
-  "main": "server.js",
+  "name": "StarTalk",
+  "source": "public/index.html",
   "engines": {
     "node": "18.x"
   },
