@@ -5,6 +5,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const DBConnection = require('./BackEnd/config/database');
+const DiscordBotMain = require('./DiscordBot/index');
+
 const fs = require('fs');
 
 //app.use(express.static('dist'));
@@ -61,9 +63,16 @@ app.get('/*', (req, res) => {
 // Define a port for the server
 const port = 8080;
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+
+(async () => {
+    // Start the discord Bot
+    await DiscordBotMain();
+    // Start the server
+    app.listen(port, () => {
+        console.log(`Server node(StarTalk) is running on port ${port}`);
+    });
+})();
+
+
 
 module.exports = app;

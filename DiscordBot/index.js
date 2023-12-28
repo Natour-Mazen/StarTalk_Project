@@ -21,18 +21,20 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN_
 const commandHandler = new CommandHandler(rest);
 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+    console.log(`Logged to discord as ${client.user.tag}!`);
 });
 
 client.on('interactionCreate', commandHandler.handleInteraction);
 
-async function main(){
+async function DiscordBotmain(){
+    console.log("==========START DISCORD BOT==========")
     await commandHandler.registerCommands();
     try {
-        client.login(TOKEN);
+       await client.login(TOKEN);
     } catch (err) {
         console.log(err);
     }
+    console.log("======================================")
 }
 
-main()
+module.exports = DiscordBotmain;
