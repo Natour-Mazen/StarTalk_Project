@@ -8,14 +8,14 @@ function generateCitationsEmbed(user, citations, isFavorite = false, isOwn = tru
 
   let description;
   if (isOwn) {
-    description = isFavorite ? 'Here are some random of your favorite citations ! 🌟' : 'Here are some random of your citaitons ! 📚';
+    description = isFavorite ? 'Here are some of your favorite citations ! 🌟' : 'Here are some of your citations ! 📚';
   } else {
-    description = `Here are some random citaitons of ${user.username} ! 🗣️`;
+    description = `Here are some random citations from ${user.username} ! 🗣️`;
   }
 
   return {
     color: color,
-    title: 'Do not hesitate to visit our webSite dear writer ✒️',
+    title: 'Do not hesitate to visit our website, dear writer ✒️',
     url: 'https://startalk-project.onrender.com/',
     author: {
       name: user.username,
