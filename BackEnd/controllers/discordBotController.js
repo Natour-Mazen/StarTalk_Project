@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Citation = require('../models/Citation');
 const DBConnection = require('../config/database');
+const UserController = require("./userController");
 class DiscordBotController {
 
     // Helper function to retrieve a random number of citations for a specific user
@@ -70,12 +71,26 @@ class DiscordBotController {
     }
 
     // Add a created citation to allCitations
-    static async addCreatedCitation(req, citationId) {
-        const user = await User.findOne({ _id: req.client.id });
+    static async addCitation(client,title,desc) {
+
+        const user = await User.findOne({ discordId: client.id });
         if (user == null) {
             throw new Error('Cannot find user');
         }
-        user.allCitations.push(citationId);
+
+        const citation = new Citation({
+            title: title,
+            description: desc,
+            writerId: user._id,
+            writerName: user.pseudo,
+        });
+
+        const newCitation = await citation.save();
+        if(newCitation == null){
+            throw new Error('Error when save new citaiton');
+        }
+
+        user.allCitations.push(citation._id);
         await user.save();
     }
 }

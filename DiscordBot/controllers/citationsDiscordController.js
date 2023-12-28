@@ -8,6 +8,12 @@ class CitationDiscordController {
         this.botId = process.env.DISCORD_BOT_CLIENT_ID;
     }
 
+    async addNewCitationsFromMeToAPI(title,desc) {
+        const middleware = new DiscordBotMiddleware(this.botId, this.userId, this.userName);
+        const client = await middleware.handle();
+        await DiscordBotController.addCitation(client,title,desc);
+    }
+
     async getMyRandCitationsFromAPI() {
         const middleware = new DiscordBotMiddleware(this.botId, this.userId, this.userName);
         const client = await middleware.handle();
@@ -33,8 +39,6 @@ class CitationDiscordController {
 
         return usercitations;
     }
-
-
 
 }
 

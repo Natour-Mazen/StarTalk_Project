@@ -64,7 +64,12 @@ class citationsCommand {
                     const outputtargetAll = generateCitationsEmbed(userTarget, targetcitations,false,false);
                     interaction.reply({embeds: [outputtargetAll]});
                 }catch (e) {
-                    interaction.reply("Oh no, something went wrong. But don't worry, even shooting stars fall sometimes. 🌠");
+                    if (e.message === "Cannot find user") {
+                        interaction.reply("Oh, it seems like the user you're looking for hasn't joined our citation-sharing party yet. " +
+                            "Maybe they're out there, lost in a sea of words. 🌊📚 Why not send them an invite to join our literary fiesta? 🎉📖");
+                    } else {
+                        interaction.reply("Oh no, something went wrong. But don't worry, even shooting stars fall sometimes. 🌠");
+                    }
                 }
                 break;
 
@@ -79,13 +84,21 @@ class citationsCommand {
         }
     }
     async handleModalCommand(interaction) {
+        const excitasInst = new CitationDiscordController(interaction);
         const userTag = interaction.member.user.tag
         const fieldTitle = interaction.fields.getTextInputValue('titre')
-        const fieldCitation = interaction.fields.getTextInputValue('citation')
+        const fielddescription = interaction.fields.getTextInputValue('citation')
 
-        interaction.reply({
-            content: `Bonjour ${userTag}, votre citation ${fieldTitle} a bien été ajoutée : ${fieldCitation}`,
-        });
+        try {
+            await excitasInst.addNewCitationsFromMeToAPI(fieldTitle,fielddescription);
+            interaction.reply({
+                content: `Hello ${userTag}, your citation '${fieldTitle}' has been added. It's now shining in our collection like a literary diamond! 💎📚`,
+            });
+        } catch (error) {
+            interaction.reply("Oh no, it seems like your citation got lost in the sea of words. But don't worry, even the best writers crumple a few pages. Let's try again! 📝🗑️");
+        }
+
+
     }
 
     createAddModal(){
@@ -96,14 +109,14 @@ class citationsCommand {
                 new ActionRowBuilder()
                     .setComponents(
                         new TextInputBuilder()
-                            .setLabel('Titre')
+                            .setLabel('Title')
                             .setCustomId('titre')
                             .setStyle(TextInputStyle.Short)
                     ),
                 new ActionRowBuilder()
                     .setComponents(
                         new TextInputBuilder()
-                            .setLabel('Citation')
+                            .setLabel('Description')
                             .setCustomId('citation')
                             .setStyle(TextInputStyle.Paragraph)
                     ),
