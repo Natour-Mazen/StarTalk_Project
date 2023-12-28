@@ -1,7 +1,6 @@
 const User = require('../models/User');
 const Citation = require('../models/Citation');
 const DBConnection = require('../config/database');
-const UserController = require("./userController");
 class DiscordBotController {
 
     // Helper function to retrieve a random number of citations for a specific user
