@@ -1,7 +1,6 @@
 const User = require('../models/User');
 const Citation = require('../models/Citation');
 class DiscordBotController {
-
     // Helper function to retrieve a random number of citations for a specific user
     static async getRandomCitationsForUser(discordId) {
         // Find the user by their discordId
