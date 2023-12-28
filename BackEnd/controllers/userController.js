@@ -76,6 +76,7 @@ class UserController {
     // Retrieve a random number of favorite citations for a specific user
     static async getSpecificUserFavorites(req, res) {
         return this.getRandomFavoritesForUser(req.client.idUserToRead, res);
+
     }
 
     // Add a created citation to allCitations

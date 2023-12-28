@@ -22,7 +22,7 @@ const routerCitations = require('./BackEnd/routes/routeCitations');
 const routerAdmin = require('./BackEnd/routes/routeAdmin');
 const routerUsers = require('./BackEnd/routes/routeUsers');
 const routerAuth = require('./BackEnd/routes/routeAuth');
-const routerBot = require('./BackEnd/routes/routeDiscordBot');
+//const routerBot = require('./BackEnd/routes/routeDiscordBot');
 const CitationHumor = require("./BackEnd/models/CitationHumor");
 
 // Use the route files
@@ -30,7 +30,7 @@ app.use('/startalk-api/citations', routerCitations);
 app.use('/startalk-api/admin/users', routerAdmin);
 app.use('/startalk-api/users', routerUsers);
 app.use('/startalk-api/auth', routerAuth);
-app.use('/startalk-api/discordbot', routerBot);
+//app.use('/startalk-api/discordbot', routerBot);
 
 
 app.get('/*', (req, res) => {

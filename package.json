@@ -35,7 +35,10 @@
     "socket.io": "^4.6.1",
     "use-local-storage": "^3.0.0",
     "uuid": "^9.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@discordjs/builders": "^1.7.0",
+    "@discordjs/rest": "^2.0.1",
+    "discord.js": "^14.13.0"
   },
   "name": "StarTalk",
   "source": "public/index.html",
@@ -49,7 +52,8 @@
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:web": "parcel FrontEnd/index.js",
-    "build": "parcel build FrontEnd/index.js"
+    "build": "parcel build FrontEnd/index.js",
+    "start:dev": "nodemon DiscordBot/index.js"
   },
   "devDependencies": {
     "buffer": "^6.0.3",
