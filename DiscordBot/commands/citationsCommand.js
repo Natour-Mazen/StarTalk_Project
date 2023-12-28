@@ -3,13 +3,13 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { ActionRowBuilder, ModalBuilder, TextInputBuilder } = require('discord.js');
 const generateCitationsEmbed = require('../functions/citationsEmbed.js');
 const { TextInputStyle } = require('discord.js');
-const CitationDiscordController = require('../controllers/citationsDiscordController.js');
+const CitationCommandDiscordController = require('../controllers/citationsCommandDiscordController.js');
 
 class citationsCommand {
     constructor() {
         this.commandData = new SlashCommandBuilder()
             .setName('stt-cits')
-            .setDescription('Test')
+            .setDescription('Principal command for StarTalk Bot')
             .addSubcommand(subCommand =>
                 subCommand
                     .setName('add')
@@ -42,7 +42,7 @@ class citationsCommand {
     async handleChatCommand(interaction) {
         // Handle citations command logic
         const subCommand = interaction.options.getSubcommand();
-        const excitasInst = new CitationDiscordController(interaction);
+        const excitasInst = new CitationCommandDiscordController(interaction);
 
         switch (subCommand) {
             case 'add':
@@ -80,11 +80,11 @@ class citationsCommand {
                 break;
 
             default:
-            // Handle unknown subcommands
+                // Handle unknown subcommands
         }
     }
     async handleModalCommand(interaction) {
-        const excitasInst = new CitationDiscordController(interaction);
+        const excitasInst = new CitationCommandDiscordController(interaction);
         const userTag = interaction.member.user.tag
         const fieldTitle = interaction.fields.getTextInputValue('titre')
         const fielddescription = interaction.fields.getTextInputValue('citation')

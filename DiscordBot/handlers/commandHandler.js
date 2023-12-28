@@ -1,7 +1,6 @@
 // commandHandler.js
 const { Routes } = require('discord.js');
 const citationsCommand = require('../commands/citationsCommand.js');
-const quoiCommand = require('../commands/quoi.js');
 const { config } = require('dotenv');
 
 config();
@@ -11,8 +10,7 @@ class CommandHandler {
     constructor(rest) {
         this.rest = rest;
         this.commands = [
-            citationsCommand,
-            quoiCommand
+            citationsCommand
         ];
     }
 
@@ -20,7 +18,6 @@ class CommandHandler {
         if (interaction.isChatInputCommand()){
             const commandChatHandlers = {
                 'stt-cits': citationsCommand.handleChatCommand,
-                'quoi': quoiCommand.handleChatCommand,
             };
             const handler = commandChatHandlers[interaction.commandName];
             if (handler) {

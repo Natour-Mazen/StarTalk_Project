@@ -9,8 +9,8 @@ const DiscordBotMain = require('./DiscordBot/index');
 
 const fs = require('fs');
 
-//app.use(express.static('dist'));
 app.use('/', express.static('dist'));
+
 // Load environment variables from .env file
 dotenv.config()
 
