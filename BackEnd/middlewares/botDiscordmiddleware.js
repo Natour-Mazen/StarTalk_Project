@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 // Load environment variables from .env file
 dotenv.config();
-const DISCORD_BOT_ID = process.env.DISCORD_BOTID;
+const DISCORD_BOT_ID = process.env.DISCORD_BOT_CLIENT_ID;
 const allowedRoles = ['ROLE_USER','ROLE_ADMIN'];
 class DiscordBotMiddleware {
 

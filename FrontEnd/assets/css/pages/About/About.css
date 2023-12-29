@@ -18,22 +18,22 @@
     transition: all 0.8s ease;
 }
 
-a, a:active{
+.AboutFieldset a, .AboutFieldset a:active{
     color : var(--text);
     margin-left : 5px;
 }
 
-a:hover{
+.AboutFieldset a:hover{
     color : var(--accent)
 }
 
-.developers {
+.AboutFieldset .developers {
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
     font-size:18px;
 }
 
-.developers i {
+.AboutFieldset .developers i {
     margin-right: 5px;
 }
