@@ -1,0 +1,39 @@
+.AboutFieldset{
+    background-color: var(--secondary);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+    transition: all 0.8s ease;
+}
+
+.AboutFieldset p{
+    text-align: center;
+}
+
+.DeviderAbout .p-divider-content {
+    background-color: var(--secondary);
+    border: 0.5px solid var(--text);
+    user-select: none;
+    border-radius:10px;
+    transition: all 0.8s ease;
+}
+
+a, a:active{
+    color : var(--text);
+    margin-left : 5px;
+}
+
+a:hover{
+    color : var(--accent)
+}
+
+.developers {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size:18px;
+}
+
+.developers i {
+    margin-right: 5px;
+}
