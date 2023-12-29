@@ -56,7 +56,7 @@ export default function RightSideBar()
                     const formattedQuotes = quotes.map(quote => {
                         const randomIndex = Math.floor(Math.random() * quote.tags.length);
                         return {
-                            title: quote.tags[randomIndex] || 'Unknown 🙄',
+                            title: quote.tags[randomIndex] || 'inspirational citation',
                             description: quote.content,
                             writerName: quote.author,
                             StartalkQuote:false,
@@ -90,7 +90,7 @@ export default function RightSideBar()
                 }</p>
             </Divider>
 
-            <ScrollPanel style={{height: '700px'}}>
+            <ScrollPanel style={{height: '1100px'}}>
                 {quotes.map((quote, key) => (
                     <MiniCitationCard citation={quote} key={key}/>
                 ))}

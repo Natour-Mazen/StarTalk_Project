@@ -18,7 +18,7 @@ export default function About() {
         <Base>
             <Fieldset legend={legendTemplate} className="AboutFieldset">
                 <p>
-                    StarTalk is a social network where you will let your writer's soul express itself. This site will allow
+                    StarTalk is a social network where you will let your writer's soul express itself. This website will allow
                     you to post your citations.
                 </p>
                 <Divider align="center" className="DeviderAbout">
