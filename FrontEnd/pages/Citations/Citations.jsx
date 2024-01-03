@@ -61,6 +61,10 @@ export default function Citations() {
                     loader={
                         <div className="ProgressSpinner">
                             <ProgressSpinner
+                                style={{
+                                    width: '50px',
+                                    height: '50px'
+                                }}
                                 pt={{
                                     spinner: {style: {animationDuration: '0.8s'}},
                                     circle: {style: {stroke: '#5a67f6', strokeWidth: 4, animation: '-moz-initial'}}
