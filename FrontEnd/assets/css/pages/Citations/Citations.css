@@ -3,22 +3,20 @@
 }
 
 .steve-image {
-    animation: steve-appear 3s ease-in-out;
-    height: 300px;
-    width: 300px;
-    display : block;
-    margin-left : auto;
-    margin-right : auto;
-    pointer-events:none;
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
-@keyframes steve-appear {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.ProgressSpinner{
+    height: 150px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

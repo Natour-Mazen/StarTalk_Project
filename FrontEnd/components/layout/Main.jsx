@@ -5,7 +5,7 @@ import ScrollToTopButton from "../Button/ScrollToTopButton";
 export default function Main({ children })
 {
     return (
-        <div className="Main">
+        <div className="Main" id="Main">
             <ScrollToTopButton />
             {children}
 
