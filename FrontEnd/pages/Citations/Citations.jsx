@@ -52,6 +52,7 @@ export default function Citations() {
         <Base>
             <div className="Citations">
                 <InfiniteScroll
+                    style={{overflow: 'visible'}}
                     dataLength={allCitations.length}
                     next={fetchMoreData}
                     hasMore={hasMore}
