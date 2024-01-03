@@ -7,7 +7,6 @@ import Steve from '../../assets/images/SteveMC.png';
 import '../../assets/css/pages/Citations/Citations.css'
 import InfiniteScroll from "react-infinite-scroll-component";
 
-
 export default function Citations() {
     const [allCitations, setAllCitations] = useState([]);
     const [page, setPage] = useState(1);
@@ -32,7 +31,6 @@ export default function Citations() {
                             setPage((old) => old + 1);
                             return [...prev, ...citations];
                         }
-
                     });
                 });
         }
@@ -44,71 +42,6 @@ export default function Citations() {
     useEffect( () => {
         fetchMoreData();
     }, []);
-
-    /*
-    useEffect(() => {
-        var options = {
-            root: null,
-            rootMargin: "20px",
-            threshold: 1.0
-        };
-
-        const observer = new IntersectionObserver(handleObserver, options);
-        if (loader.current) {
-            observer.observe(loader.current)
-        }
-    }, []);
-
-
-    useEffect(() => {
-        if (page <= totalPages) {
-            getCitations();
-        }
-    }, [page]);
-
-    useEffect(() => {
-        if (page === totalPages) {
-            setReachedEnd(true);
-        }
-    }, [page, totalPages]);
-
-    const handleObserver = (entities) => {
-        const target = entities[0];
-        if (target.isIntersecting) {
-            setPage((prev) => prev + 1);
-        }
-    }
-
-    async function getCitations() {
-        setLoading(true);
-
-        try {
-            const response = await axios.get(`/startalk-api/citations?page=${page}`);
-
-            if (response.status === 200) {
-                const data = response.data.citations;
-
-                // Vérifier si la page actuelle est la première page
-                const isFirstPage = page === 0;
-
-                setTotalPages(response.data.totalPages);
-
-                setAllCitations((prev) => {
-                    if (isFirstPage) {
-                        // On remplace les anciennes citations par les nouvelles pour la première page car 2 appels
-                        return data;
-                    } else {
-                        // On ajoute les nouvelles citations à la liste existante pour les pages suivantes
-                        return [...prev, ...data];
-                    }
-                });
-            }
-        } catch (error) {
-            // Handle error
-        }
-        await new Promise(resolve => setTimeout(resolve, 800)); // on met un sleep histoire de voir le spinner
-        setLoading(false);
-    }*/
 
     return (
         <Base>
