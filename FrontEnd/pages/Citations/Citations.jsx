@@ -1,7 +1,8 @@
 import Base from "../../components/layout/Base";
 import CitationCard from "../../components/ForPages/Citations/CitationCard";
 import axios from "axios";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
+import { useInView } from 'react-intersection-observer';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import Steve from '../../assets/images/SteveMC.png';
 import '../../assets/css/pages/Citations/Citations.css'
@@ -12,6 +13,10 @@ export default function Citations() {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
     const [hasMore, setHasMore] = useState(true);
+
+    const [refEndCit, inView] = useInView({
+        triggerOnce: true,
+    });
 
     async function fetchMoreData()
     {
@@ -51,7 +56,7 @@ export default function Citations() {
                     next={fetchMoreData}
                     hasMore={hasMore}
                     scrollThreshold={0.5}
-                    pullDownToRefreshThreshold={0}
+                    pullDownToRefreshThreshold={1000}
                     scrollableTarget={"Main"}
                     loader={
                         <div className="ProgressSpinner">
@@ -65,10 +70,11 @@ export default function Citations() {
                     }
                     endMessage={
                         <div className="end-of-content">
-                            <img src={Steve} alt="Steve" className="steve-image"
-                            title="Credit to DALLE.E-3 for generating the initial photo and Mazen for correcting some small errors in the image"/>
+                            <img src={Steve} alt="Steve" className={`steve-image ${inView ? 'steve-animation' : 'steve-hidden'}`}
+                                title="Credit to DALLE.E-3 for generating the initial photo and Mazen for correcting some small errors in the image"
+                                ref={refEndCit}
+                            />
                         </div>
-
                     }
                 >
                     {

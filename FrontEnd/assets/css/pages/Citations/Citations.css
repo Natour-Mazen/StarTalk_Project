@@ -1,16 +1,38 @@
 .end-of-content{
     user-select:none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
 }
 
 .steve-image {
     width: 100%;
     max-width: 300px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
     pointer-events: none;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+.steve-hidden{
+    visibility: hidden;
+}
+
+.steve-animation{
+    animation: steve-appear 3s ease-in-out;
+    visibility: visible;
+}
+
+@keyframes steve-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .ProgressSpinner{
