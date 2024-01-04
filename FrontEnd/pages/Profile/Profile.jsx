@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import Base from "../../components/layout/Base";
-import { Card } from 'primereact/card';
 import axios from 'axios';
 import CitationCard from '../../components/ForPages/Citations/CitationCard';
 import {UserContext} from "../../utils/UserAuthContext";
@@ -9,7 +8,6 @@ import {TabPanel, TabView} from "primereact/tabview";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAt, faBookBookmark, faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
 import "../../assets/css/pages/Profile/Profile.css"
-import ScrollToTop from "../../components/Button/ScrollToTopButton";
 import {Fieldset} from "primereact/fieldset";
 
 export default function Profile() {
@@ -68,26 +66,31 @@ export default function Profile() {
                                       </>}
                               style={{marginLeft: 'auto'}}
                     >
-                        {citations.map(citation => (
+                        {citations.length > 0 ? citations.map(citation => (
                             <CitationCard key={citation._id} citation={citation}/>
-                        ))}
+                        )) : (
+                            <p className="noneThingPara">No citations yet. Time to get inspired! 🚀</p>
+                        )}
                     </TabPanel>
                     <TabPanel header={<>
                                         <FontAwesomeIcon icon={faHeart} /> My Likes
                                       </>}
                     >
-                        {likes.map(like => (
+                        {likes.length > 0 ? likes.map(like => (
                             <CitationCard key={like._id} citation={like}/>
-                        ))}
+                        )) : (
+                            <p className="noneThingPara">No likes yet. Why not spread some love? 💖</p>
+                        )}
                     </TabPanel>
                     <TabPanel header={<>
                                         <FontAwesomeIcon icon={faStar} /> My Favorites
                                       </>}
-                              style={{marginRight: 'auto'}}>
+                              style={{marginRight: 'auto'}}
+                    >
                         {favorites.length > 0 ? favorites.map(favorite => (
                             <CitationCard key={favorite._id} citation={favorite}/>
                         )) : (
-                            <p>No favorites yet. Start exploring and favoriting citations!</p>
+                            <p className="noneThingPara">No favorites yet. Start exploring and favoriting citations! ⭐</p>
                         )}
                     </TabPanel>
                 </TabView>

@@ -6,6 +6,13 @@
     transition: all 0.8s ease;
     height:13.05em;
 }
+
+.noneThingPara{
+    user-select:  none;
+    font-style: italic;
+    text-align: center;
+}
+
 .p-fieldset-legend{
     background-color: var(--third) !important;
     color : var(--text);
