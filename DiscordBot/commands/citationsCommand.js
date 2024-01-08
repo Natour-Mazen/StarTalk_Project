@@ -42,7 +42,7 @@ class citationsCommand {
     async handleChatCommand(interaction) {
         // Handle citations command logic
         const subCommand = interaction.options.getSubcommand();
-        const excitasInst = new CitationCommandDiscordController(interaction);
+        const citCommInst = new CitationCommandDiscordController(interaction);
 
         switch (subCommand) {
             case 'add':
@@ -51,7 +51,7 @@ class citationsCommand {
                 break;
 
             case 'all':
-                const mycitations = await excitasInst.getMyRandCitationsFromAPI();
+                const mycitations = await citCommInst.getMyRandCitationsFromAPI();
                 const outputAll = generateCitationsEmbed(interaction.member.user, mycitations);
                 interaction.reply({embeds: [outputAll]});
                 break;
@@ -60,7 +60,7 @@ class citationsCommand {
                 try{
                     const userTarget = interaction.options.getUser('target');
                     const targetId = userTarget.id;
-                    const targetcitations = await excitasInst.getSpecUserRandCitationsFromAPI(targetId);
+                    const targetcitations = await citCommInst.getSpecUserRandCitationsFromAPI(targetId);
                     const outputtargetAll = generateCitationsEmbed(userTarget, targetcitations,false,false);
                     interaction.reply({embeds: [outputtargetAll]});
                 }catch (e) {
@@ -74,7 +74,7 @@ class citationsCommand {
                 break;
 
             case 'fav':
-                const mycitationsfav = await excitasInst.getMyFavRandCitationsFromAPI();
+                const mycitationsfav = await citCommInst.getMyFavRandCitationsFromAPI();
                 const outputAllfav = generateCitationsEmbed(interaction.member.user, mycitationsfav,true,true);
                 interaction.reply({embeds: [outputAllfav]});
                 break;
@@ -84,13 +84,13 @@ class citationsCommand {
         }
     }
     async handleModalCommand(interaction) {
-        const excitasInst = new CitationCommandDiscordController(interaction);
+        const citCommInst = new CitationCommandDiscordController(interaction);
         const userTag = interaction.member.user.tag
         const fieldTitle = interaction.fields.getTextInputValue('titre')
         const fielddescription = interaction.fields.getTextInputValue('citation')
 
         try {
-            await excitasInst.addNewCitationsFromMeToAPI(fieldTitle,fielddescription);
+            await citCommInst.addNewCitationsFromMeToAPI(fieldTitle,fielddescription);
             interaction.reply({
                 content: `Hello ${userTag}, your citation '${fieldTitle}' has been added. It's now shining in our collection like a literary diamond! 💎📚`,
             });
