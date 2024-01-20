@@ -10,6 +10,7 @@ import '../../../assets/css/components/ForPages/Citaitons/CitationsCard.css'
 import LookButton from "../../Button/LookButton";
 import DateField from "../../Utils/DateField";
 import DeleteButton from "../../Button/DeleteButton";
+import UpdateButton from "../../Button/UpdateButton";
 
 export default function CitationCard({citation})
 {
@@ -28,6 +29,7 @@ export default function CitationCard({citation})
                     <LikeButton citation={citation} likes={likes} setLikes={setLikes} />
                     <FavButton citation={citation} />
                     <DeleteButton citation={citation}/>
+                    <UpdateButton citation={citation}/>
                     <DateField dateString={citation.creationDate} />
                 </div>
             ) : (
