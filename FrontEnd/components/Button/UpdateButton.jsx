@@ -12,7 +12,6 @@ export default function UpdateButton({ citation }) {
         setVisible(true);
     };
 
-
     return (
         <>
             {showButton && (

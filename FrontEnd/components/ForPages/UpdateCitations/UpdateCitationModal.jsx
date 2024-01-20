@@ -102,7 +102,7 @@ export default function UpdateCitationModal({visible, setVisible , citation}) {
             <Toast ref={toast}
                    position="top-center"
             />
-            <Dialog header="🛠️ Time to give your citation a fun makeover! 💄"
+            <Dialog header="🛠️ Time to give your citation a fun makeover ! 💄"
                     visible={visible}
                     onHide={handleClose}
                     draggable={false}
