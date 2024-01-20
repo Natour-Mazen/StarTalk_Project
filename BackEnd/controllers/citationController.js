@@ -136,32 +136,35 @@ class CitationController {
     }
 
 
-
-
-
     // Update an existing citation
     static async updateCitation(req, res) {
-        // Check if the user trying to update the citation is the original author
-        if (req.client.id !== res.citation.writerId)
-            return res.status(403).json({ message: 'Access forbidden.' });
-
-        // Update citation properties if they are provided in the request body
-        if (req.body.title != null) {
-            res.citation.title = req.body.title;
-        }
-        if (req.body.description != null) {
-            res.citation.description = req.body.description;
-        }
-        if (req.body.numberLike != null) {
-            res.citation.numberLike = req.body.numberLike;
-        }
-
         try {
-            // Attempt to save the updated citation to the database
-            const updatedCitation = await res.citation.save();
+
+            const citation = await Citation.findById(req.params.id);
+
+            // Check if the user trying to update the citation is the original author
+            if (req.client.id !== citation.writerId.toString())
+                return res.status(403).json({ message: 'Access forbidden.' });
+
+            // Update citation properties if they are provided in the request body
+            if (req.body.title != null) {
+                citation.title = req.body.title;
+            }
+            if (req.body.description != null) {
+                citation.description = req.body.description;
+            }
+
+            if(req.body.humor != null){
+                citation.humor = req.body.humor
+            }
+
+            const updatedCitation = await citation.save();
 
             // Return the updated citation in the response
-            res.json(updatedCitation);
+            res.status(201).json({
+                data: updatedCitation,
+                message: "The citation updated correctly"
+            });
         } catch (err) {
             // If an error occurs during the update, return a 400 response with the error message
             res.status(400).json({ message: err.message });

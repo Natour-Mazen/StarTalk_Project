@@ -17,8 +17,20 @@ export default function CitationCard({citation})
     const { isAuthenticated } = useContext(UserContext);
     const [likes, setLikes] = useState(citation.numberLike);
 
+    const Content = (
+        <React.Fragment>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                {citation.title}
+                <div>
+                    <DeleteButton citation={citation} style={{marginRight: '10px'}}/>
+                    <UpdateButton citation={citation}/>
+                </div>
+            </div>
+        </React.Fragment>
+    );
+
     return (
-        <Card title={citation.title} className="MyCitationCardCss">
+        <Card title={Content} className="MyCitationCardCss">
             <Divider/>
             <p>{citation.description}</p>
             <Divider/>
@@ -28,8 +40,6 @@ export default function CitationCard({citation})
                     <LookButton citation={citation}/>
                     <LikeButton citation={citation} likes={likes} setLikes={setLikes} />
                     <FavButton citation={citation} />
-                    <DeleteButton citation={citation}/>
-                    <UpdateButton citation={citation}/>
                     <DateField dateString={citation.creationDate} />
                 </div>
             ) : (

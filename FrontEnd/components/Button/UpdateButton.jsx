@@ -1,16 +1,17 @@
 import { Button } from "primereact/button";
-import { useNavigate } from "react-router-dom";
 import React, {useContext, useState} from "react";
 import {UserContext} from "../../utils/UserAuthContext";
+import UpdateCitationModal from "../ForPages/UpdateCitations/UpdateCitationModal";
 
 export default function UpdateButton({ citation }) {
     const { id } = useContext(UserContext);
     const [showButton, setShowButton] = useState(citation.writerId === id);
-    const navigate = useNavigate();
+    const [visible, setVisible] = useState(false);
 
     const handleClick = () => {
-        navigate(`/update-citation/${citation._id}`);
+        setVisible(true);
     };
+
 
     return (
         <>
@@ -24,6 +25,7 @@ export default function UpdateButton({ citation }) {
                     onClick={handleClick}
                 />
             )}
+            <UpdateCitationModal visible={visible} setVisible={setVisible} citation={citation}/>
         </>
     );
 }
