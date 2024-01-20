@@ -109,7 +109,7 @@ export default function Citation({ match }) {
         </Base>
     ) : (
         <Base>
-            <div>Loading...</div>
+            <div className='noneFavsLikePara'>🚀 Rocketing through the stars! Your citation is arriving at light speed... 🌟</div>
         </Base>
     );
 }
