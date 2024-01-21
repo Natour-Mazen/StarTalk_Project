@@ -27,7 +27,7 @@ export default function FavButton({citation}) {
             rounded
             text
             className="StartalkButtonSpec"
-            title="Favorite"
+            title="Fav"
             onClick={handleFav}
         />
     );
