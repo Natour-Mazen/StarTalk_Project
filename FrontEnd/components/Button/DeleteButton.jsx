@@ -38,7 +38,7 @@ export default function DeleteButton({citation}) {
                     rounded
                     text
                     className="StartalkButtonSpec"
-                    title="delete"
+                    title="Delete"
                     onClick={(e) => showDisconnectPopUp(e)}
                     ref={deleteButtonRef}
                 />

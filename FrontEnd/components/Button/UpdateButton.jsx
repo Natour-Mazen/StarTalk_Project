@@ -20,7 +20,7 @@ export default function UpdateButton({ citation }) {
                     rounded
                     text
                     className="StartalkButtonSpec"
-                    title="Update details"
+                    title="Update"
                     onClick={handleClick}
                 />
             )}

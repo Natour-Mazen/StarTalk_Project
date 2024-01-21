@@ -28,7 +28,7 @@ export default function LikeButton({citation, likes, setLikes}) {
             rounded
             text
             className="StartalkButtonSpec"
-            title="like"
+            title="Like"
             onClick={handleLike}
         />
     );
