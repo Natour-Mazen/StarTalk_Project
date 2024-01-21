@@ -63,7 +63,7 @@ const port = 8080;
 
 (async () => {
     // Start the discord Bot
-   // await DiscordBotMain();
+    await DiscordBotMain();
     // Start the SatrTalk server
     app.listen(port, () => {
         console.log(`Server node(StarTalk) is running on port ${port}`);
