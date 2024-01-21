@@ -67,6 +67,34 @@ class DiscordBotController {
         return citationsToSend
     }
 
+
+    // Helper function to retrieve a random number of likes citations for a specific user
+    static async getRandomLikesForUser(client) {
+        // Find the user by their discordId
+        const user = await User.findOne({ discordId: client.id }).populate('allLiked');;
+
+        // If the user is not found, return a 404 response
+        if (user == null) {
+            throw new Error("Cannot find user")
+        }
+        // Get all favorite citations of the user
+        const userLikes = user.allLiked;
+
+        // Generate a random number between 1 and 4
+        const randomNumber = Math.floor(Math.random() * 4) + 1;
+
+        // Get a random subset of citations
+        const randomCitations = userLikes.sort(() => 0.5 - Math.random()).slice(0, randomNumber);
+
+        // Map the random citations to an array of objects with only title and description
+        const citationsToSend = randomCitations.map(citation => ({
+            title: citation.title,
+            description: citation.description
+        }));
+        // Send the random favorite citations
+        return citationsToSend
+    }
+
     // Add a created citation to allCitations
     static async addCitation(client,title,desc) {
 

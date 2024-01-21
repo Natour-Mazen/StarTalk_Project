@@ -34,6 +34,12 @@ class CitationCommandDiscordController {
         return await DiscordBotController.getRandomFavoritesForUser(client);
     }
 
+    // Method to get random Liked citations of the user from the API
+    async getMyLikesRandCitationsFromAPI() {
+        const client = await this.getClient();
+        return await DiscordBotController.getRandomLikesForUser(client);
+    }
+
     // Method to get random citations of a specific user from the API
     async getSpecUserRandCitationsFromAPI(targetuserId) {
         const middleware = new DiscordBotMiddleware(this.botId, this.userId, this.userName,targetuserId);

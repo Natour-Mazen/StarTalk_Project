@@ -33,6 +33,11 @@ class citationsCommand {
                     .setName('fav')
                     .setDescription('Get a random selection of your favorite citations')
             )
+            .addSubcommand(subCommand =>
+                subCommand
+                    .setName('liked')
+                    .setDescription('Get a random selection of your liked citations')
+            )
             .toJSON();
 
         this.handleChatCommand = this.handleChatCommand.bind(this);
@@ -77,6 +82,12 @@ class citationsCommand {
                 const mycitationsfav = await citCommInst.getMyFavRandCitationsFromAPI();
                 const outputAllfav = generateCitationsEmbed(interaction.member.user, mycitationsfav,true,true);
                 interaction.reply({embeds: [outputAllfav]});
+                break;
+
+            case 'liked':
+                const mycitationslike = await citCommInst.getMyLikesRandCitationsFromAPI();
+                const outputAlllikes = generateCitationsEmbed(interaction.member.user, mycitationslike,false,false,true);
+                interaction.reply({embeds: [outputAlllikes]});
                 break;
 
             default:
