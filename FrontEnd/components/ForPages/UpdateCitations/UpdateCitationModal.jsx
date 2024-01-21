@@ -14,8 +14,6 @@ import {UserContext} from "../../../utils/UserAuthContext";
 
 export default function UpdateCitationModal({visible, setVisible , citation}) {
 
-    console.log(citation)
-
     const { handleDisconnectErrResponse } = useContext(UserContext);
 
     const [humors, setHumors] = useState([]);
@@ -32,10 +30,7 @@ export default function UpdateCitationModal({visible, setVisible , citation}) {
     }
 
     const defaultValues = { description: citation.description , titre : citation.title};
-
-
-
-    const getHumor = async () => {
+    const getdefaultValueHumor = async () => {
         if(citation.humor != null){
             try {
                 const response = await axios.get(`/startalk-api/citations//possiblehumor/${citation.humor}`, {
@@ -53,7 +48,7 @@ export default function UpdateCitationModal({visible, setVisible , citation}) {
     };
 
     useEffect(() => {
-        getHumor();
+        getdefaultValueHumor();
     }, []);
 
 
