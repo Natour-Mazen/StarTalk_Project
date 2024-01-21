@@ -32,9 +32,34 @@ export default function UpdateCitationModal({visible, setVisible , citation}) {
     }
 
     const defaultValues = { description: citation.description , titre : citation.title};
-   // setSelectedHumor(citation.humor);
+
+
+
+    const getHumor = async () => {
+        if(citation.humor != null){
+            try {
+                const response = await axios.get(`/startalk-api/citations//possiblehumor/${citation.humor}`, {
+                    withCredentials: true,
+                });
+
+                if (response.status === 200) {
+                    const humorOfCitation = response.data;
+                    setSelectedHumor(humorOfCitation);
+                }
+            } catch (error) {
+                handleDisconnectErrResponse(error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        getHumor();
+    }, []);
+
+
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
+
 
     const onSubmit = async (data) => {
         setVisible(false);
@@ -79,11 +104,7 @@ export default function UpdateCitationModal({visible, setVisible , citation}) {
 
     const handleClose = () => {
         setVisible(false);
-        setSelectedHumor(null);
-        form.reset();
     };
-
-
 
     useEffect(() => {
         const fetchHumors = async () => {
@@ -96,6 +117,7 @@ export default function UpdateCitationModal({visible, setVisible , citation}) {
 
         fetchHumors();
     }, []);
+
 
     return (
         <>
