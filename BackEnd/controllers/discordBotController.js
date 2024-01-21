@@ -42,12 +42,12 @@ class DiscordBotController {
 
     // Helper function to retrieve a random number of favorite citations for a specific user
     static async getRandomFavoritesForUser(client) {
-        return this.getRandomCitationsForUser(client.id, 'allFavorite');
+        return await this.getRandomCitationsForUser(client.id, 'allFavorite');
     }
 
     // Helper function to retrieve a random number of likes citations for a specific user
     static async getRandomLikesForUser(client) {
-        return this.getRandomCitationsForUser(client.id, 'allLiked');
+        return await this.getRandomCitationsForUser(client.id, 'allLiked');
     }
     
     // Add a created citation to allCitations
