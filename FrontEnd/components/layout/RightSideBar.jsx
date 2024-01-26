@@ -49,6 +49,9 @@ export default function RightSideBar()
                     handleDisconnectErrResponse(error);
                 });
         } else if (quotes.length === 0) {
+            //  If there are no quotes available, this part of the code makes the website feel more "natural" by fetching
+            // random citations from an API when the user does not perform a search.
+            // This API is free and open-source. You can find it here: https://github.com/lukePeavey/quotable
             const promises = Array.from({length: 3}, () => fetch('https://api.quotable.io/random'));
             Promise.all(promises)
                 .then(responses => Promise.all(responses.map(response => response.clone().json())))
