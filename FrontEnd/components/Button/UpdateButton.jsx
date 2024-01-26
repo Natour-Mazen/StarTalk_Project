@@ -15,16 +15,19 @@ export default function UpdateButton({ citation }) {
     return (
         <>
             {showButton && (
-                <Button
-                    icon="pi pi-pencil"
-                    rounded
-                    text
-                    className="StartalkButtonSpec"
-                    title="Update"
-                    onClick={handleClick}
-                />
+                <>
+                    <Button
+                        icon="pi pi-pencil"
+                        rounded
+                        text
+                        className="StartalkButtonSpec"
+                        title="Update"
+                        onClick={handleClick}
+                    />
+                    <UpdateCitationModal visible={visible} setVisible={setVisible} citation={citation}/>
+                </>
+
             )}
-            <UpdateCitationModal visible={visible} setVisible={setVisible} citation={citation}/>
         </>
     );
 }

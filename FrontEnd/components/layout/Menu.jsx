@@ -147,19 +147,20 @@ export default function Menu(initialValue, key) {
             </nav>
 
             {isAuthenticated ? (
-                <Button
-                    icon="fa-solid fa-feather"
-                    title="Write your most Beautiful Citation"
-                    label="Post"
-                    className="StartalkButton PostButtonCss"
-                    onClick={handleOpenModalAddCitaion}
+                <>
+                    <Button
+                        icon="fa-solid fa-feather"
+                        title="Write your most Beautiful Citation"
+                        label="Post"
+                        className="StartalkButton PostButtonCss"
+                        onClick={handleOpenModalAddCitaion}
 
-                />
+                    />
+                    <AddCitationModal visible={visible} setVisible={setVisible}/>
+                </>
             ) : (
                 <></>
             )}
-
-            <AddCitationModal visible={visible} setVisible={setVisible}/>
 
             <div className="flex flex-grow"></div>
 
