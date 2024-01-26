@@ -40,7 +40,7 @@
     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
 }
 
-.UserPanel .p-paginator,.UserPanel .p-icon,.UserPanel .p-paginator-page,.UserPanel .p-paginator-element,.UserPanel .p-highlight {
+.UserPanel .p-paginator,.UserPanel .p-paginator-page,.UserPanel .p-paginator-element,.UserPanel .p-highlight {
     background-color: var(--secondary);
     color: var(--text);
 
