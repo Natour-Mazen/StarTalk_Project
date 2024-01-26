@@ -12,6 +12,7 @@ routerAuth.get('/login', (req, res) => {
 routerAuth.get('/logout', authenticateToken(allowedRolesForRouteAuth), async (req, res) => {
     try {
         const result = await AuthController.handleLogout(req.client.id);
+        res.clearCookie('accessToken');
         res.status(200).json(result);
     } catch (err) {
         res.status(500).json({ message: err.message });
