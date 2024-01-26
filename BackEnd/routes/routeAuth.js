@@ -30,7 +30,7 @@ routerAuth.get('/callback', async (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: 'None',
-            maxAge: 2147483647, // This is the maximum value for maxAge 68 years
+            maxAge: 10 * 24 * 60 * 60 * 1000, // Max Age fix for 10 days 
         });
         res.redirect("/");
     } catch (err) {
