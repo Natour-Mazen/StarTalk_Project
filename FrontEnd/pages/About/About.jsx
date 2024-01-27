@@ -36,7 +36,7 @@ export default function About() {
                     <p><i className="fas fa-rocket"></i> Why</p>
                 </Divider>
                 <p>
-                    This site was created as part of the computer science master's degree at the University of Poitiers,
+                    This website was created as part of the computer science master's degree at the University of Poitiers,
                     specifically for the course of
                     <a href="https://formations.univ-poitiers.fr/fr/index/master-XB/master-XB/master-informatique-JAJEEY0P/parcours-conception-logicielle-JAJEG53Q/architectures-des-applications-web-KZQQ0MBP/ec-architecture-des-applications-web-JC4WK9XX.html"
                        target="_blank">
@@ -47,7 +47,7 @@ export default function About() {
                     <p><i className="fas fa-users"></i> Who</p>
                 </Divider>
                 <p>
-                    This site was developed by a team of dedicated developers. You can consult their work
+                    This website was developed by a team of dedicated developers. You can consult their work
                     on GitHub by clicking on their respective logos.
                 </p>
                 <div className="developers">
@@ -68,7 +68,7 @@ export default function About() {
                     <p><i className="fas fa-heart"></i> Acknowledgements</p>
                 </Divider>
                 <p>
-                    Thank you for visiting our site. We hope you enjoy using StarTalk as much as
+                    Thank you for visiting our website. We hope you enjoy using StarTalk as much as
                     we enjoyed building it!
                 </p>
                 <p>
