@@ -152,7 +152,7 @@ class AdminController {
         }
     }
 
-    // Create a new user
+    // Create a new user, this function not is really used in the application, but it is available if ever for the future ;)
     static async createUser(req, res) {
         // Create a new User object based on the request body
         const user = new User({
@@ -174,7 +174,7 @@ class AdminController {
         }
     }
 
-    // Update an existing user
+    // Update an existing, this function is not really used in the application, but it is available if ever for the future ;)
     static async updateUser(req, res) {
         // Update user properties if they are provided in the request body
         if (req.body.pseudo != null) {
@@ -201,7 +201,7 @@ class AdminController {
         }
     }
 
-    // Delete a user
+    // Delete a user, this function not is really used in the application, but it is available if ever for the future ;)
     static async deleteUser(req, res) {
         try {
             // Attempt to remove the user from the database

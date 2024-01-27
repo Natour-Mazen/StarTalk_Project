@@ -109,12 +109,11 @@ class CitationController {
             const filter = req.query.filter;
             const value = req.query.value;
 
-            // Création de l'objet de requête en fonction du filtre fourni
             let query = {};
             if (filter === 'title') {
-                query.title = new RegExp(value, 'i'); // i flag for case insensitive matching
+                query.title = new RegExp(value, 'i');
             } else if (filter === 'author') {
-                query.writerName = new RegExp(value, 'i'); // Utilisez query.writerName si votre modèle utilise "writerName"
+                query.writerName = new RegExp(value, 'i');
             }
 
             // Recherche dans la base de données avec le filtre
