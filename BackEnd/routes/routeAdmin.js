@@ -3,7 +3,7 @@ const routerAdmin = express.Router();
 const AdminController = require('../controllers/adminController');
 const authenticateToken = require('../middlewares/authTokenjwt');
 
-const allowedRolesForRouteAdminUser = 'ROLE_ADMIN';
+const allowedRolesForRouteAdminUser = ['ROLE_ADMIN'];
 
 routerAdmin.get('/', authenticateToken(allowedRolesForRouteAdminUser), AdminController.getAllUsers);
 
