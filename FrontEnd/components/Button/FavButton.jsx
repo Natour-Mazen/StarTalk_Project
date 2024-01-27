@@ -5,7 +5,6 @@ import {UserContext} from "../../utils/UserAuthContext";
 
 export default function FavButton({citation}) {
     const { id } = useContext(UserContext);
-    //const [isFav, setIsFav] = useState(citation.favs.includes(id));
     const [isFav, setIsFav] = useState(citation.favs && citation.favs.some(
         fav => fav.userId && fav.userId === id));
 
